@@ -67,7 +67,7 @@ model Chapter {
   isPublished Boolean @default(false)
   isFree Boolean @default(false)
 
-  maxData MaxData?
+  muxData MuxData?
 
   courseId String
   course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
@@ -80,8 +80,8 @@ model Chapter {
   @@index([courseId])
 }
 
-model MaxData {
-  id String @id
+model MuxData {
+  id String @id @default(uuid())
   assetId String 
   playbackId String?
 

@@ -5,9 +5,9 @@ const Logo = () => {
     return (
         <Image
             height={130}
-            width={130}
+            width={150}
             alt='logo'
-            src="/logo.svg"
+            src="/logo.png"
         />
     )
 }
