@@ -34,7 +34,7 @@ const SideRoutes = () => {
 
     const pathname = usePathname();
     const isTeacherPage = pathname?.includes("/teacher");
-
+    
     const routes = isTeacherPage ? teacherRoutes : guestRoutes;
 
     return (
