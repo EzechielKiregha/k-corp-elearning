@@ -8,8 +8,8 @@ const Pricing = () => {
         <div id='pricing' className="mt-20">
             <h2 className="text-3xl sm:text-5xl lg:text-6xl text-center my-8 tracking-wide">Check Our Plans</h2>
             <div className="flex flex-wrap">
-                {pricingOptions.map((option, index) => (
-                    <div className="w-full lg:w-1/3 sm:w-1/2 p-2">
+                {pricingOptions.map((option) => (
+                    <div key={option.title} className="w-full lg:w-1/3 sm:w-1/2 p-2">
                         <div className="p-10 border border-slate-700  text-slate-100 rounded-xl bg-gradient-to-r 
                                 from-slate-950 to-sky-600 ">
                             <p className="text-4xl mb-8">
@@ -28,7 +28,7 @@ const Pricing = () => {
                             
                             <ul>
                                 {option.features.map((feature, index) => (
-                                    <li className="mt-8 flex items-center">
+                                    <li key={index} className="mt-8 flex items-center">
                                         <CheckCircle2/>
                                         <span className="ml-2">{feature}</span>
                                     </li>

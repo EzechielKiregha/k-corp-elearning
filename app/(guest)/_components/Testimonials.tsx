@@ -9,7 +9,7 @@ const Testimonials = () => {
             </h2>
             <div className="flex flex-wrap justify-center">
                 {testimonials.map((testimonial, index) => (
-                    <div className="w-full sm:w-1/2 lg:w-1/3 px-4 py-2">
+                    <div key={index} className="w-full sm:w-1/2 lg:w-1/3 px-4 py-2">
                         <div className="text-white bg-sky-950 border border-slate-800 rounded-md text-md p-6 font-thin">
                             <p>{testimonial.text}</p>
                             <div className="flex items-start mt-8">
