@@ -6,7 +6,7 @@ const FeatureSection = () => {
             <div className="text-center">
                 <span className="dark:bg-slate-300 dark:text-sky-900 bg-sky-800 text-slate-200 rounded-full h-6 text-sm font-medium px-2 py-1">Our Features</span>
                 <h2 className="text-3xl sm:text-5xl lg:text-6xl mt-10 lg:mt-20 tracking-wide">Why Choose<br/>
-                    <span className="bg-gradient-to-r from-sky-500 to-sky-800 text-transparent bg-clip-text ">
+                    <span className="bg-gradient-to-r from-sky-950 to-sky-600">
                         K-Corp eLearning
                     </span> ?
                 </h2>

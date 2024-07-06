@@ -6,7 +6,11 @@ import { CheckCircle2 } from 'lucide-react'
 const Pricing = () => {
     return (
         <div id='pricing' className="mt-20">
-            <h2 className="text-3xl sm:text-5xl lg:text-6xl text-center my-8 tracking-wide">Check Our Plans</h2>
+            <h2 className="text-3xl sm:text-5xl lg:text-6xl text-center my-8 tracking-wide">Join Us &<br />
+            <span className="bg-gradient-to-r from-sky-950 to-sky-600 ">
+                Host your courses today. 
+            </span>
+            </h2>
             <div className="flex flex-wrap">
                 {pricingOptions.map((option) => (
                     <div key={option.title} className="w-full lg:w-1/3 sm:w-1/2 p-2">
@@ -15,7 +19,7 @@ const Pricing = () => {
                             <p className="text-4xl mb-8">
                                 {option.title}
                                 {option.title === "Pro" && (
-                                    <span className="text-xl text-blue-900 dark:text-blue-300 text-transparent bg-clip-text ml-2 mb-4">
+                                    <span className="text-xl text-blue-300 dark:text-blue-300 text-transparent bg-clip-text ml-2 mb-4">
                                         (Most popular)
                                     </span>
 

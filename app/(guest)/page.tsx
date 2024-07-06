@@ -5,9 +5,8 @@ import Workflow from './_components/Workflow';
 import Pricing from './_components/Pricing';
 import Testimonials from './_components/Testimonials';
 import Footer from './_components/Footer';
-import Search from '../(dashboard)/(routes)/search/page';
 import { db } from '@/lib/db';
-import BrowseCourse from './browse-courses/page';
+import BrowseCourse from './browse-courses/_components/browse';
 
 export default async function Guest() {
 
@@ -28,7 +27,7 @@ export default async function Guest() {
                 <Pricing/>
                 <Testimonials/>
                 <Footer/>
-                <div className='mb-5'></div>
+                <div className='p-4 dark:bg-slate-900'></div>
             </div>
         </>
     )

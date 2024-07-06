@@ -12,7 +12,7 @@ interface searchParamsProps {
     }
 }
 
-const BrowseCoursesPage = async () => {
+const BrowsePage = async () => {
 
     const categories = await db.category.findMany({
         orderBy : {
@@ -30,7 +30,7 @@ const BrowseCoursesPage = async () => {
         <div id="courses" className="flex flex-col items-center mt-2 ">
             <div className="text-center">
                 <h2 className="text-3xl sm:text-5xl lg:text-6xl mt-10 lg:mt-20 tracking-wide">Browse Our<br/>
-                    <span className="bg-gradient-to-r from-sky-500 to-sky-800 text-transparent bg-clip-text ">
+                    <span className="bg-gradient-to-r from-sky-500 to-sky-800 ">
                         Courses
                     </span>
                 </h2>
@@ -50,4 +50,4 @@ const BrowseCoursesPage = async () => {
     )
 }
 
-export default BrowseCoursesPage
+export default BrowsePage

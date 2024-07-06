@@ -3,7 +3,7 @@ import { communityLinks, platformLinks, resourcesLinks } from '../constants'
 
 const Footer = () => {
     return (
-        <footer className="mt-20 border-t border-neutral-700 ">
+        <footer className="mt-20 border-t border-slate-700 flex flex-col justify-center ">
             <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
                 <div>
                     <h3 className="text-md font-semibold mb-4">
@@ -13,7 +13,7 @@ const Footer = () => {
                         {resourcesLinks.map((link, index) => (
                             <li key={index}>
                                 <a 
-                                className="text-neutral-900 dark:text-white hover:text-blue-700"
+                                className="text-neutral-900 dark:text-white hover:text-sky-500 dark:hover:text-sky-500"
                                 href={link.href}> {link.text} </a>
                             </li>
                         ))}
@@ -27,7 +27,7 @@ const Footer = () => {
                         {platformLinks.map((link, index) => (
                             <li key={index}>
                                 <a 
-                                className="text-neutral-900 dark:text-white hover:text-blue-700"
+                                className="text-neutral-900 dark:text-white hover:text-sky-500 dark:hover:text-sky-500"
                                 href={link.href}> {link.text} </a>
                             </li>
                         ))}
@@ -41,7 +41,7 @@ const Footer = () => {
                         {communityLinks.map((link, index) => (
                             <li key={index}>
                                 <a 
-                                className="text-neutral-900 dark:text-white hover:text-blue-700"
+                                className="text-neutral-900 dark:text-white hover:text-sky-500 dark:hover:text-sky-500"
                                 href={link.href}> {link.text} </a>
                             </li>
                         ))}

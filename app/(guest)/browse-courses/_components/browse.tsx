@@ -26,7 +26,7 @@ const BrowseCourse = async () => {
         <div id="courses" className="flex flex-col w-full items-center mt-2 mx-0 ">
             <div className="text-center">
                 <h2 className="text-3xl sm:text-5xl lg:text-6xl mt-10 lg:mt-20 tracking-wide">Browse Our<br/>
-                    <span className="bg-gradient-to-r from-sky-500 to-sky-800 text-transparent bg-clip-text ">
+                    <span className="bg-gradient-to-r from-sky-950 to-sky-600 ">
                         Courses
                     </span>
                 </h2>

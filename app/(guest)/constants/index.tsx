@@ -8,10 +8,10 @@ import user5 from "../assets/profile-pictures/user5.jpg";
 import user6 from "../assets/profile-pictures/user6.jpg";
 
 export const navItems = [
-  { label: "Features", href: "#features" , key : 1 },
-  { label: "Courses", href: "#courses", key : 2},
-  { label: "Testimonials", href: "#testimonials", key : 3 },
-  { label: "Pricing", href: "#pricing", key : 4 },
+  { label: "Features", href: "/#features" , key : 1 },
+  { label: "Courses", href: "/#courses", key : 2},
+  { label: "Testimonials", href: "/#testimonials", key : 3 },
+  { label: "Pricing", href: "/#pricing", key : 4 },
 ];
 
 export const testimonials = [

@@ -37,7 +37,9 @@ const MainNavbar = () => {
                 <div className="flex justify-between items-center">
                     <div className="flex items-center flex-shrink-0">
                     <div className="px-6 py-0">
-                        <Logo />
+                        <Link href="/">
+                            <Logo />
+                        </Link>
                     </div>
                     </div>
                     <ul className="hidden lg:flex ml-14 space-x-12">
@@ -83,22 +85,21 @@ const MainNavbar = () => {
                 </div>
                 {mobileDrawerOpen && (
                     <div className="flex flex-col justify-center fixed right-0 z-20 bg-slate-100 dark:bg-slate-900
-                    text-slate-900 dark:text-slate-200 hover:text-sky-500
+                    text-slate-900 dark:text-slate-200 
                     w-full p-12 items-center lg:hidden">
                         <ul>
                             {navItems.map((item) => (
-                                <li key={item.key} className='py-4'>
+                                <li key={item.key} className='py-3 hover:text-sky-500'>
                                     <Link href={item.href}> {item.label} </Link>
                                 </li>
                             ))}
                         </ul>
                         {!isLogin ? (
-                            <><ThemeToggle/>
                             <div className="flex space-x-6 items-center ">
                                 <a href="/sign-in" className='py-2 px-3 border rounded-md border-sky-800 text-sky-800 '> Sign In </a>
                                 <a href="/sign-up" className="py-2 px-3 rounded-md bg-gradient-to-r 
                                    from-sky-950 to-sky-600 text-slate-200"> Create an account</a>
-                            </div></>
+                            </div>
                         ):(
                             <div className="flex space-x-6">
                                 <UserButton/>
