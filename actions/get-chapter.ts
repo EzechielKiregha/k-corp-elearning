@@ -42,9 +42,9 @@ const getChapter = async ({
             throw new Error("Chapter or course not found.")
         }
 
-        let muxData = null
-        let attachments : Attachment[] = []
-        let nextChapter : Chapter | null
+        let muxData = null;
+        let attachments : Attachment[] = [];
+        let nextChapter : Chapter | null = null;
 
         if(purchase){
             attachments = await db.attachment.findMany({
@@ -106,8 +106,6 @@ const getChapter = async ({
             
             
     }
-
-  
 }
 
 export default getChapter
