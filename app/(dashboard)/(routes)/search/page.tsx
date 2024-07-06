@@ -35,11 +35,11 @@ const Search = async ({
         ... searchParams,
     });
 
-    console.log("from seach, Progress :", courses[0].progress)
+    // console.log("from seach, Progress :", courses[0].progress)
 
     return (
         <>
-            <div className="px-6 pt-6 md:hidden block md:mb-0">
+            <div className="px-6 pt-6 sm:block xl:hidden md:mb-0">
                 <SearchInput/>
             </div>
             <div className="p-6 space-y-4">

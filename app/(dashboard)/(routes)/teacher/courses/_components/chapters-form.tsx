@@ -87,9 +87,9 @@ const ChaptersForm = ({
     }
 
   return (
-    <div className="relative mt-6 border bg-slate-100 p-4 rounded-md">
+    <div className="relative mt-6 border bg-slate-100 dark:bg-slate-800 dark:text-slate-200 p-4 rounded-md">
         {isUpdating && (
-            <div className="absolute h-full w-full bg-slate-500/20 top-0 right-0 rounded-m flex items-center justify-center">
+            <div className="absolute h-full w-full bg-slate-500/20 dark:bg-slate-800 dark:text-slate-200 top-0 right-0 rounded-m flex items-center justify-center">
                 <Loader2 className="animate-spin h-6 w-6 text-sky-700"/>
             </div>
         )}
@@ -152,7 +152,7 @@ const ChaptersForm = ({
             </div>
         )}
         {!isCreating && (
-            <p className="text-xs text-muted-foreground mt-4">
+            <p className="text-xs text-muted-foreground  dark:text-slate-400 mt-4">
                 Drag and Drop to reorder the chapters
             </p>
         )}

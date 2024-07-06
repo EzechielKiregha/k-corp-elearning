@@ -4,15 +4,16 @@ import * as z from 'zod'
 import axios from 'axios'
 import { Button } from '@/components/ui/button'
 import { ImageIcon, Pencil, PlusCircle, Video } from 'lucide-react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { useRouter } from 'next/navigation'
 import { Chapter, MuxData } from '@prisma/client'
 import FileUpload from '@/components/file-upload'
 import Image from 'next/image'
+// import { checkMuxVideoExists } from '@/lib/muxUtils'
 
 interface ChapterVideoFormProps {
-    initialData : Chapter & { muxData : MuxData}
+    initialData : Chapter & { muxData : MuxData | null}
     courseId : string
     chapterId : string
 }
@@ -30,7 +31,9 @@ const ChapterVideoForm = ({
 } : ChapterVideoFormProps) => {
 
     const [isEditing, setIsEditing] = useState(false);
-    const router = useRouter()
+    const router = useRouter();
+    const [videoExists, setVideoExists] = useState<boolean>(false);
+    const [playbackId, setPlaybackId] = useState<string | null>(null);
 
     const toggleEdit = () => setIsEditing((current) => !current)
 
@@ -45,8 +48,27 @@ const ChapterVideoForm = ({
         }
     }
 
+    useEffect(() => {
+        const checkVideoStatus = async () => {
+            if (initialData?.muxData?.assetId) {
+                try {
+                    const { data } = await axios.get(`/api/mux/asset?assetId=${initialData.muxData.assetId}`);
+                    setVideoExists(data.exists);
+                    if (data.exists && data.playbackIds.length > 0) {
+                        setPlaybackId(data.playbackIds[0]);
+                    }
+                    console.log("Video status:", data);
+                } catch (error) {
+                    console.error('Error checking video status:', error);
+                }
+            }
+        }
+
+        checkVideoStatus();
+    }, [initialData]);
+
     return (
-        <div className="mt-6 border bg-slate-100 p-4 rounded-md">
+        <div className="mt-6 border bg-slate-100 dark:bg-slate-800 dark:text-slate-200 p-4 rounded-md">
             <div className="flex font-medium items-center justify-between">
                 Chapter video
                 <Button onClick={toggleEdit} variant="ghost">
@@ -73,11 +95,15 @@ const ChapterVideoForm = ({
                     <div className="flex items-center justify-center h-60 rounded-md bg-slate-200">
                         <Video className="h-10 w-10 text-slate-500" />
                     </div>
-                ) : (
+                ) : videoExists && playbackId ? (
                     <div className="relative aspect-video mt-2">
                         <MuxPlayer
-                            playbackId={initialData?.muxData?.playbackId || ""}
+                            playbackId={playbackId}
                         />
+                    </div>
+                ) : (
+                    <div className="flex items-center justify-center h-60 rounded-md dark:bg-slate-700 dark:text-slate-200 bg-slate-200">
+                        <p>Video unavailable for now</p>
                     </div>
                 )
             )}

@@ -1,6 +1,13 @@
 "use client";
 
-import { BarChart, Compass, Layout, List } from "lucide-react";
+import { BarChart,
+    Code2,
+    Compass,
+    Layout,
+    List,
+    Rabbit,
+    Twitter, 
+} from "lucide-react";
 import SidebarItem from "./sidebar-item";
 import { usePathname } from "next/navigation";
 
@@ -8,12 +15,27 @@ const guestRoutes = [
     {
         icon : Layout,
         label : "Dashboard",
-        href : "/"
+        href : "/dashboard"
     },
     {
         icon : Compass,
         label : "Browse",
         href : "/search"
+    },
+    {
+        icon : Twitter,
+        label : "Community",
+        href : "/community"
+    },
+    {
+        icon : Rabbit,
+        label : "Rabbit Events",
+        href : "/events"
+    },
+    {
+        icon : Code2,
+        label : "Hackathons",
+        href : "/hackathons"
     },
 ]
 

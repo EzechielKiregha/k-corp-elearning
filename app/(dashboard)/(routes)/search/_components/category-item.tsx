@@ -33,7 +33,7 @@ const CategoryItem = ({
                 categoryId : isSelected ? null : value
             }
         },{skipNull:true, skipEmptyString:true});
-
+        console.log("URL : ", url);
         router.push(url);
     }
 
@@ -42,7 +42,7 @@ const CategoryItem = ({
             onClick={onClick}
             className={cn(
                 "px-3 py-2 gap-x-1 border border-slate-200 rounded-full hover:border-sky-700 transition flex itens-center",
-                isSelected && "bg-sky-200/20 border-sky-700 text-sky-800"
+                isSelected && "bg-sky-200/20 border-sky-700 text-sky-500"
             )}
             type="button"
         >

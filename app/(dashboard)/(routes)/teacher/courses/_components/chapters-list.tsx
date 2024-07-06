@@ -76,14 +76,14 @@ export const ChaptersList = ({
                                 {(provided) => (
                                     <div className={ cn(
                                         "flex items-center bg-slate-200 gap-x-2 border border-slate-200 rounded-md text-slate-700 mb-4 text-sm",
-                                        chapter.isPublished && "bg-sky-100 border-sky-200 text-sky-700"
+                                        chapter.isPublished && "bg-sky-100 border-sky-200 text-sky-700 dark:border-sky-800 dark:bg-slate-700 dark:text-slate-200"
                                     ) }
                                     ref = {provided.innerRef}
                                     {...provided.draggableProps}
                                     >
                                         <div className={ cn(
-                                            "px-2 py=3 border-r border-r-slate-200 hover:bg-slate-300 rounded-l-md transition",
-                                            chapter.isPublished && "border-r-sky-200 hover:bg-sky-200"
+                                            "px-2 py=3 border-r dark:hover:bg-slate-500 border-r-slate-200 hover:bg-slate-300 rounded-l-md transition",
+                                            chapter.isPublished && "border-r-sky-200 dark:hover:bg-slate-500 hover:bg-sky-200"
                                         )}
                                         
                                         {...provided.dragHandleProps}
@@ -100,7 +100,7 @@ export const ChaptersList = ({
                                             <Badge 
                                             className={cn(
                                                 "bg-slate-500",
-                                                chapter.isPublished && 'bg-sky-700'
+                                                chapter.isPublished && 'bg-sky-700 dark:bg-sky-600 dark:text-slate-200'
                                             )}
                                             >
                                                 {chapter.isPublished ? "published" : "draft"}

@@ -47,7 +47,7 @@ const CourseId = async ({
     })
 
     if(!course){
-        return redirect("/");
+        return redirect("/dashboard");
     }
 
     const requiredFields = [
@@ -79,7 +79,7 @@ const CourseId = async ({
                         <h1 className="text-2xl font-medium">
                             Course Setup
                         </h1>
-                        <span className="text-sm text-slate-700">
+                        <span className="text-sm text-slate-700  dark:text-slate-400">
                             complete all fields {completionText}
                         </span>
                     </div>

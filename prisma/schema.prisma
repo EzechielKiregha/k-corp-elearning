@@ -93,7 +93,7 @@ model MuxData {
 }
 
 model UserProgress {
-  id String @id
+  id String @id @default(uuid())
   userId String 
 
   chapterId String

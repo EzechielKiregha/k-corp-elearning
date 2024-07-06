@@ -64,7 +64,7 @@ export const getCourses = async ({
 
                 return {
                     ...course,
-                    percentage : progressPercentage,
+                    progress : progressPercentage,
                 }
             })
         )

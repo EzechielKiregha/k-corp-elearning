@@ -68,7 +68,7 @@ const ChapterDescriptionForm = ({
     }
 
   return (
-    <div className="mt-6 border bg-slate-100 p-4 rounded-md">
+    <div className="mt-6 border bg-slate-100 dark:bg-slate-800 dark:text-slate-200 p-4 rounded-md">
         <div className="flex font-medium items-center justify-between">
             Chapter description
             <Button onClick={toggleEdit} variant="ghost">
@@ -109,6 +109,8 @@ const ChapterDescriptionForm = ({
                         <FormItem>
                             <FormControl>
                                 <Editor
+                                    className="my-4 dark:border-secondary-40  rounded-md text-slate-800 dark:text-slate-200 dark:bg-slate-900 lg:text-xl text-lg"
+                                    placeholder={"Write something here..."}
                                     {...field }
                                 />
                             </FormControl>

@@ -4,6 +4,8 @@ import { Inter } from 'next/font/google'
 import { ClerkProvider } from '@clerk/nextjs'
 import ToastProvider from '@/components/providers/toaster-provider'
 import { ConfettiProvider } from '@/components/providers/confetti-provider'
+import {NextUIProvider} from '@nextui-org/react'
+import {ThemeProvider as NextThemesProvider} from "next-themes";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -21,9 +23,13 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className={inter.className}>
-          <ConfettiProvider/>
-          <ToastProvider/>
-          {children}
+          <NextUIProvider>
+              <NextThemesProvider attribute="class" defaultTheme="system" enableSystem>
+              <ConfettiProvider/>
+              <ToastProvider/>
+                  {children}
+              </NextThemesProvider>
+          </NextUIProvider>
         </body>
       </html>
     </ClerkProvider>

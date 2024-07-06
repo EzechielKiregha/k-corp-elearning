@@ -66,7 +66,7 @@ const CourseCard = ({
                             variant={progress === 100 ? "success" : "default"}
                             size="sm"
                             value={progress} />
-                            <p>the progress: {progress}</p>
+                            {/* <p>the progress: {progress}</p> */}
                         </>
                     ) : (
                         <p>

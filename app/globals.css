@@ -1,7 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  font-family: "Poppins", sans-serif;
+  color-scheme: dark;
+}
+.dark body {
+  @apply bg-slate-900 text-slate-100 ;
+}
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -72,6 +80,47 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+  
+  .quill > * {
+    border-color: inherit !important;
+    color: inherit !important;
+  }
+  .quill > .ql-toolbar {
+    /* border radius of the toolbar */
+    border-radius: 10px 10px 0 0;
+  }
+  .quill > .ql-container {
+    /* border radius of the container and for font size*/
+    font-size: inherit;
+    border-radius: 0 0 10px 10px;
+  }
+  .ql-toolbar.ql-snow .ql-picker-label {
+    color: inherit !important;
+    opacity: 0.76;
+  }
+  .ql-snow .ql-picker {
+    color: inherit !important;
+  }
+  .quill > .ql-container > .ql-editor.ql-blank::before {
+    /* for placeholder */
+    color: inherit;
+  }
+  .ql-snow.ql-toolbar button svg {
+    opacity: 0.76;
+    color: currentColor;
+  }
+  .ql-snow .ql-stroke {
+    /* for the border of the editor */
+    stroke: currentColor !important;
+  }
+  .ql-snow .ql-fill {
+    /* for the bg color */
+    fill: currentColor !important;
+  }
+  .ql-picker-item {
+    /* for dropdown */
+    color: #444 !important;
   }
 }
 
