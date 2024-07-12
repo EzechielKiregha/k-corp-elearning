@@ -17,6 +17,7 @@ import { Input } from "@/components/ui/input"
 import * as z from 'zod'
 import Link from 'next/link';
 import toast from 'react-hot-toast';
+import { useNavigation } from '@/hooks/useNavigation';
 
 
 const formSchema = z.object({
@@ -27,7 +28,8 @@ const formSchema = z.object({
 
 const Create = () => {
 
-    const router = useRouter()
+    const router = useRouter();
+    const nav = useNavigation()
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver : zodResolver(formSchema),
@@ -84,11 +86,9 @@ const Create = () => {
                             )}
                         />
                         <div className="flex items-center gap-x-2">
-                            <Link href="/">
-                                <Button type='button' variant="ghost">
+                            <Button onClick={() => nav('/')} type='button' variant="ghost">
                                     Cancel
                                 </Button>
-                            </Link>
                             <Button type='submit' disabled={!isValid || isSubmitting}>
                                 Continue
                             </Button>

@@ -1,11 +1,12 @@
+// app/layout.tsx
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { ClerkProvider } from '@clerk/nextjs'
-import ToastProvider from '@/components/providers/toaster-provider'
 import { ConfettiProvider } from '@/components/providers/confetti-provider'
-import {NextUIProvider} from '@nextui-org/react'
-import {ThemeProvider as NextThemesProvider} from "next-themes";
+import ToastProvider from '@/components/providers/toaster-provider'
+import { LoadingProvider } from '@/contexts/loadingContext'
+import ClientWrapper from './ClientWrapper'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -23,16 +24,13 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className={inter.className}>
-          <NextUIProvider>
-              <NextThemesProvider attribute="class" defaultTheme="system" enableSystem>
-              <ConfettiProvider/>
-              <ToastProvider/>
-                  {children}
-              </NextThemesProvider>
-          </NextUIProvider>
+          <LoadingProvider>
+            <ConfettiProvider/>
+            <ToastProvider/>
+            <ClientWrapper>{children}</ClientWrapper>
+          </LoadingProvider>
         </body>
       </html>
     </ClerkProvider>
-    
   )
 }

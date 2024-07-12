@@ -2,6 +2,8 @@ import React from 'react'
 import { communityLinks, platformLinks, resourcesLinks } from '../constants'
 import Link from 'next/link'
 import Logo from '@/app/(dashboard)/_components/logo'
+import TGlink from '@/components/CustomLink'
+import TGa from '@/components/CustomAnchor'
 
 const Footer = () => {
     return (
@@ -14,9 +16,9 @@ const Footer = () => {
                     <ul className="space-y-2">
                         {resourcesLinks.map((link, index) => (
                             <li key={index}>
-                                <a 
+                                <TGa 
                                 className="text-neutral-900 dark:text-white hover:text-sky-500 dark:hover:text-sky-500"
-                                href={link.href}> {link.text} </a>
+                                href={link.href}> {link.text} </TGa>
                             </li>
                         ))}
                     </ul>
@@ -28,9 +30,9 @@ const Footer = () => {
                     <ul className="space-y-2">
                         {platformLinks.map((link, index) => (
                             <li key={index}>
-                                <a 
+                                <TGa 
                                 className="text-neutral-900 dark:text-white hover:text-sky-500 dark:hover:text-sky-500"
-                                href={link.href}> {link.text} </a>
+                                href={link.href}> {link.text} </TGa>
                             </li>
                         ))}
                     </ul>
@@ -42,18 +44,18 @@ const Footer = () => {
                     <ul className="space-y-2">
                         {communityLinks.map((link, index) => (
                             <li key={index}>
-                                <a 
+                                <TGa 
                                 className="text-neutral-900 dark:text-white hover:text-sky-500 dark:hover:text-sky-500"
-                                href={link.href}> {link.text} </a>
+                                href={link.href}> {link.text} </TGa>
                             </li>
                         ))}
                     </ul>
                 </div>
             </div>
             <div className="px-6 py-2 items-center justify-center flex">
-                <Link href="/">
+                <TGlink href="/">
                     <Logo />
-                </Link>
+                </TGlink>
             </div>
 
         </footer>

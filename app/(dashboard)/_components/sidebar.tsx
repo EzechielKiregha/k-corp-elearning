@@ -2,14 +2,15 @@ import React from 'react'
 import Logo from './logo'
 import SideRoutes from './sidebar-routes'
 import Link from 'next/link'
+import TGlink from '@/components/CustomLink'
 
 const Sidebar = () => {
   return (
     <div className="h-full border-r flex flex-col overflow-y-auto shadon-sm bg-white dark:bg-slate-900">
         <div className="p-6">
-        <Link href="/">
+        <TGlink href="/">
             <Logo />
-        </Link>
+        </TGlink>
         </div>
         <div className="flex flex-col w-full">
             <SideRoutes/>

@@ -8,10 +8,11 @@ import { useUser } from '@/hooks/use-User'
 import UserImageForm from '../../_components/user-image-form'
 import UserActions from '../../_components/user-actions'
 import { useState } from 'react'
+import { useAuth } from '@clerk/nextjs'
 
 const UserIdPage = async (
 ) => {
-    const {userId} = auth()
+    const {userId} = useAuth()
     const user = useUser(userId)
     const [isDeleted, setIsDeleted] = useState(false)
 

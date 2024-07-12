@@ -1,5 +1,6 @@
 import MainNavbar from "../_components/MainNavbar";
 import Footer from "../_components/Footer";
+import TGa from "@/components/CustomAnchor";
 
 const ContactPage = () => {
 
@@ -41,9 +42,9 @@ const ContactPage = () => {
                 <p>Address: 1234 Learning St, Kigali, Rwanda</p>
                 </div>
                 <div className="mt-6 flex space-x-4 justify-center">
-                <a href="#" className="text-blue-500">Facebook</a>
-                <a href="#" className="text-blue-500">Twitter</a>
-                <a href="#" className="text-blue-500">LinkedIn</a>
+                <TGa href="#" className="text-blue-500">Facebook</TGa>
+                <TGa href="#" className="text-blue-500">Twitter</TGa>
+                <TGa href="#" className="text-blue-500">LinkedIn</TGa>
                 </div>
             </div>
             </div>

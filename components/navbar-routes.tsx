@@ -10,6 +10,7 @@ import { isTeacher  } from "@/lib/isTeacher";
 import { ThemeToggle } from "./theme-toggle";
 import { useUser } from "@/hooks/use-User";
 import { FcBookmark } from "react-icons/fc";
+import { useNavigation } from "@/hooks/useNavigation";
 
 const NavbarRoutes = () => {
     const { userId } = useAuth();
@@ -17,6 +18,7 @@ const NavbarRoutes = () => {
     const isTeacherPage = pathname?.startsWith("/teacher");
     const isCoursePage = pathname?.includes("/courses");
     const isSearchPage = pathname === "/search";
+    const nav = useNavigation()
 
     const user = useUser(userId);
 
@@ -33,19 +35,15 @@ const NavbarRoutes = () => {
                 {
                     isTeacherPage || isCoursePage ?
                     (
-                        <Link href="/dashboard">
-                            <Button size="sm" variant="ghost">
-                                <LogOut className="h-4 w-4 mr-2" />
-                                Exit
-                            </Button>
-                        </Link>
+                        <Button onClick={() => nav('/dashboard')} size="sm" variant="ghost">
+                            <LogOut className="h-4 w-4 mr-2" />
+                            Exit
+                        </Button>
                     ) : isTeacher(user!) === true ? (
-                    <Link href="/teacher/courses">
-                        <Button size="sm" variant="ghost">
+                        <Button onClick={() => nav('/teacher/courses')} size="sm" variant="ghost">
                             | <FcBookmark/>
                             Teach Mode |
-                        </Button>
-                    </Link>) : null
+                        </Button>) : null
                 }
                 <ThemeToggle/>
                 <UserButton afterSignOutUrl="/"/>

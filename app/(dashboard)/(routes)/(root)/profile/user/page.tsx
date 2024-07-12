@@ -15,6 +15,7 @@ import NewUserForm from "@/app/(guest)/subscription/_forms/user-form";
 import Banner from "@/components/banner";
 import UserIdPage from "./[userId]/page";
 import SubscriptionButton from "../_components/subscrption-button";
+import { useNavigation } from "@/hooks/useNavigation";
 
 
 const CreateInstitution = () => {
@@ -29,16 +30,19 @@ const CreateInstitution = () => {
     const [enterpriseisActivated, setEnterpriseIsActivated] = useState(false)
     const [proIsActivated, setProIsActivated] = useState(false)
     const [freeIsActivated, setFreeIsActivated] = useState(false)
+    const nav = useNavigation()
     
     useEffect(()=>{
         try {
-            if (institution ){
+            if (institution){
                 if (user?.subscriptionPlan === "Enterprise") setGotbusiness(true);
+
                 if (institution.isActivated && user?.subscriptionPlan === "Ultimate Enterprise Plan") {
                     setEnterpriseIsActivated(true) ;
                     setGotbusiness(true);
                 }
-            } else if (user?.subscriptionPlan === "Pro") {
+            }
+            if (user?.subscriptionPlan === "Pro") {
                 setGotPro(true);
                 setGotbusiness(false)
             } else if (user?.subscriptionPlan === "Ultimate Enterprise Plan") {
@@ -61,12 +65,10 @@ const CreateInstitution = () => {
     
     return (
         <div className="max-w-5xl mx-auto flex flex-col items-center justify-center p-4">
-            <UserButton/>
-            <NewUserForm initialData={user!} selectedPlan={user?.subscriptionPlan!}/>
+            
             {!gotBusiness ? (
                 <>
-                
-                <div className="flex items-center justify-center">
+                <div className="flex flex-col items-center justify-center">
                     {gotPro ? (
                         <>
                         {proIsActivated ? (
@@ -75,7 +77,8 @@ const CreateInstitution = () => {
                                 variant="success"
                                 label="You are a Pro Member and Instructor at K-Corp eLearning. Create up to [ 200 ] courses"
                             />
-                            <UserIdPage /></>
+                            {/* <UserIdPage /> */}
+                            </>
                         ) : (
                             <>
                             <Banner
@@ -87,7 +90,8 @@ const CreateInstitution = () => {
                                 Upgrade to Enterprise. Register You Institution, University, College, ... and Manage your students, and Create up to [ 500 ] courses.
                             </Button>
                             <SubscriptionButton userId={userId!} price={11.99} />
-                            <UserIdPage /></>
+                            {/* <UserIdPage /> */}
+                            </>
                         )}
                         </>
                     ): (
@@ -98,7 +102,8 @@ const CreateInstitution = () => {
                                 variant="success"
                                 label="You are a Pro Member and Instructor at K-Corp eLearning. Create up to [ 200 ] courses" 
                                 />
-                            <UserIdPage /></>
+                            {/* <UserIdPage /> */}
+                            </>
                         ) : (
                             <><Banner
                             variant="warning"
@@ -108,24 +113,22 @@ const CreateInstitution = () => {
                                 Activate & get Student Free MemberShip.
                             </Button>
                             <SubscriptionButton userId={userId!} price={0.00} />
-                            <UserIdPage />
+                            {/* <UserIdPage /> */}
                             </>
                         )}
                         <Button variant="link">
                             <CircleArrowRight />
                             Upgrade to Pro .become a Pro Member and Instructor at K-Corp eLearning. Create up to [ 200 ] courses.
                         </Button>
-                        <Link href="/subscription">
-                            <Button variant="link">
-                                <CircleArrowRight />
-                                Upgrade to Enterprise. Register 
-                            </Button>
-                        </Link>
-                        <UserIdPage />
+                        <Button onClick={() => nav('/subscription')} variant="link">
+                            <CircleArrowRight />
+                            Upgrade to Enterprise. Register 
+                        </Button>
+                        {/* <UserIdPage /> */}
                         </>
                     )}
                 </div>
-                
+                <NewUserForm initialData={user!} selectedPlan={user?.subscriptionPlan!}/>
                 </>
             ):(
                 <><Banner
@@ -135,12 +138,11 @@ const CreateInstitution = () => {
                     <><Banner
                     variant="success"
                     label="You are an Institution, University, College, ... and Manage your students, and Create up to [ 500 ] courses." />
-                    <Link href={`/profile/user/${userId}/institutions/${institution?.id}`}>
-                        <Button variant="ghost">
-                            <CircleArrowRight />
-                            Visite '{institution?.name}'
-                        </Button>
-                    </Link></>
+                    <Button onClick={() => nav(`/profile/user/${userId}/institutions/${institution?.id}`)} variant="ghost">
+                        <CircleArrowRight />
+                        Visite '{institution?.name}'
+                    </Button>
+                    </>
                 ) : (
                     <><Button variant="link">
                         <CircleArrowRight />

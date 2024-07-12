@@ -11,6 +11,7 @@ import ChapterVideoForm from "../_components/chapter-video-form"
 import Banner from "@/components/banner"
 import { boolean } from "zod"
 import ChapterActions from "../_components/chapter-actions"
+import TGlink from "@/components/CustomLink"
 
 const ChapterIdPage = async (
     {
@@ -58,12 +59,12 @@ const ChapterIdPage = async (
             <div className="p-6">
                 <div className="flex items-center justify-between">
                     <div className="w-full">
-                        <Link className="flex items-center text-sm hover:opacity-75 transition mb-6"
+                        <TGlink className="flex items-center text-sm hover:opacity-75 transition mb-6"
                         href={`/teacher/courses/${params.courseId}`}
                         >
                             <ArrowLeft className="h-4 w-4 mr-2"/>
                             back to course setup
-                        </Link>
+                        </TGlink>
                         <div className="flex items-center justify-between w-full">
                             <div className="flex flex-col gap-y-2">
                                 <h1 className="text-2xl font-medium">

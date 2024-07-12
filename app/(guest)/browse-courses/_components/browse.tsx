@@ -2,6 +2,7 @@ import { db } from "@/lib/db"
 import Categories from "@/app/(dashboard)/(routes)/search/_components/categories";
 import { getBrowseCourses } from "@/actions/get-browseCourses";
 import BrowseCoursesList from "@/components/browse-courses-list";
+import TGa from "@/components/CustomAnchor";
 
 interface searchParamsProps {
     searchParams : {
@@ -26,7 +27,7 @@ const BrowseCourse = async () => {
         <div id="courses" className="flex flex-col w-full items-center mt-2 mx-0 ">
             <div className="text-center">
                 <h2 className="text-3xl sm:text-5xl lg:text-6xl mt-10 lg:mt-20 tracking-wide">Browse Our<br/>
-                    <span className="bg-gradient-to-r from-sky-950 to-sky-600 ">
+                    <span className="bg-gradient-to-r from-sky-950 to-sky-600 text-slate-200">
                         Courses
                     </span>
                 </h2>
@@ -37,8 +38,8 @@ const BrowseCourse = async () => {
                 />
                 <BrowseCoursesList items={courses} />
                 <div className="flex justify-center my-10">
-                    <a href="/browse-courses" className="bg-gradient-to-r text-slate-200 from-sky-950 to-sky-600 px-3 py-2
-                    rounded-md ">more</a>
+                    <TGa href="/browse-courses" className="bg-gradient-to-r text-slate-200 from-sky-950 to-sky-600 px-3 py-2
+                    rounded-md ">more</TGa>
                     {/* <a href="#" className="px-3 py-2 mx-3 rounded-md ">Guide & Docs</a> */}
                 </div>
             </div>

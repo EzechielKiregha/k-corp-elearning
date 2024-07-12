@@ -5,6 +5,7 @@ import IconBadge from './icon-badge';
 import { BookOpen } from 'lucide-react';
 import formatPrice  from '@/lib/format'
 import CourseProgress from './couurse-progress';
+import TGlink from './CustomLink';
 
 
 interface BrowseCourseCardProps {
@@ -33,7 +34,7 @@ const BrowseCourseCard = ({
     }).format(price)
 
     return (
-        <Link href={`/courses/${id}`}>
+        <TGlink href={`/courses/${id}`}>
             <div className="group hover:shadow-sm h-full p-3 border rounded-lg overflow-hidden transition">
                 <div className="relative w-full aspect-video rounded-md overflow-hidden">
                     <Image
@@ -64,7 +65,7 @@ const BrowseCourseCard = ({
                     
                 </div>
             </div>
-        </Link>
+        </TGlink>
     )
 }
 

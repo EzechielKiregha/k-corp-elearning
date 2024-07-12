@@ -59,7 +59,7 @@ const teacherRoutes = [
     {
         icon : User,
         label : "Profile",
-        href : "/profile"
+        href : "/profile/user"
     },
 ]
 

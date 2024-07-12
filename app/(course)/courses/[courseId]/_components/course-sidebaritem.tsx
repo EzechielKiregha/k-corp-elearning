@@ -1,5 +1,6 @@
 "use client";
 
+import { useNavigation } from '@/hooks/useNavigation';
 import { cn } from '@/lib/utils';
 import { CircleCheck, Lock, PlayCircle } from 'lucide-react';
 import { usePathname, useRouter } from 'next/navigation';
@@ -23,18 +24,15 @@ const CourseSidebarItem = ({
 
     const pathName = usePathname()
     const router = useRouter()
+    const nav = useNavigation();
 
     const Icon = isLocked ? Lock : (isCompleted ? CircleCheck : PlayCircle);
 
     const isActive = pathName?.includes(id)
 
-    const onClick = () => {
-        router.push(`/courses/${courseId}/chapters/${id}`);
-    }
-
     return (
         <button
-            onClick={onClick}
+            onClick={() => nav(`/courses/${courseId}/chapters/${id}`)}
             type="button"
             className={cn(
                 "flex items-center gap-x-2 text-sm text-slate-500 font-[500] pl-6 transition-all hover:text-slate-600 hover:bg-slate-300/20",

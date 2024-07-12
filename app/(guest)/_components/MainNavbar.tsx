@@ -1,6 +1,6 @@
 "use client";
 
-import { Menu, X, Sun, Moon } from 'lucide-react'
+import { Menu, X, Sun, Moon, Layout } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import { useState, useEffect} from 'react'
 import { navItems } from '../constants'
@@ -9,15 +9,18 @@ import Logo from './logo';
 import Link from 'next/link';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { isTeacher } from '@/lib/isTeacher';
-import { Button } from '@/components/ui/button';
 import { useUser } from '@/hooks/use-User';
+import { useNavigation } from '@/hooks/useNavigation';
+import TGlink from '@/components/CustomLink';
+import TGa from '@/components/CustomAnchor';
 
 
 const MainNavbar = () => {
 
     const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false)
     const [isLogin, setIsLogin] = useState(false);
-    const [mounted, setMounted] = useState(false)
+    const [mounted, setMounted] = useState(false);
+    const nav = useNavigation()
     
 
     const {userId} = useAuth();
@@ -40,15 +43,15 @@ const MainNavbar = () => {
                 <div className="flex justify-between items-center">
                     <div className="flex items-center flex-shrink-0">
                     <div className="px-2 py-0">
-                        <Link href="/">
+                        <TGlink href="/">
                             <Logo />
-                        </Link>
+                        </TGlink>
                     </div>
                     </div>
                     <ul className="hidden lg:flex ml-14 space-x-6">
                         {navItems.map( (item, index) => (
                             <li key={index}>
-                                <Link
+                                <TGlink
                                     className='hover:text-sky-600'
                                     href={item.href }
                                 >
@@ -66,28 +69,26 @@ const MainNavbar = () => {
                                     ) : (
                                         item.label
                                     )}
-                                </Link>
+                                </TGlink>
                             </li>
                         ))}
                     </ul>
                     {!isLogin ? (
                         <div className="hidden lg:flex justify-center space-x-6 items-center ">
                             <ThemeToggle/>
-                            <a href="/sign-in" className='py-2 px-2 border rounded-md border-sky-700 dark:border-slate-200 dark:text-slate-200 text-sky-700 dark:hover:text-sky-500 dark:hover:border-sky-500'> Sign In </a>
-                            <a href="/sign-up" className="py-2 px-2 rounded-md bg-gradient-to-r 
-                                from-sky-950 to-sky-600 text-slate-200">Create an account</a>
+                            <TGa href="/sign-in" className='py-2 px-2 border rounded-md border-sky-700 dark:border-slate-200 dark:text-slate-200 text-sky-700 dark:hover:text-sky-500 dark:hover:border-sky-500'> Sign In </TGa>
+                            <TGa href="/sign-up" className="py-2 px-2 rounded-md bg-gradient-to-r 
+                                from-sky-950 to-sky-600 text-slate-200">Create an account</TGa>
                         </div>
                     ):(
                         <>
-                        <div className="hidden lg:flex justify-center space-x-12 items-center">
+                        <div className="hidden lg:flex lg:flex-row justify-center space-x-12 items-center">
                             <ThemeToggle/>
-                            <UserButton/>
-                            <Link href="/dashboard" >
-                                <button className="py-2 px-3 rounded-md bg-gradient-to-r 
-                                from-sky-950 to-sky-600 text-slate-200">
-                                    Dashboard
-                                </button>
-                            </Link>
+                            {/* <UserButton/> */}
+                            <button onClick={() => nav('/dashboard')} className="py-2 px-3 rounded-md bg-gradient-to-r 
+                            from-sky-950 to-sky-600 text-slate-200">
+                                Dashboard
+                            </button>
                         </div>
                         </>
                     )}
@@ -106,7 +107,7 @@ const MainNavbar = () => {
                         <ul>
                         {navItems.map( (item, index) => (
                             <li key={index}>
-                                <Link
+                                <TGlink
                                     className='hover:text-sky-600'
                                     href={item.label === "Teach Mode" && item.key === 4 ? item.href : "/teacher/courses"  }
                                 >
@@ -124,21 +125,21 @@ const MainNavbar = () => {
                                     ) : (
                                         item.label
                                     )}
-                                </Link>
+                                </TGlink>
                             </li>
                         ))}
                         </ul>
                         {!isLogin ? (
                             <div className="flex space-x-6 items-center ">
-                                <a href="/sign-in" className='py-2 px-3 border rounded-md border-sky-800 text-sky-800 '> Sign In </a>
-                                <a href="/sign-up" className="py-2 px-3 rounded-md bg-gradient-to-r 
-                                   from-sky-950 to-sky-600 text-slate-200"> Create an account</a>
+                                <TGa href="/sign-in" className='py-2 px-3 border rounded-md border-sky-800 text-sky-800 '> Sign In </TGa>
+                                <TGa href="/sign-up" className="py-2 px-3 rounded-md bg-gradient-to-r 
+                                from-sky-950 to-sky-600 text-slate-200"> Create an account</TGa>
                             </div>
                         ):(
                             <div className="flex space-x-6">
                                 <UserButton/>
-                                <Link href="/dashboard" className="py-2 px-3 rounded-md bg-gradient-to-r 
-                                    from-sky-950 to-sky-600 text-slate-200">Dashboard</Link>
+                                <TGlink href="/dashboard" className="py-2 px-3 rounded-md bg-gradient-to-r 
+                                    from-sky-950 to-sky-600 text-slate-200">Dashboard</TGlink>
                             </div>
                         )}
                     </div>

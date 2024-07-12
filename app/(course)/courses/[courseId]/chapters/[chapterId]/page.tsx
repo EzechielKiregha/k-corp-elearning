@@ -9,6 +9,7 @@ import { Separator } from '@/components/ui/separator';
 import Preview from '@/components/preview';
 import { File } from 'lucide-react';
 import CourseProgressButton from './_components/course-progress-button';
+import TGa from '@/components/CustomAnchor';
 
 const ChapterIdPage = async ({
     params,
@@ -98,7 +99,7 @@ const ChapterIdPage = async ({
                         <Separator/>
                         <div className="p-4">
                             {attachments.map((attachment) => (
-                                <a 
+                                <TGa 
                                 key={attachment.id}
                                 href={attachment.url}
                                 target='_blank'
@@ -109,7 +110,7 @@ const ChapterIdPage = async ({
                                     <p className="line-clamp-1">
                                         {attachment.name}
                                     </p>
-                                </a>
+                                </TGa>
                             ))}
                         </div>
                     </>

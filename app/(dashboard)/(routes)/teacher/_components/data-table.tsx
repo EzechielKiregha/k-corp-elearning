@@ -25,6 +25,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import Link from 'next/link'
 import { PlusCircle } from 'lucide-react'
+import { useNavigation } from '@/hooks/useNavigation'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -40,6 +41,7 @@ export function DataTable<TData, TValue>({
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
         []
       );
+    const nav = useNavigation()
 
     const table = useReactTable({
         data,
@@ -69,12 +71,10 @@ export function DataTable<TData, TValue>({
             className="max-w-sm"
             />
 
-            <Link href="/teacher/create">
-                <Button>
-                    <PlusCircle className='h-4 w-4 mr-2'/>
-                    New Course
-                </Button>
-            </Link>
+            <Button onClick={() => nav("/teacher/create")}>
+                <PlusCircle className='h-4 w-4 mr-2'/>
+                New Course
+            </Button>
         </div>
         <div className="rounded-md border">
         <Table>

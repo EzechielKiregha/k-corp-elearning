@@ -13,6 +13,7 @@ import {
 import Link from "next/link"
 import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
+import TGlink from "@/components/CustomLink"
 
 export const columns: ColumnDef<Course>[] = [
     {
@@ -93,12 +94,12 @@ export const columns: ColumnDef<Course>[] = [
                         </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
-                        <Link href={`/teacher/courses/${id}`}>
+                        <TGlink href={`/teacher/courses/${id}`}>
                             <DropdownMenuItem>
                                 <Pencil className="h-4 w-4 mr-2" />
                                 Edit
                             </DropdownMenuItem>
-                        </Link>
+                        </TGlink>
                     </DropdownMenuContent>
                 </DropdownMenu>
             )

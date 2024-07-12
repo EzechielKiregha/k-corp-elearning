@@ -22,6 +22,7 @@ import { useUser } from '@clerk/nextjs'
 import { User } from '@prisma/client'
 import Link from 'next/link'
 import Image from 'next/image'
+import TGlink from '@/components/CustomLink'
 
 interface NewUserFormProps {
     initialData: User | null;
@@ -113,7 +114,7 @@ const NewUserForm = ({
                 <div className="flex font-medium relative mt-0 justify-between">
                 User Details
                 {goToProfile && !isEditing && (
-                    <Link href="/profile/user">
+                    <TGlink href="/profile/user">
                         {!userData?.imageUrl ? (
                             <div className="flex absolute items-center justify-center w-20 h-20 mt-8 -ml-6 md:-ml-16 lg:h-60 lg:-ml-20 lg:w-60 sm:-ml-8 xs:-ml-6 sm:h-32 sm:w-32 xs:h-20 xs:w-20  rounded-full bg-slate-200">
                                 <ImageIcon className=" text-slate-800" />
@@ -128,7 +129,7 @@ const NewUserForm = ({
                                 />
                             </div>
                         )}
-                    </Link>
+                    </TGlink>
                 )}
                 <Button onClick={toggleEditing} variant="ghost">
                     {isEditing && "Cancel"}

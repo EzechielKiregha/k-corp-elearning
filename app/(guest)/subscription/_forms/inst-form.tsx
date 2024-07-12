@@ -24,6 +24,7 @@ import { cn } from '@/lib/utils'
 import { useUser } from '@clerk/nextjs'
 import Image from 'next/image'
 import Link from 'next/link'
+import TGlink from '@/components/CustomLink'
 
 
 interface InstitutionForNewUserFormProps {
@@ -126,7 +127,7 @@ const InstitutionForNewUserForm = ({
                 <div className="flex font-medium relative justify-between">
                 Institution Details
                 {goToProfile && !isEditing && (
-                    <Link href="/profile/user">
+                    <TGlink href="/profile/user">
                         {!institution?.imageUrl ? (
                             <div className="flex absolute items-center justify-center mt-20 lg:mt-0 lg:h-60 lg:-ml-44 lg:w-96 -ml-32 h-44 w-72 md:w-60 md:40 md:-ml-28   sm:ml-32 sm:mt-10 sm:h-32 sm:w-44   rounded-md bg-slate-600">
                                 <ImageIcon className=" text-slate-800" />
@@ -141,7 +142,7 @@ const InstitutionForNewUserForm = ({
                                 />
                             </div>
                         )}
-                    </Link>
+                    </TGlink>
                 )}
                 <Button onClick={toggleEditing} variant="ghost">
                     {isEditing && "Cancel"}

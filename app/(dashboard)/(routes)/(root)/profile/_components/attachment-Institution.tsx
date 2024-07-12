@@ -8,6 +8,7 @@ import toast from 'react-hot-toast'
 import { useRouter } from 'next/navigation'
 import { Attachment, Institution } from '@prisma/client'
 import FileUpload from '@/components/file-upload'
+import { useAuth } from '@clerk/nextjs'
 
 interface AttachmentInstitutionFormProps {
     initialData : Institution & { supportingDocuments : Attachment[] };
@@ -27,7 +28,7 @@ const AttachmentInstitutionForm = ({
 
     const [isEditing, setIsEditing] = useState(false);
     const [deletingId, setDeletingId] = useState<string | null>(null);
-
+    const {userId} = useAuth()
     const router = useRouter()
 
     const toggleEdit = () => setIsEditing((current) => !current)
