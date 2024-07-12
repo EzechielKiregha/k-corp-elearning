@@ -5,7 +5,6 @@ import {
     SheetTrigger
 } from '@/components/ui/sheet'
 import Sidebar from "./sidebar"
-import { ThemeToggle } from "@/components/theme-toggle"
 
 
 const MobileSidebar = () => {

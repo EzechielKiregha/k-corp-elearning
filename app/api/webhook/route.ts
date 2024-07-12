@@ -25,20 +25,41 @@ export async function POST(
     const session = event.data.object as Stripe.Checkout.Session;
     const userId = session?.metadata?.userId;
     const courseId = session?.metadata?.courseId
+    const sub = session?.metadata?.subscriptionId
 
     if(event.type === "checkout.session.completed"){
         if (!userId || !courseId){
             return new NextResponse(`Webhook Error : Messing metadata`, {status : 400});
         }
 
-        await db.purchase.create({
-            data : {
-                userId : userId,
-                courseId : courseId,
-            }
-        })
-
-        console.log("User Who Purchase :", userId);
+        if(userId && courseId) {
+            await db.purchase.create({
+                data : {
+                    userId : userId,
+                    courseId : courseId,
+                }
+            })
+        }else if (userId && sub && !sub.includes('Pro_Membership_') || !sub?.includes('StudentFreeOffer_')){
+            await db.institution.update({
+                where : {
+                    id : sub,
+                },
+                data : {
+                    owner : userId,
+                    isActivated : true,
+                }
+            })
+        } else {
+            await db.user.update({
+                where : {
+                    id : userId,
+                },
+                data : {
+                    subscriptionPlan : sub.includes('Pro_Membership_') ? "Pro MemberShip" : sub?.includes('StudentFreeOffer_') ?
+                    "Student Free MemberShip" : "Ultimate Enterprise Plan"
+                }
+            })
+        }
 
     } else {
         return new NextResponse(`Webhook Error : Unhandeled event type ${event.type}`, {status : 200})

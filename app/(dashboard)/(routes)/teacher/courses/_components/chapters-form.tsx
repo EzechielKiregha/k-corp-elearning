@@ -62,7 +62,7 @@ const ChaptersForm = ({
             toast.success("Chapter Created Successfully")
             toggleCreating()
             router.refresh()
-        } catch {
+        } catch {   
             toast.error("Something Went Wrong")
         }
     }

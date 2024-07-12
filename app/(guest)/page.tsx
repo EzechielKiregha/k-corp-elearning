@@ -5,16 +5,9 @@ import Workflow from './_components/Workflow';
 import Pricing from './_components/Pricing';
 import Testimonials from './_components/Testimonials';
 import Footer from './_components/Footer';
-import { db } from '@/lib/db';
 import BrowseCourse from './browse-courses/_components/browse';
 
-export default async function Guest() {
-
-    const categories = await db.category.findMany({
-        orderBy : {
-            name:"asc",
-        }
-    });
+export default function Guest() {
 
     return (
         <>

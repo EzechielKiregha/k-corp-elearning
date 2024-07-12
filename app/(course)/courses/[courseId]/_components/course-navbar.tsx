@@ -17,16 +17,16 @@ const CourseNavbar = ({
     course,
     progressCount,
 }:CourseNavbarProps) => {
-  return (
-    <div className="flex items-center h-full p-4 border-b bg-white shadow-sm">
-        <CourseMobileNavbar
-            course={course}
-            progressCount={progressCount}
-        />
-        <NavbarRoutes/>
-        
-    </div>
-  )
+    return (
+        <div className="flex items-center h-full p-4 border-b bg-white dark:bg-slate-900 shadow-sm">
+            <CourseMobileNavbar
+                course={course}
+                progressCount={progressCount}
+            />
+            <NavbarRoutes/>
+            
+        </div>
+    )
 }
 
 export default CourseNavbar

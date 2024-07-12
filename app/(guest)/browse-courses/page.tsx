@@ -4,13 +4,7 @@ import { getBrowseCourses } from "@/actions/get-browseCourses";
 import BrowseCoursesList from "@/components/browse-courses-list";
 import SearchInput from "@/components/search-input";
 import MainNavbar from "../_components/MainNavbar";
-
-interface searchParamsProps {
-    searchParams : {
-        title : string,
-        categoryId : string
-    }
-}
+import Footer from "../_components/Footer";
 
 const BrowsePage = async () => {
 
@@ -29,8 +23,8 @@ const BrowsePage = async () => {
         <MainNavbar/>
         <div id="courses" className="flex flex-col items-center mt-2 ">
             <div className="text-center">
-                <h2 className="text-3xl sm:text-5xl lg:text-6xl mt-10 lg:mt-20 tracking-wide">Browse Our<br/>
-                    <span className="bg-gradient-to-r from-sky-500 to-sky-800 ">
+                <h2 className="text-3xl sm:text-5xl lg:text-6xl tracking-wide">Browse Our<br/>
+                    <span className="bg-gradient-to-r from-sky-500 to-sky-800 text-slate-200 ">
                         Courses
                     </span>
                 </h2>
@@ -45,6 +39,7 @@ const BrowsePage = async () => {
                 <BrowseCoursesList items={courses} />
             </div>
         </div>
+        <Footer/>
         </>
         
     )

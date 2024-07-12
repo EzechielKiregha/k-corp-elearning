@@ -1,5 +1,7 @@
+"use client"
+import { useUser } from '@/hooks/use-User';
 import { isTeacher } from '@/lib/isTeacher';
-import { auth } from '@clerk/nextjs/server';
+import { useAuth } from '@clerk/nextjs';
 import { redirect } from 'next/navigation';
 import React from 'react'
 
@@ -9,10 +11,13 @@ const TeacherLayout = ({
     children : React.ReactNode;
 }) => {
 
-    const {userId } = auth();
+    const { userId } = useAuth();
 
-    if (!isTeacher(userId)){
-        return redirect("/")
+    const user = useUser(userId)
+
+    if (user && (isTeacher(user) === false)){
+        console.log("this nigga ain't Teacher or Instructor")
+        return redirect("/dashboard")
     }
 
     return <> {children} </>

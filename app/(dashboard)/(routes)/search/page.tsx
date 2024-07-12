@@ -39,6 +39,7 @@ const Search = async ({
 
     return (
         <>
+        <div className="min-h-screen">
             <div className="px-6 pt-6 sm:block xl:hidden md:mb-0">
                 <SearchInput/>
             </div>
@@ -48,6 +49,8 @@ const Search = async ({
                 />
                 <CoursesList items={courses} />
             </div>
+        </div>
+            
         </>
     )
 }

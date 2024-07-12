@@ -8,10 +8,15 @@ import user5 from "../assets/profile-pictures/user5.jpg";
 import user6 from "../assets/profile-pictures/user6.jpg";
 
 export const navItems = [
-  { label: "Features", href: "/#features" , key : 1 },
-  { label: "Courses", href: "/#courses", key : 2},
-  { label: "Testimonials", href: "/#testimonials", key : 3 },
-  { label: "Pricing", href: "/#pricing", key : 4 },
+  { key : 1, label: "Home", href: "/" },
+  { key : 2, label: "Contact", href: "/contact" },
+  { key : 3, label: "About", href: "/about"},
+  { key : 3, label: "Teach Mode", href: "/teacher/courses" },
+  { key : 4, label: "Features", href: "/#features"  },
+  { key : 5, label: "Courses", href: "/#courses"},
+  { key : 6, label: "Testimonials", href: "/#testimonials" },
+  
+  
 ];
 
 export const testimonials = [
@@ -118,35 +123,41 @@ export const checklistItems = [
 export const pricingOptions = [
   {
     title: "Free",
-    price: "$0",
+    price: "$0.00",
     features: [
-      "Access to free courses",
+      "Access to all courses",
       "Community support",
-      "share your progress",
-      "Basic analytics",
+      "Create up to 5 courses",
+      "Basic course analytics",
     ],
   },
   {
     title: "Pro",
-    price: "$10",
+    price: "$11.99",
     features: [
       "Access to all courses",
       "Priority support",
-      "Advanced analytics",
-      "Certificates of completion",
+      "Create unlimited courses",
+      "Advanced course analytics",
+      "Certificates of completion for students",
     ],
   },
   {
     title: "Enterprise",
-    price: "$200",
+    price: "$68.99",
     features: [
       "Access to all courses",
-      "Dedicated support",
-      "Team management",
-      "Custom analytics",
+      "Dedicated account manager",
+      "Create unlimited courses",
+      "Custom branding for courses",
+      "Advanced course and user analytics",
+      "Team collaboration tools",
+      "API access for integration",
     ],
   },
 ];
+
+
 
 export const resourcesLinks = [
   { href: "#", text: "Getting Started" },

@@ -1,11 +1,13 @@
 import React from 'react'
 import { communityLinks, platformLinks, resourcesLinks } from '../constants'
+import Link from 'next/link'
+import Logo from '@/app/(dashboard)/_components/logo'
 
 const Footer = () => {
     return (
         <footer className="mt-20 border-t border-slate-700 flex flex-col justify-center ">
-            <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
-                <div>
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-4  md:items-center ">
+                <div className='md:px-6 md:mx-auto'>
                     <h3 className="text-md font-semibold mb-4">
                         Resources
                     </h3>
@@ -19,7 +21,7 @@ const Footer = () => {
                         ))}
                     </ul>
                 </div>
-                <div>
+                <div className='md:px-6 md:mx-auto'>
                     <h3 className="text-md font-semibold mb-4">
                         Platforms
                     </h3>
@@ -33,7 +35,7 @@ const Footer = () => {
                         ))}
                     </ul>
                 </div>
-                <div>
+                <div className='md:px-6 md:mx-auto'>
                     <h3 className="text-md font-semibold mb-4">
                         Community
                     </h3>
@@ -47,6 +49,11 @@ const Footer = () => {
                         ))}
                     </ul>
                 </div>
+            </div>
+            <div className="px-6 py-2 items-center justify-center flex">
+                <Link href="/">
+                    <Logo />
+                </Link>
             </div>
 
         </footer>

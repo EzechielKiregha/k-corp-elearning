@@ -3,7 +3,7 @@ const HeroSection = () => {
         <div className="flex flex-col items-center mt-6 ">
             <div className="text-center">
                 <h2 className="text-3xl sm:text-5xl lg:text-6xl mt-10 lg:mt-20 tracking-wide">Empower your future with<br/>
-                    <span className="bg-gradient-to-r from-sky-950 to-sky-600 ">
+                    <span className="bg-gradient-to-r from-sky-950 to-sky-600 text-slate-200">
                         K-Corp eLearning
                     </span>
                 </h2>

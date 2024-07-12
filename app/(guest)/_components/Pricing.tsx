@@ -1,13 +1,14 @@
+"use client"
 import React from 'react'
-import { features, pricingOptions } from '../constants'
-import { MRT_FilterOptionMenu } from 'material-react-table'
+import { pricingOptions } from '../constants'
 import { CheckCircle2 } from 'lucide-react'
 
 const Pricing = () => {
+    
     return (
         <div id='pricing' className="mt-20">
             <h2 className="text-3xl sm:text-5xl lg:text-6xl text-center my-8 tracking-wide">Join Us &<br />
-            <span className="bg-gradient-to-r from-sky-950 to-sky-600 ">
+            <span className="bg-gradient-to-r from-sky-950 to-sky-600 text-slate-200 ">
                 Host your courses today. 
             </span>
             </h2>
@@ -38,12 +39,12 @@ const Pricing = () => {
                                     </li>
                                 ))}  
                             </ul>
-                            <a 
-                            href="#" 
-                            className="inline-flex justify-center itens-center text-center w-full 
-                            h-12 p-2 mt-20 text-xl tracking-tight border hover:bg-slate-200 hover:text-slate-900 dark:hover:bg-white dark:hover:text-slate-900
-                             border-blue-900 rounded-lg transition duration-200 ">
-                                Subscribe
+                            <a
+                                href='/subscription' 
+                                className="inline-flex justify-center itens-center text-center w-full 
+                                h-12 p-2 mt-20 text-xl tracking-tight border hover:bg-slate-200 hover:text-slate-900 dark:hover:bg-white dark:hover:text-slate-900
+                                border-blue-900 rounded-lg transition duration-200 ">
+                                    Subscribe
                             </a>
                         </div>
                     </div>

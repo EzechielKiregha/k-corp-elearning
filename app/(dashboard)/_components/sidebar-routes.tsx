@@ -6,7 +6,8 @@ import { BarChart,
     Layout,
     List,
     Rabbit,
-    Twitter, 
+    Twitter,
+    User, 
 } from "lucide-react";
 import SidebarItem from "./sidebar-item";
 import { usePathname } from "next/navigation";
@@ -30,12 +31,17 @@ const guestRoutes = [
     {
         icon : Rabbit,
         label : "Rabbit Events",
-        href : "/events"
+        href : "/rabbit-events"
     },
     {
         icon : Code2,
         label : "Hackathons",
         href : "/hackathons"
+    },
+    {
+        icon : User,
+        label : "Profile",
+        href : "/profile/user"
     },
 ]
 
@@ -49,6 +55,11 @@ const teacherRoutes = [
         icon : BarChart,
         label : "Analytics",
         href : "/teacher/analytics"
+    },
+    {
+        icon : User,
+        label : "Profile",
+        href : "/profile"
     },
 ]
 
@@ -71,6 +82,7 @@ const SideRoutes = () => {
                     />
                 ))
             }
+            
         </div>
     )
 }
