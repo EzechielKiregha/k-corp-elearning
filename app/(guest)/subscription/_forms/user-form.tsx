@@ -6,7 +6,7 @@ import axios from 'axios'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
-import { useRouter } from 'next/navigation'
+import { redirect, useRouter } from 'next/navigation'
 
 import {
     Form,
@@ -17,9 +17,11 @@ import {
 } from '@/components/ui/form'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { Pencil, PlusCircle } from 'lucide-react'
+import { ImageIcon, Pencil, PlusCircle } from 'lucide-react'
 import { useUser } from '@clerk/nextjs'
 import { User } from '@prisma/client'
+import Link from 'next/link'
+import Image from 'next/image'
 
 interface NewUserFormProps {
     initialData: User | null;
@@ -40,6 +42,7 @@ const NewUserForm = ({
     selectedPlan
 }: NewUserFormProps) => {
     const [isEditing, setIsEditing] = useState(false)
+    const [goToProfile, setGoToProfile] = useState(false)
     const [userData, setUserData] = useState(initialData)
     const { user } = useUser();
 
@@ -67,6 +70,8 @@ const NewUserForm = ({
 
     useEffect(() => {
         if (initialData) {
+            setUserData(initialData);
+            if (initialData.id) setGoToProfile(true);
         form.reset({
             username: initialData.username || "",
             email: initialData.email || "",
@@ -101,12 +106,30 @@ const NewUserForm = ({
     }
 
     return (
-        <div className="mt-6 flex flex-col  justify-start border lg:w-[900px] lg:h-[500px] 
-            md:w-[600px] md:h-[400px] xs:w-[300px] xs:h-[200px] 
-        bg-slate-100 dark:bg-slate-800 dark:text-slate-200 p-8 rounded-md">
+        <div className="mt-6 flex flex-col justify-start border lg:w-[900px] lg:h-[500px] 
+            md:w-[600px] md:h-[400px] w-[370px] h-[320px] sm:w-[600px] sm:h-[400px] 
+        bg-slate-100 dark:bg-slate-800 dark:text-slate-200 xs:p-2 sm:p-2 lg:p-4 rounded-md">
             <div className="flex flex-col ">
-                <div className="flex font-medium items-center justify-between">
+                <div className="flex font-medium relative mt-0 justify-between">
                 User Details
+                {goToProfile && !isEditing && (
+                    <Link href="/profile/user">
+                        {!userData?.imageUrl ? (
+                            <div className="flex absolute items-center justify-center w-20 h-20 mt-8 -ml-6 md:-ml-16 lg:h-60 lg:-ml-20 lg:w-60 sm:-ml-8 xs:-ml-6 sm:h-32 sm:w-32 xs:h-20 xs:w-20  rounded-full bg-slate-200">
+                                <ImageIcon className=" text-slate-800" />
+                            </div>
+                        ) : (
+                            <div className=" aspect-video mt-2">
+                                <Image
+                                    alt = "Upload"
+                                    fill
+                                    className="object-cover rounded-md"
+                                    src={userData?.imageUrl}
+                                />
+                            </div>
+                        )}
+                    </Link>
+                )}
                 <Button onClick={toggleEditing} variant="ghost">
                     {isEditing && "Cancel"}
                     {!isEditing && !userData && (
@@ -115,6 +138,7 @@ const NewUserForm = ({
                             Add User Info
                         </>
                     )}
+
                     {!isEditing && userData && (
                         <>
                             <Pencil className="h-4 w-4 mr-2"/>
@@ -138,12 +162,12 @@ const NewUserForm = ({
                 )}
             </div>
             {!isEditing && userData && (
-                <div className="lg:mt-6 mt-4 ">
-                    <div className="flex justify-center text-4xl md:text-2xl items-center 
-                    lg:w-[820px] md:w-[540px] lg:h-[380px] md:h-[250px] sm:w-[350px] xs:h-[200px]  bg-slate-200 gap-x-2 border 
-                    border-slate-200 rounded-md text-slate-800 p-3">
+                <div className=" mt-14 lg:mt-12">
+                    <div className="flex justify-center text-4xl md:text-2xl items-end 
+                    lg:w-[865px] lg:h-[380px] md:w-[580px]  md:h-[300px]  sm:w-[580px] sm:h-[300px] xs:h-[200px] xs:w-[460px]  gap-x-2 border 
+                    border-slate-200 rounded-md dark:text-slate-700 dark:bg-slate-200 bg-slate-800 text-slate-200 p-3">
                         <div>
-                            <p className="font-semibold">{userData.firstName} {userData.lastName}</p><br />
+                            <p className="font-semibold">{userData.firstName} {userData.lastName}</p>
                             <p className="text-xl"><i>Username:    </i>@{userData.username}</p>
                             <p className="text-xl"><i>Email:    </i>{userData.email}</p>
                             <p className="text-xl"><i>Role:     </i>{userData.role}</p>

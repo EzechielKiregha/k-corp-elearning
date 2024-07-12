@@ -70,9 +70,9 @@ const SubscriptionPage = () => {
                     {pricingOptions.map((option) => (
                         option.title === currentPlan && (
                             <div key={option.title} className="w-full lg:w-1/3 sm:w-1/2 p-2">
-                            <div className="lg:flex-col xl:flex-col border-slate-700 md:flex-col md:flex sm:flex-col 
+                            <div className="lg:flex-col border-slate-700 md:flex-col md:flex sm:flex-col 
                             lg:w-[900px] md:w-[700px] xs:w-[500px] lg:h-[460px] md:h-[520px] xs:h-[420px] 
-                            from-emerald-900  to-emerald-600 p-10 border text-slate-100 rounded-xl bg-gradient-to-r ">
+                            from-emerald-900 to-emerald-600 p-10 border text-slate-100 rounded-xl bg-gradient-to-r ">
                                 <div>
                                     <p className="text-4xl mb-8">{option.title}</p>
                                     <p className="mb-8">
@@ -166,12 +166,7 @@ const SubscriptionPage = () => {
                 
                 {currentPlan 
                 ? (
-                    <><a
-                        className="flex items-center text-sm hover:opacity-75 transition mb-6"
-                        href='/subscription'>
-                        <ArrowLeft className="h-4 w-4 mr-2" />
-                        come back to subscription plans
-                    </a>
+                    <>
                     <NewUserForm initialData={user!} selectedPlan={selectedPlan!} /></>
                 ) : showUserForm && (
                     <><a

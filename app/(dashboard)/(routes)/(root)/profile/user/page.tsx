@@ -16,11 +16,6 @@ import Banner from "@/components/banner";
 import UserIdPage from "./[userId]/page";
 import SubscriptionButton from "../_components/subscrption-button";
 
-const formSchema = z.object({
-    name : z.string().min(1, {
-        message : "name is required"
-    })
-})
 
 const CreateInstitution = () => {
 

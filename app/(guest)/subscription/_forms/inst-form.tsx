@@ -6,7 +6,7 @@ import axios from 'axios'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
-import { useRouter } from 'next/navigation'
+import { redirect, useRouter } from 'next/navigation'
 import { Institution } from '@prisma/client'
 
 import {
@@ -18,10 +18,12 @@ import {
 } from '@/components/ui/form'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { Pencil, PlusCircle } from 'lucide-react'
+import { ImageIcon, Pencil, PlusCircle } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
 import { useUser } from '@clerk/nextjs'
+import Image from 'next/image'
+import Link from 'next/link'
 
 
 interface InstitutionForNewUserFormProps {
@@ -46,12 +48,19 @@ const InstitutionForNewUserForm = ({
 }: InstitutionForNewUserFormProps) => {
     const [isEditing, setIsEditing] = useState(false)
     const [institution, setInstitution] = useState(initialData)
+    const [goToProfile, setGoToProfile] = useState(false)
     const { user } = useUser();
 
     const router = useRouter()
 
-    const toggleEditing = () => setIsEditing((current) => !current)
-
+    const toggleEditing = () => {
+        if (institution?.id){
+            setGoToProfile(true)
+        } else (
+            setGoToProfile(false)
+        )
+        return setIsEditing((current) => !current)
+    }
     const form = useForm<FormValues>({
         resolver: zodResolver(formSchema),
         mode: 'onChange',
@@ -75,6 +84,7 @@ const InstitutionForNewUserForm = ({
     useEffect(() => {
         if (initialData) {
         setInstitution(initialData);
+        if (initialData.id) setGoToProfile(true);
         form.reset({
             name: initialData.name || "",
             address: initialData.address || "",
@@ -110,11 +120,29 @@ const InstitutionForNewUserForm = ({
     }
 
     return (
-        <div className="mt-6 border flex flex-col justify-start xs:w-[300px] xs:h-[150px] lg:w-[900px] lg:h-[500px] xs:items-center md:w-[600px] md:h-[500px] 
-        bg-slate-100 dark:bg-slate-800 dark:text-slate-200 p-8 rounded-md">
+        <div className="mt-6 border flex flex-col justify-start w-[370px] h-[520px] xs:w-[300px] xs:h-[150px] lg:w-[900px] lg:h-[500px] xs:items-center md:w-[600px] md:h-[500px] 
+        bg-slate-100 dark:bg-slate-800 dark:text-slate-200 lg:p-6 p-2 sm:p-2 rounded-md">
             <div className="flex flex-col ">
-                <div className="flex font-medium items-center justify-between">
+                <div className="flex font-medium relative justify-between">
                 Institution Details
+                {goToProfile && !isEditing && (
+                    <Link href="/profile/user">
+                        {!institution?.imageUrl ? (
+                            <div className="flex absolute items-center justify-center mt-20 lg:mt-0 lg:h-60 lg:-ml-44 lg:w-96 -ml-32 h-44 w-72 md:w-60 md:40 md:-ml-28   sm:ml-32 sm:mt-10 sm:h-32 sm:w-44   rounded-md bg-slate-600">
+                                <ImageIcon className=" text-slate-800" />
+                            </div>
+                        ) : (
+                            <div className=" aspect-video mt-2">
+                                <Image
+                                    alt = "Upload"
+                                    fill
+                                    className="object-cover rounded-md"
+                                    src={institution?.imageUrl}
+                                />
+                            </div>
+                        )}
+                    </Link>
+                )}
                 <Button onClick={toggleEditing} variant="ghost">
                     {isEditing && "Cancel"}
                     {!isEditing && !institution && (
@@ -147,21 +175,21 @@ const InstitutionForNewUserForm = ({
                 )}
             </div>
             {!isEditing && institution && (
-                <div className="mt-4">
+                <div className="lg:mt-10 md:mt-28 mt-6 sm:mt-14">
                     <div className={cn(
-                        "flex items-center text-4xl md:text-2xl lg:w-[820px] md:w-[540px] lg:h-[380px] md:h-[350px] xs:w-[300px] xs:h-[150px] bg-slate-200 gap-x-2 border border-slate-200 rounded-md text-slate-700 p-3",
+                        "flex items-end lg:text-3xl text-2xl bg-slate-800 text-slate-200 md:text-2xl h-[420px] lg:w-[855px] md:w-[580px] lg:h-[380px] md:h-[350px] xs:w-[300px] xs:h-[150px] dark:bg-slate-200 gap-x-2 border border-slate-200 rounded-md dark:text-slate-700 p-3",
                         institution.isActivated && "bg-sky-100 border-sky-200 text-sky-800"
                     )}>
                         <div>
-                            <p className="font-semibold"><i></i>{institution.name}</p><br/>
-                            <p className="text-3xl"><i>Address : </i>{institution.address}</p>
-                            <p className="text-3xl"><i>email : </i>{institution.contactEmail}</p>
-                            <p className="text-3xl"><i>Tel : </i>{institution.contactPhone}</p>
-                            <p className="text-3xl"><i>Website : </i>{institution.website}</p>
-                            <p className="text-3xl"><i>Reg. No: </i>{institution.registrationNumber}</p>
+                            <p className="font-semibold"><i></i>{institution.name}</p>
+                            <p className="lg:md:sm:text-3xl text-xl"><i>Address : </i>{institution.address}</p>
+                            <p className="lg:md:sm:text-3xl text-xl"><i>email : </i>{institution.contactEmail}</p>
+                            <p className="lg:md:sm:text-3xl text-xl"><i>Tel : </i>{institution.contactPhone}</p>
+                            <p className="lg:md:sm:text-3xl text-xl"><i>Website : </i><a className='text-blue-700' href={`${institution.website?.includes('https://') ? institution.website : "https://"+institution.website}`}>{institution.website}</a></p>
+                            <p className="lg:md:sm:text-3xl text-xl"><i>Reg. No: </i>{institution.registrationNumber}</p>
                         </div>
                         <Badge className={cn(
-                            "h-16 absolute ml-[55%]  w-16 ",
+                            "h-16 absolute lg:md:ml-[55%] ml-[60%] w-16 ",
                             institution.isActivated ? 'bg-green-700 text-slate-100 font-semibold' : 'bg-gray-900 text-slate-100 font-semibold'
                         )}>
                             {institution.isActivated ? "Active" : "Inactive"}
