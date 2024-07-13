@@ -21,9 +21,10 @@ export async function POST(
                     owner : userId,
                 }
             })
-
+            let course = null; 
+            
             if (!institution){
-                const course = await db.course.create({
+                course = await db.course.create({
                     data: {
                         userId,
                         title,
@@ -31,7 +32,7 @@ export async function POST(
                 })
             }
 
-            const course = await db.course.create({
+            course = await db.course.create({
                 data: {
                     userId,
                     title,
