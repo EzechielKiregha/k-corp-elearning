@@ -107,84 +107,87 @@ const NewUserForm = ({
     }
 
     return (
-        <div className="mt-6 flex flex-col justify-start border lg:w-[900px] lg:h-[500px] 
-            md:w-[600px] md:h-[400px] w-[370px] h-[320px] sm:w-[600px] sm:h-[400px] 
-        bg-slate-100 dark:bg-slate-800 dark:text-slate-200 xs:p-2 sm:p-2 lg:p-4 rounded-md">
-            <div className="flex flex-col ">
-                <div className="flex font-medium relative mt-0 justify-between">
-                User Details
-                {goToProfile && !isEditing && (
+        <div className="mt-6 border flex flex-col justify-start w-full max-w-[1200px] mx-auto p-4 lg:p-8 bg-slate-100 dark:bg-slate-800 dark:text-slate-200 rounded-md">
+        <div className="flex md:flex-col sm:flex-col xs:flex-col lg:flex-row lg:justify-between lg:items-start">
+            <div className="flex flex-col lg:w-2/3 ">
+                <div className="flex font-medium justify-between items-center mb-4 lg:mb-8">
+                    <h2 className="text-2xl lg:text-4xl">Your Information</h2>
+                    <Button onClick={toggleEditing} variant="ghost" className="flex items-center text-lg lg:text-xl">
+                        {isEditing ? "Cancel" : (
+                            <>
+                                {!userData ? (
+                                    <>
+                                        <PlusCircle className="h-5 w-5 mr-2"/>
+                                        Add Few Info about your
+                                    </>
+                                ) : (
+                                    <>
+                                        <Pencil className="h-5 w-5 mr-2"/>
+                                        Edit Your Info
+                                    </>
+                                )}
+                            </>
+                        )}
+                    </Button>
+                </div>
+    
+                {!isEditing && !userData && (
+                    <div className="flex items-center justify-center p-4 lg:p-8">
+                        <h3 className="text-xl sm:text-2xl lg:text-3xl text-center mb-6 lg:mb-8 tracking-wide">
+                            ADD USER INFO<br/><br />
+                            <i>Click the <strong>Add User Info</strong>, As The Owner Please Provide Some Information About Yourself <br /></i>
+                            <span className="bg-gradient-to-r from-sky-700 to-sky-900 text-slate-200 p-3 lg:p-4 inline-block mt-4">
+                                First Name <br />Last Name <br />Email <br />
+                            </span>
+                            <br /><br />
+                            <i>next you will click create button and you be redirected to portal </i>
+                        </h3>
+                    </div>
+                )}
+    
+                {!isEditing && userData && (
+                    <div className="mt-4 lg:mt-8 p-6 lg:p-8 border border-slate-200 rounded-md dark:text-slate-700 dark:bg-slate-200 bg-slate-800 text-slate-200">
+                        <p className="text-2xl lg:text-4xl font-semibold mb-4">{userData.firstName} {userData.lastName}</p>
+                        <p className="text-xl lg:text-2xl mb-2"><i>Username: </i>@{userData.username}</p>
+                        <p className="text-xl lg:text-2xl mb-2"><i>Email: </i>{userData.email}</p>
+                        <p className="text-xl lg:text-2xl mb-2"><i>Role: </i>{userData.role}</p>
+                        <p className="text-xl lg:text-2xl mb-2"><i>Plan: </i>{userData.subscriptionPlan}</p>
+                        <p className="text-xl lg:text-2xl mb-2"><i>Courses: </i>{userData.createdCourses} / {userData.coursesLimit}</p>
+                    </div>
+                )}
+            </div>
+    
+            {goToProfile && !isEditing && (
+                <div className="lg:w-1/3 mt-6 lg:mt-20 lg:ml-8">
                     <TGlink href="/profile/user">
                         {!userData?.imageUrl ? (
-                            <div className="flex absolute items-center justify-center w-20 h-20 mt-8 -ml-6 md:-ml-16 lg:h-60 lg:-ml-20 lg:w-60 sm:-ml-8 xs:-ml-6 sm:h-32 sm:w-32 xs:h-20 xs:w-20  rounded-full bg-slate-200">
-                                <ImageIcon className=" text-slate-800" />
+                            <div className="flex items-center justify-center w-full h-64 lg:h-80 bg-slate-200 rounded-full">
+                                <ImageIcon className="text-slate-800 w-24 h-24 lg:w-32 lg:h-32" />
                             </div>
                         ) : (
-                            <div className=" aspect-video mt-2">
+                            <div className="w-full aspect-square relative">
                                 <Image
-                                    alt = "Upload"
-                                    fill
-                                    className="object-cover rounded-md"
-                                    src={userData?.imageUrl}
+                                    alt="User"
+                                    layout="fill"
+                                    objectFit="cover"
+                                    className="rounded-full"
+                                    src={userData.imageUrl}
                                 />
                             </div>
                         )}
                     </TGlink>
-                )}
-                <Button onClick={toggleEditing} variant="ghost">
-                    {isEditing && "Cancel"}
-                    {!isEditing && !userData && (
-                        <>
-                            <PlusCircle className="h-4 w-4 mr-2"/>
-                            Add User Info
-                        </>
-                    )}
-
-                    {!isEditing && userData && (
-                        <>
-                            <Pencil className="h-4 w-4 mr-2"/>
-                            Edit User Info
-                        </>
-                    )}
-                </Button>
-                </div>
-                {!isEditing && !userData && (
-                    <div className=" flex items-center justify-center p-4">
-                    <h3 className="sm:text-xl lg:text-2xl text-center mb-6 tracking-wide">ADD USER INFO<br/><br />
-                            
-                                <i>Click the <strong>Add User Info</strong>,As The Owner Please Provide Some Information About Yourself <br /></i>
-                            <span className="bg-gradient-to-r from-sky-700 to-sky-900 text-slate-200 ">
-                                First Name <br />Last Name <br />Email <br /> <br /><br /><br />
-                            </span>
-                            <i>next you will click create button and you be redirected to portal </i>
-                        </h3>
-
-                    </div>
-                )}
-            </div>
-            {!isEditing && userData && (
-                <div className=" mt-14 lg:mt-12">
-                    <div className="flex justify-center text-4xl md:text-2xl items-end 
-                    lg:w-[865px] lg:h-[380px] md:w-[580px]  md:h-[300px]  sm:w-[580px] sm:h-[300px] xs:h-[200px] xs:w-[460px]  gap-x-2 border 
-                    border-slate-200 rounded-md dark:text-slate-700 dark:bg-slate-200 bg-slate-800 text-slate-200 p-3">
-                        <div>
-                            <p className="font-semibold">{userData.firstName} {userData.lastName}</p>
-                            <p className="text-xl"><i>Username:    </i>@{userData.username}</p>
-                            <p className="text-xl"><i>Email:    </i>{userData.email}</p>
-                            <p className="text-xl"><i>Role:     </i>{userData.role}</p>
-                            <p className="text-xl"><i>Plan:     </i>{userData.subscriptionPlan}</p>
-                            <p className="text-xl"><i>Courses:  </i>{userData.createdCourses} / {userData.coursesLimit}</p>
-                        </div>
-                    </div>
                 </div>
             )}
-            {isEditing && (
-                <div className="flex justify-center items-start">
-                    <Form {...form}>
+        </div>
+    
+        {isEditing && (
+            <div className="w-full max-w-2xl mx-auto mt-8">
+                <Form {...form}>
                     <form 
                     onSubmit={form.handleSubmit(onSubmit)}
-                    className="space-y-4 mt-10 w-[70%] "
+                    className="space-y-6"
                     >
+                        {/* Form fields - increase size for larger screens */}
                         <FormField 
                             control={form.control}
                             name="username"
@@ -192,12 +195,13 @@ const NewUserForm = ({
                                 <FormItem>
                                     <FormControl>
                                         <Input
+                                            className="text-lg lg:text-xl p-3 lg:p-4"
                                             disabled={isSubmitting}
                                             placeholder="Username"
                                             {...field}
                                         />
                                     </FormControl>
-                                    <FormMessage/>
+                                    <FormMessage />
                                 </FormItem>
                             )}
                         />
@@ -210,6 +214,7 @@ const NewUserForm = ({
                                         <Input
                                             disabled={isSubmitting || !!user?.primaryEmailAddress?.emailAddress}
                                             placeholder="Email"
+                                            className="text-lg lg:text-xl p-3 lg:p-4"
                                             type="email"
                                             {...field}
                                         />
@@ -230,6 +235,7 @@ const NewUserForm = ({
                                         <Input
                                             disabled={isSubmitting}
                                             placeholder="First Name"
+                                            className="text-lg lg:text-xl p-3 lg:p-4"
                                             {...field}
                                         />
                                     </FormControl>
@@ -246,6 +252,7 @@ const NewUserForm = ({
                                         <Input
                                             disabled={isSubmitting}
                                             placeholder="Last Name"
+                                            className="text-lg lg:text-xl p-3 lg:p-4"
                                             {...field}
                                         />
                                     </FormControl>
@@ -255,6 +262,7 @@ const NewUserForm = ({
                         />
                         <Button 
                         disabled={!isValid || isSubmitting}
+                        className="w-full text-lg lg:text-xl py-3 lg:py-4"
                         type="submit"
                         >
                             {userData ? "Update" : "Create"}

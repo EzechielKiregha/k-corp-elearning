@@ -1,74 +1,71 @@
 "use client";
 
-import { redirect, useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
-import * as z from 'zod'
-import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { UserButton, useAuth } from '@clerk/nextjs';
 import { useUser } from '@/hooks/use-User';
-import InstitutionsForm from '../_components/inst-form';
 import { useBusiness } from '@/hooks/use-Business';
-import { CircleArrowRight } from 'lucide-react';
+import { CircleArrowRight, Loader2 } from 'lucide-react';
 import InstitutionForNewUserForm from "@/app/(guest)/subscription/_forms/inst-form";
 import NewUserForm from "@/app/(guest)/subscription/_forms/user-form";
 import Banner from "@/components/banner";
-import UserIdPage from "./[userId]/page";
 import SubscriptionButton from "../_components/subscrption-button";
 import { useNavigation } from "@/hooks/useNavigation";
+import UserIdPage from "./_components/user-id-page";
+import InstitutionProfile from "../_components/inst-form";
 
 
-const CreateInstitution = () => {
+const Profile = () => {
 
-    const router = useRouter()
     const {userId} = useAuth()
 
     const user = useUser(userId);
-    const institution = useBusiness(user?.institutionId, userId)
+    
+    const { institution, isLoading, error } = useBusiness(user?.institutionId, userId);
+
     const [gotBusiness, setGotbusiness] = useState(false)
     const [gotPro, setGotPro] = useState(false)
     const [enterpriseisActivated, setEnterpriseIsActivated] = useState(false)
     const [proIsActivated, setProIsActivated] = useState(false)
     const [freeIsActivated, setFreeIsActivated] = useState(false)
     const nav = useNavigation()
-    
+
     useEffect(()=>{
         try {
-            if (institution){
-                if (user?.subscriptionPlan === "Enterprise") setGotbusiness(true);
+            if (user?.role === "BUSINESSOWNER") setGotbusiness(true);
 
-                if (institution.isActivated && user?.subscriptionPlan === "Ultimate Enterprise Plan") {
-                    setEnterpriseIsActivated(true) ;
-                    setGotbusiness(true);
-                }
+            if (institution?.isActivated && user?.subscriptionPlan === "Ultimate Enterprise Plan") {
+                setEnterpriseIsActivated(true) ;
+                setGotbusiness(true);
             }
+            
             if (user?.subscriptionPlan === "Pro") {
                 setGotPro(true);
                 setGotbusiness(false)
-            } else if (user?.subscriptionPlan === "Ultimate Enterprise Plan") {
-                setProIsActivated(true)
-            }
-            else {
-                if (user?.subscriptionPlan === "Student Free MemberShip") {
-                    setFreeIsActivated(true)
-                    setGotPro(false);
-                } else {
-                    setGotPro(true);
-                }
+            } else if (user?.subscriptionPlan === "Pro MemberShip") {
+                setProIsActivated(true);
                 setGotbusiness(false)
             }
+
+            if (user?.subscriptionPlan === "Free") {
+                setFreeIsActivated(true)
+            } else if (user?.subscriptionPlan === "Student Free MemberShip") {
+                setFreeIsActivated(true)
+                setGotPro(false);
+            }
+
         } catch (error) {
             console.log("Error fetching the user business: ",error)
         }
     },[userId, user])
 
-    
     return (
-        <div className="max-w-5xl mx-auto flex flex-col items-center justify-center p-4">
+        <div className="flex justify-center items-center flex-col mx-auto">
             
+            {error && <div>Error: {error}</div>}
             {!gotBusiness ? (
                 <>
-                <div className="flex flex-col items-center justify-center">
+                <div >
                     {gotPro ? (
                         <>
                         {proIsActivated ? (
@@ -77,7 +74,7 @@ const CreateInstitution = () => {
                                 variant="success"
                                 label="You are a Pro Member and Instructor at K-Corp eLearning. Create up to [ 200 ] courses"
                             />
-                            {/* <UserIdPage /> */}
+                            <UserIdPage userId={userId!} user={user!}/>
                             </>
                         ) : (
                             <>
@@ -90,7 +87,7 @@ const CreateInstitution = () => {
                                 Upgrade to Enterprise. Register You Institution, University, College, ... and Manage your students, and Create up to [ 500 ] courses.
                             </Button>
                             <SubscriptionButton userId={userId!} price={11.99} />
-                            {/* <UserIdPage /> */}
+                            <UserIdPage userId={userId!} user={user!}/>
                             </>
                         )}
                         </>
@@ -102,53 +99,65 @@ const CreateInstitution = () => {
                                 variant="success"
                                 label="You are a Pro Member and Instructor at K-Corp eLearning. Create up to [ 200 ] courses" 
                                 />
-                            {/* <UserIdPage /> */}
+                            <UserIdPage userId={userId!} user={user!}/>
                             </>
                         ) : (
-                            <><Banner
+                            <>
+                            <Banner
                             variant="warning"
                             label="By activating your account you will the Student Free MemberShip. Create up to [ 5+ ] courses & start teaching your collegues" />
-                            <Button variant="link">
-                                <CircleArrowRight />
-                                Activate & get Student Free MemberShip.
-                            </Button>
+                            <br />
                             <SubscriptionButton userId={userId!} price={0.00} />
-                            {/* <UserIdPage /> */}
+                            <UserIdPage userId={userId!} user={user!}/>
                             </>
                         )}
-                        <Button variant="link">
-                            <CircleArrowRight />
-                            Upgrade to Pro .become a Pro Member and Instructor at K-Corp eLearning. Create up to [ 200 ] courses.
-                        </Button>
-                        <Button onClick={() => nav('/subscription')} variant="link">
-                            <CircleArrowRight />
-                            Upgrade to Enterprise. Register 
-                        </Button>
-                        {/* <UserIdPage /> */}
+                        {isLoading ? (
+                            <div className="z-50 top-8 backdrop-blur-lg bg-opacity-50">
+                                <div className="container px-2 mx-auto">
+                                    <div className="flex items-center justify-center inset-0 ">
+                                        <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-blue-500"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        ) : (
+                            <><Button variant="link">
+                                <CircleArrowRight />
+                                Upgrade to Pro .become a Pro Member and Instructor at K-Corp eLearning. Create up to [ 200 ] courses.
+                            </Button>
+                            <Button onClick={() => nav('/subscription')} variant="link">
+                                <CircleArrowRight />
+                                Upgrade to Enterprise. Register 
+                            </Button>
+                            <UserIdPage userId={userId!} user={user!}/>
+                            </>
+                        )}
+                        
                         </>
                     )}
                 </div>
-                <NewUserForm initialData={user!} selectedPlan={user?.subscriptionPlan!}/>
+                
                 </>
-            ):(
-                <><Banner
-                    variant="success"
-                    label="You are an Institution, University, College, ..." />
+            ) : (
+                <>
                 {enterpriseisActivated ? (
                     <><Banner
                     variant="success"
                     label="You are an Institution, University, College, ... and Manage your students, and Create up to [ 500 ] courses." />
-                    <Button onClick={() => nav(`/profile/user/${userId}/institutions/${institution?.id}`)} variant="ghost">
+                    <Button onClick={() => nav(`/profile/user/institutions/${institution?.id}`)} variant="ghost">
                         <CircleArrowRight />
                         Visite '{institution?.name}'
                     </Button>
                     </>
                 ) : (
-                    <><Button variant="link">
-                        <CircleArrowRight />
-                        Activate Your Institution. Advanced Analytics & Full Management of Courses and students, Create up to [ 500+ ] courses.
-                    </Button>
-                    <SubscriptionButton userId={userId!} price={68.99} /></>
+                    <>
+                    <Banner
+                        variant="success"
+                        label="As Institution, University, College, ... know that by Activate Your Institution Status you unlock - Advanced Analytics & Full Management of Courses and students - you can Create up to [ 500+ ] courses."
+                    /> <br />
+                    <SubscriptionButton userId={userId!} price={68.99} />
+                    <UserIdPage userId={userId!} user={user!}/>
+                    <InstitutionProfile initialData={institution} userId={userId!}/>
+                    </>
                 )}
                 </>
             )} 
@@ -158,4 +167,4 @@ const CreateInstitution = () => {
     
 }
 
-export default CreateInstitution
+export default Profile

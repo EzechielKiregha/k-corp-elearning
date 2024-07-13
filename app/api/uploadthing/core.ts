@@ -1,7 +1,4 @@
-import { useUser } from "@/hooks/use-User";
-import { isTeacher } from "@/lib/isTeacher";
 import { auth } from "@clerk/nextjs/server";
-import { error } from "console";
 import { createUploadthing, type FileRouter } from "uploadthing/next";
 import { UploadThingError } from "uploadthing/server";
 
@@ -9,10 +6,10 @@ const f = createUploadthing();
 
 const handleAuth = () => {
     const {userId} = auth();
-    const user = useUser(userId)
-    const isAuthorized = isTeacher(user!)
+    // const user = useUser(userId)
+    // const isAuthorized = isTeacher(user!)
 
-    if(!userId || !isAuthorized) throw new Error("Unauthorized");
+    if(!userId) throw new Error("Unauthorized");
     return { userId }
 }
 export const ourFileRouter = {

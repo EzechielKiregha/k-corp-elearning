@@ -27,7 +27,9 @@ export default function RootLayout({
           <LoadingProvider>
             <ConfettiProvider/>
             <ToastProvider/>
-            <ClientWrapper>{children}</ClientWrapper>
+            <ClientWrapper>
+              {children}
+            </ClientWrapper>
           </LoadingProvider>
         </body>
       </html>

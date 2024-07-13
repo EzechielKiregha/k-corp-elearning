@@ -38,7 +38,7 @@ const InstitutionImageForm = ({
 
     const onSubmit = async (values : z.infer<typeof formSchema>) => {
         try {
-            await axios.patch(`/api/users/${userId}/institutions/${institutionId}`, values)
+            await axios.patch(`/api/users/${userId}/institutions/${institutionId}`, {values : values})
             toast.success("institution Updated Successfully")
             toggleEdit()
             router.refresh()
@@ -48,7 +48,7 @@ const InstitutionImageForm = ({
     }
 
     return (
-        <div className=" border w-full bg-slate-100 dark:bg-slate-800 dark:text-slate-200 p-4 rounded-md">
+        <div className="border w-96 ml-[30%] bg-slate-100 dark:bg-slate-900 dark:text-slate-200 p-2 rounded-md">
             <div className="flex font-medium items-center justify-between">
                 institution image
                 <Button onClick={toggleEdit} variant="ghost">
@@ -72,7 +72,7 @@ const InstitutionImageForm = ({
             </div>
             {!isEditing && (
                 !initialData.imageUrl ? (
-                    <div className="flex items-center justify-center h-60 rounded-md bg-slate-200">
+                    <div className="flex items-center justify-center h-96 rounded-md bg-slate-200">
                         <ImageIcon className="h-10 w-10 text-slate-500" />
                     </div>
                 ) : (

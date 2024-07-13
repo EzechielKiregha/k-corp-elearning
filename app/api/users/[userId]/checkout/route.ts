@@ -33,7 +33,7 @@ export async function POST(
                         name : userSub?.firstName +""+ userSub?.lastName,
                         description : userSub?.subscriptionPlan === "Pro" ? "The Pro Membership [200+ Courses creation] - " :
                         userSub?.subscriptionPlan === "Enterprise" ? "The Ultimate Enterprise Plan [500+ Courses creation] - " :
-                        "StudentFreeOffer [5+ Courses creation] - ",
+                        "Student Free Membership [5+ Courses creation] - ",
                     },
                     unit_amount : Math.round(price! * 100),
                 }
@@ -65,12 +65,14 @@ export async function POST(
             customer : stripeCustomer.striperCustomerId,
             line_items,
             mode : 'payment',
-            success_url : `${process.env.NEXT_PUBLIC_API_URL}/users/${userSub!.id}?success=1`,
-            cancel_url : `${process.env.NEXT_PUBLIC_API_URL}/users/${userSub!.id}?canceled=1`,
+            success_url : userSub?.role === "BUSINESSOWNER" ? `${process.env.NEXT_PUBLIC_API_URL}/profile/user/institutions/${userSub!.institutionId}?success=1` : 
+            `${process.env.NEXT_PUBLIC_API_URL}/profile/user/?success=1`,
+            cancel_url : userSub?.role === "BUSINESSOWNER" ? `${process.env.NEXT_PUBLIC_API_URL}/profile/user/institutions/${userSub!.institutionId}?canceled=1` : 
+            `${process.env.NEXT_PUBLIC_API_URL}/profile/user/?canceled=1`,
             metadata : {
                 userId : user.id,
                 subscriptionId : userSub?.subscriptionPlan === "Pro" ? `Pro_Membership_${userSub!.id}` :
-                userSub?.subscriptionPlan === "Enterprise" ? `Ultimate_Enterpeise_Plan_${userSub!.institutionId}` : `StudentFreeOffer_${userSub!.id}`
+                userSub?.subscriptionPlan === "Enterprise" ? `Ultimate_Enterpeise_Plan_${userSub!.institutionId}` : `Student_Free_Membership_${userSub!.id}`
             }
         });
         // console.log("Session URL : ", session.url );

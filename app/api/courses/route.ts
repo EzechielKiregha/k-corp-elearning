@@ -11,16 +11,31 @@ export async function POST(
         try {
             const { userId } = auth();
             const { title } = await req.json();
-            const teacher = useUser(userId)
 
-            if(!userId || !isTeacher(teacher!)) {
+            if(!userId ) {
                 return new NextResponse("Unauthorized ", {status : 401})
+            }
+
+            const institution = await db.institution.findUnique({
+                where : {
+                    owner : userId,
+                }
+            })
+
+            if (!institution){
+                const course = await db.course.create({
+                    data: {
+                        userId,
+                        title,
+                    }
+                })
             }
 
             const course = await db.course.create({
                 data: {
                     userId,
                     title,
+                    institutionId : institution?.id,
                 }
             })
 

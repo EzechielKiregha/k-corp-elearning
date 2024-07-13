@@ -56,7 +56,12 @@ const InstitutionField = ({
 
     const onSubmit = async (values: any) => {
         try {
-            await axios.patch(`/api/users/${userId}/institutions/${institutionId}`, values)
+            const data = {
+                values : {
+                    ...values
+                }
+            }
+            await axios.patch(`/api/users/${userId}/institutions/${institutionId}`, data)
             toast.success("Institution Updated Successfully")
             toggleEdit()
             router.refresh()

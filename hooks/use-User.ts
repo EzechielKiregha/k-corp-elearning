@@ -2,30 +2,31 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { User } from "@prisma/client";
-import { useRouter } from "next/navigation";
 
 export function useUser(userId: string | null | undefined) {
-    const [user, setUser] = useState<User | null>(null);
-    const router = useRouter();
-
+    
+    const [user, setUser] = useState<User>();
+    
+    if (!userId) return null;
+    
     useEffect(() => {
-        const fetchUserData = async () => {
-        if (!userId) return;
-
+        const fetchUserData = async (userId: string | null | undefined) => {
         try {
+            // console.log("??? USER ID : ", userId)
             const response = await axios.get(`/api/users/${userId}`);
-            if (response.status === 404) {
-                console.error('User data not found: ', response.status);
+            if (response.status === 200) {
+                setUser(response.data);
+                console.log('User data status: ', response.status);
             } else {
-            setUser(response.data);
+                console.log('User data not found: ', response.status);
             }
         } catch (error) {
-            console.error('Error fetching user data:', error);
+            console.log('Error fetching user data:', error);
         }
         };
 
-        fetchUserData();
-    }, [userId, router]);
+        fetchUserData(userId);
+    }, [userId]);
 
     return user;
 }

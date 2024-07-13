@@ -28,8 +28,8 @@ export async function POST(
     const sub = session?.metadata?.subscriptionId
 
     if(event.type === "checkout.session.completed"){
-        if (!userId || !courseId){
-            return new NextResponse(`Webhook Error : Messing metadata`, {status : 400});
+        if (!courseId || !sub){
+            console.log("[ webhool stripe ] Either Course ID or Subscription Gone missing.")
         }
 
         if(userId && courseId) {
@@ -39,13 +39,12 @@ export async function POST(
                     courseId : courseId,
                 }
             })
-        }else if (userId && sub && !sub.includes('Pro_Membership_') || !sub?.includes('StudentFreeOffer_')){
+        }else if (userId && sub && (!sub.includes('Pro_Membership_') || !sub?.includes('StudentFreeOffer_'))){
             await db.institution.update({
                 where : {
                     id : sub,
                 },
                 data : {
-                    owner : userId,
                     isActivated : true,
                 }
             })
@@ -55,7 +54,7 @@ export async function POST(
                     id : userId,
                 },
                 data : {
-                    subscriptionPlan : sub.includes('Pro_Membership_') ? "Pro MemberShip" : sub?.includes('StudentFreeOffer_') ?
+                    subscriptionPlan : sub?.includes('Pro_Membership_') ? "Pro MemberShip" : sub?.includes('Student_Free_Membership_') ?
                     "Student Free MemberShip" : "Ultimate Enterprise Plan"
                 }
             })

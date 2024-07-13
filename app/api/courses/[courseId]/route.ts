@@ -17,9 +17,8 @@ export async function DELETE(
 
         try {
             const { userId } = auth();
-            const teacher = useUser(userId)
 
-            if(!userId || !isTeacher(teacher!)) {
+            if(!userId ) {
                 return new NextResponse("Unauthorized ", {status : 401})
             }
             const course = await db.course.findUnique({
@@ -68,9 +67,8 @@ export async function PATCH(
         const { userId } = auth();
         const { courseId } = params;
         const values = await req.json()
-        const teacher = useUser(userId)
 
-        if(!userId || !isTeacher(teacher!)) {
+        if(!userId) {
             return new NextResponse("Unauthorized ", {status : 401})
         }
 

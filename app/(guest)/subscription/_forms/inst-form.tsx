@@ -121,200 +121,219 @@ const InstitutionForNewUserForm = ({
     }
 
     return (
-        <div className="mt-6 border flex flex-col justify-start w-[370px] h-[520px] xs:w-[300px] xs:h-[150px] lg:w-[900px] lg:h-[500px] xs:items-center md:w-[600px] md:h-[500px] 
-        bg-slate-100 dark:bg-slate-800 dark:text-slate-200 lg:p-6 p-2 sm:p-2 rounded-md">
-            <div className="flex flex-col ">
-                <div className="flex font-medium relative justify-between">
-                Institution Details
-                {goToProfile && !isEditing && (
-                    <TGlink href="/profile/user">
-                        {!institution?.imageUrl ? (
-                            <div className="flex absolute items-center justify-center mt-20 lg:mt-0 lg:h-60 lg:-ml-44 lg:w-96 -ml-32 h-44 w-72 md:w-60 md:40 md:-ml-28   sm:ml-32 sm:mt-10 sm:h-32 sm:w-44   rounded-md bg-slate-600">
-                                <ImageIcon className=" text-slate-800" />
-                            </div>
-                        ) : (
-                            <div className=" aspect-video mt-2">
-                                <Image
-                                    alt = "Upload"
-                                    fill
-                                    className="object-cover rounded-md"
-                                    src={institution?.imageUrl}
-                                />
-                            </div>
-                        )}
-                    </TGlink>
-                )}
-                <Button onClick={toggleEditing} variant="ghost">
-                    {isEditing && "Cancel"}
-                    {!isEditing && !institution && (
+        <div className="mt-6 border flex flex-col justify-start w-full max-w-[1200px] mx-auto p-4 lg:p-6 bg-slate-100 dark:bg-slate-800 dark:text-slate-200 rounded-md">
+        <div className="flex flex-col">
+            <div className="flex font-medium justify-between items-center mb-4 lg:mb-6">
+                <h2 className="text-2xl lg:text-3xl">Institution Details</h2>
+                <Button onClick={toggleEditing} variant="ghost" className="flex items-center text-lg lg:text-xl">
+                    {isEditing ? "Cancel" : (
                         <>
-                            <PlusCircle className="h-4 w-4 mr-2"/>
-                            Add Institution
-                        </>
-                    )}
-                    {!isEditing && institution && (
-                        <>
-                            <Pencil className="h-4 w-4 mr-2"/>
-                            Edit Institution
+                            {!institution ? (
+                                <>
+                                    <PlusCircle className="h-5 w-5 mr-2"/>
+                                    Add Institution
+                                </>
+                            ) : (
+                                <>
+                                    <Pencil className="h-5 w-5 mr-2"/>
+                                    Edit Institution
+                                </>
+                            )}
                         </>
                     )}
                 </Button>
-                </div>
-                {!isEditing && !institution && (
-                    <div className=" flex items-center justify-center p-4">
-                    <h3 className="sm:text-xl lg:text-2xl text-center mb-6 tracking-wide">ADD INSTITUTION<br/><br />
-                            
-                                <i>Click the <strong>Add Institution</strong>, Please Provide Some Information About Your <br /></i>
-                            <span className="bg-gradient-to-r from-sky-700 to-sky-900 text-slate-200 ">
-                                Institution <br />Business <br />Universtity <br />Tech Company <br />
-                                College <br /><br />
-                            </span>
-                            <i>next you will click create button and you be redirected to portal </i>
-                        </h3>
-                        
-                    </div>
-                )}
             </div>
+            
+            {goToProfile && !isEditing && (
+                <TGlink href={`/profile/user/institutions/${institution?.id}`} className="mb-6 lg:mb-8">
+                    {!institution?.imageUrl ? (
+                        <div className="flex items-center justify-center w-full h-56 sm:h-64 md:h-80 lg:h-96 bg-slate-600 rounded-md">
+                            <ImageIcon className="text-slate-800 w-20 h-20 lg:w-24 lg:h-24" />
+                        </div>
+                    ) : (
+                        <div className="aspect-video w-full">
+                            <Image
+                                alt="Upload"
+                                layout="responsive"
+                                width={16}
+                                height={9}
+                                className="object-cover rounded-md"
+                                src={institution.imageUrl}
+                            />
+                        </div>
+                    )}
+                </TGlink>
+            )}
+
+            {!isEditing && !institution && (
+                <div className="flex items-center justify-center p-4 lg:p-8">
+                    <h3 className="text-xl sm:text-2xl lg:text-3xl text-center mb-6 lg:mb-8 tracking-wide">
+                        ADD INSTITUTION<br/><br />
+                        <i>Click the <strong>Add Institution</strong>, Please Provide Some Information About Your <br /></i>
+                        <span className="bg-gradient-to-r from-sky-700 to-sky-900 text-slate-200 p-3 lg:p-4 inline-block mt-4">
+                            Institution <br />Business <br />University <br />Tech Company <br />
+                            College <br />
+                        </span>
+                        <br /><br />
+                        <i>next you will click create button and you be redirected to portal </i>
+                    </h3>
+                </div>
+            )}
+
             {!isEditing && institution && (
-                <div className="lg:mt-10 md:mt-28 mt-6 sm:mt-14">
+                <div className="mt-6 lg:mt-8">
                     <div className={cn(
-                        "flex items-end lg:text-3xl text-2xl bg-slate-800 text-slate-200 md:text-2xl h-[420px] lg:w-[855px] md:w-[580px] lg:h-[380px] md:h-[350px] xs:w-[300px] xs:h-[150px] dark:bg-slate-200 gap-x-2 border border-slate-200 rounded-md dark:text-slate-700 p-3",
+                        "flex flex-col justify-between p-6 lg:p-8 bg-slate-800 text-slate-200 dark:bg-slate-200 dark:text-slate-700 border border-slate-200 rounded-md",
                         institution.isActivated && "bg-sky-100 border-sky-200 text-sky-800"
                     )}>
                         <div>
-                            <p className="font-semibold"><i></i>{institution.name}</p>
-                            <p className="lg:md:sm:text-3xl text-xl"><i>Address : </i>{institution.address}</p>
-                            <p className="lg:md:sm:text-3xl text-xl"><i>email : </i>{institution.contactEmail}</p>
-                            <p className="lg:md:sm:text-3xl text-xl"><i>Tel : </i>{institution.contactPhone}</p>
-                            <p className="lg:md:sm:text-3xl text-xl"><i>Website : </i><a className='text-blue-700' href={`${institution.website?.includes('https://') ? institution.website : "https://"+institution.website}`}>{institution.website}</a></p>
-                            <p className="lg:md:sm:text-3xl text-xl"><i>Reg. No: </i>{institution.registrationNumber}</p>
+                            <p className="text-2xl sm:text-3xl lg:text-4xl font-semibold mb-4">{institution.name}</p>
+                            <p className="text-xl lg:text-2xl mb-2"><i>Address: </i>{institution.address}</p>
+                            <p className="text-xl lg:text-2xl mb-2"><i>Email: </i>{institution.contactEmail}</p>
+                            <p className="text-xl lg:text-2xl mb-2"><i>Tel: </i>{institution.contactPhone}</p>
+                            <p className="text-xl lg:text-2xl mb-2"><i>Website: </i>
+                                <a className='text-blue-700' href={`${institution.website?.includes('https://') ? institution.website : "https://"+institution.website}`} target="_blank" rel="noopener noreferrer">
+                                    {institution.website}
+                                </a>
+                            </p>
+                            <p className="text-xl lg:text-2xl mb-2"><i>Reg. No: </i>{institution.registrationNumber}</p>
                         </div>
                         <Badge className={cn(
-                            "h-16 absolute lg:md:ml-[55%] ml-[60%] w-16 ",
-                            institution.isActivated ? 'bg-green-700 text-slate-100 font-semibold' : 'bg-gray-900 text-slate-100 font-semibold'
+                            "self-end mt-6 px-6 py-3 text-lg",
+                            institution.isActivated ? 'bg-green-700 text-slate-100' : 'bg-gray-900 text-slate-100'
                         )}>
                             {institution.isActivated ? "Active" : "Inactive"}
                         </Badge>
                     </div>
                 </div>
             )}
+
             {isEditing && (
-                <div className="flex justify-center items-start">
+                <div className="w-full max-w-2xl mx-auto">
                     <Form {...form}>
-                    <form 
-                    onSubmit={form.handleSubmit(onSubmit)}
-                    className="space-y-4 mt-4 w-[70%]"
-                    >
-                        <FormField 
-                            control={form.control}
-                            name="name"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormControl>
-                                        <Input
-                                            disabled={isSubmitting}
-                                            placeholder="Institution name"
-                                            {...field}
-                                        />
-                                    </FormControl>
-                                    <FormMessage/>
-                                </FormItem>
-                            )}
-                        />
-                        <FormField 
-                            control={form.control}
-                            name="address"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormControl>
-                                        <Input
-                                            disabled={isSubmitting}
-                                            placeholder="Address"
-                                            {...field}
-                                        />
-                                    </FormControl>
-                                    <FormMessage/>
-                                </FormItem>
-                            )}
-                        />
-                        <FormField 
-                        control={form.control}
-                        name="contactEmail"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormControl>
-                                    <Input
-                                        // disabled={isSubmitting || !!user?.primaryEmailAddress?.emailAddress}
-                                        placeholder="Contact Email"
-                                        type="email"
-                                        {...field}
-                                    />
-                                </FormControl>
-                                {!user?.primaryEmailAddress?.emailAddress && (
-                                    <p className="text-sm text-red-500">No email associated with your account. Please enter manually.</p>
+                        <form 
+                        onSubmit={form.handleSubmit(onSubmit)}
+                        className="space-y-6 mt-6"
+                        >
+                            {/* Form fields - increase size for larger screens */}
+                            <FormField 
+                                control={form.control}
+                                name="name"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormControl>
+                                            <Input
+                                                className="text-lg lg:text-xl p-3 lg:p-4"
+                                                disabled={isSubmitting}
+                                                placeholder="Institution name"
+                                                {...field}
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
                                 )}
-                                <FormMessage/>
-                            </FormItem>
-                        )}
-                    />
-                        <FormField 
+                            />
+                            <FormField 
+                                control={form.control}
+                                name="address"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormControl>
+                                            <Input
+                                                disabled={isSubmitting}
+                                                placeholder="Address"
+                                                className="text-lg lg:text-xl p-3 lg:p-4"
+                                                {...field}
+                                            />
+                                        </FormControl>
+                                        <FormMessage/>
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField 
                             control={form.control}
-                            name="contactPhone"
+                            name="contactEmail"
                             render={({ field }) => (
                                 <FormItem>
                                     <FormControl>
                                         <Input
-                                            disabled={isSubmitting}
-                                            placeholder="Contact Phone"
+                                            // disabled={isSubmitting || !!user?.primaryEmailAddress?.emailAddress}
+                                            placeholder="Contact Email"
+                                            type="email"
+                                            className="text-lg lg:text-xl p-3 lg:p-4"
                                             {...field}
                                         />
                                     </FormControl>
+                                    {!user?.primaryEmailAddress?.emailAddress && (
+                                        <p className="text-sm text-red-500">No email associated with your account. Please enter manually.</p>
+                                    )}
                                     <FormMessage/>
                                 </FormItem>
                             )}
                         />
-                        <FormField 
-                            control={form.control}
-                            name="website"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormControl>
-                                        <Input
-                                            disabled={isSubmitting}
-                                            placeholder="Website"
-                                            {...field}
-                                        />
-                                    </FormControl>
-                                    <FormMessage/>
-                                </FormItem>
-                            )}
-                        />
-                        <FormField 
-                            control={form.control}
-                            name="registrationNumber"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormControl>
-                                        <Input
-                                            disabled={isSubmitting}
-                                            placeholder="Registration Number"
-                                            {...field}
-                                        />
-                                    </FormControl>
-                                    <FormMessage/>
-                                </FormItem>
-                            )}
-                        />
-                        <Button 
-                            disabled={!isValid || isSubmitting}
-                            type="submit"
-                            >
-                            {institution ? "Update" : "Create"}
-                        </Button>
-                    </form>
-                </Form>
-                </div>
-            )}
+                            <FormField 
+                                control={form.control}
+                                name="contactPhone"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormControl>
+                                            <Input
+                                                disabled={isSubmitting}
+                                                placeholder="Contact Phone"
+                                                className="text-lg lg:text-xl p-3 lg:p-4"
+                                                {...field}
+                                            />
+                                        </FormControl>
+                                        <FormMessage/>
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField 
+                                control={form.control}
+                                name="website"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormControl>
+                                            <Input
+                                                disabled={isSubmitting}
+                                                placeholder="Website"
+                                                className="text-lg lg:text-xl p-3 lg:p-4"
+                                                {...field}
+                                            />
+                                        </FormControl>
+                                        <FormMessage/>
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField 
+                                control={form.control}
+                                name="registrationNumber"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormControl>
+                                            <Input
+                                                disabled={isSubmitting}
+                                                placeholder="Registration Number"
+                                                className="text-lg lg:text-xl p-3 lg:p-4"
+                                                {...field}
+                                            />
+                                        </FormControl>
+                                        <FormMessage/>
+                                    </FormItem>
+                                )}
+                            />
+                            <Button 
+                                disabled={!isValid || isSubmitting}
+                                className="w-full text-lg lg:text-xl py-3 lg:py-4"
+                                type="submit"
+                                >
+                                {institution ? "Update" : "Create"}
+                            </Button>
+                        </form>
+                    </Form>
+                    </div>
+                )}
+            </div>
         </div>
     )
 }

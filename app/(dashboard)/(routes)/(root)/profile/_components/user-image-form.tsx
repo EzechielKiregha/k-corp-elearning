@@ -46,7 +46,7 @@ const UserImageForm = ({
     }
 
     return (
-        <div className=" border w-full bg-slate-100 dark:bg-slate-800 dark:text-slate-200 p-4 rounded-md">
+        <div className="border w-96  bg-slate-100 dark:bg-slate-900 dark:text-slate-200 p-2 rounded-md">
             <div className="flex font-medium items-center justify-between">
                 User image
                 <Button onClick={toggleEdit} variant="ghost">
@@ -70,15 +70,17 @@ const UserImageForm = ({
             </div>
             {!isEditing && (
                 !initialData.imageUrl ? (
-                    <div className="flex items-center justify-center h-60 rounded-md bg-slate-200">
+                    <div className="flex items-center justify-center h-72 rounded-md bg-slate-200">
                         <ImageIcon className="h-10 w-10 text-slate-500" />
                     </div>
                 ) : (
                     <div className="relative aspect-video mt-2">
                         <Image
                             alt = "Upload"
-                            fill
-                            className="object-cover rounded-md"
+                            layout="responsive"
+                                width={16}
+                                height={9}
+                            className="object-cover rounded-full"
                             src={initialData.imageUrl}
                         />
                     </div>

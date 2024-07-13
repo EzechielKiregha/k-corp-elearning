@@ -4,11 +4,11 @@ import { auth } from '@clerk/nextjs/server'
 import { CircleDollarSign, File, LayoutDashboard, ListChecks } from 'lucide-react'
 import { redirect } from 'next/navigation'
 import Banner from '@/components/banner'
-import InstitutionActions from '../../../../_components/inst-actions'
-import InstitutionImageForm from '../../../../_components/inst-image-form'
-import AttachmentInstitutionForm from '../../../../_components/attachment-Institution'
-import InstitutionField from '../../../../_components/inst-fields'
-import InstitutionTypeForm from '../../../../_components/inst-type-form'
+import InstitutionImageForm from '../../../_components/inst-image-form'
+import AttachmentInstitutionForm from '../../../_components/attachment-Institution'
+import InstitutionActions from '../../../_components/inst-actions'
+import InstitutionField from '../../../_components/inst-fields'
+import InstitutionTypeForm from '../../../_components/inst-type-form'
 
 const InstitutionIdPage = async ({
     params
@@ -110,6 +110,12 @@ const InstitutionIdPage = async ({
                             label="Address"
                         />
                         <InstitutionField
+                            initialData={institution.registrationNumber}
+                            institutionId={institution.id}
+                            field="registrationNumber"
+                            label="Registration Number"
+                        />
+                        <InstitutionField
                             initialData={institution.contactEmail}
                             institutionId={institution.id}
                             field="contactEmail"
@@ -127,22 +133,6 @@ const InstitutionIdPage = async ({
                             field="website"
                             label="Website"
                         />
-                        <InstitutionField
-                            initialData={institution.registrationNumber}
-                            institutionId={institution.id}
-                            field="registrationNumber"
-                            label="Registration Number"
-                        />
-                        <InstitutionTypeForm
-                            initialData = {institution}
-                            institutionId = {institution.id}
-                            options={
-                                institutionTypes.map((institutionType) => ({
-                                    label : institutionType.name,
-                                    value : institutionType.id,
-                                }))
-                            }
-                        />
                     </div>
                     <div className="space-y-2">
                         
@@ -150,9 +140,19 @@ const InstitutionIdPage = async ({
                         <div className="flex items-center gap-x-2">
                                 <IconBadge icon={File} />
                                 <h2 className="text-xl">
-                                    Resources & Attachments
+                                    Institution Type & Attachments
                                 </h2>
                             </div>
+                            <InstitutionTypeForm
+                                initialData = {institution}
+                                institutionId = {institution.id}
+                                options={
+                                    institutionTypes.map((institutionType) => ({
+                                        label : institutionType.name,
+                                        value : institutionType.id,
+                                    }))
+                                }
+                            />
                             <AttachmentInstitutionForm
                                 initialData = {institution }
                                 institutionId = {institution.id}

@@ -14,7 +14,7 @@ const InstitutionInfoForm = ( {
     user,
 } : InstitutionInfoFormProps ) => {
 
-    const institution = useBusiness(user.institutionId, user.id)
+    const { institution, isLoading, error } = useBusiness(user?.institutionId, user.id);
     
     const [formData, setFormData] = useState({
         name: institution?.name || '',
