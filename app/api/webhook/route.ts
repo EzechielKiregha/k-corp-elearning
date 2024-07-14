@@ -28,8 +28,9 @@ export async function POST(
     const sub = session?.metadata?.subscriptionId
 
     if(event.type === "checkout.session.completed"){
-        if (!courseId || !sub){
+        if (!courseId || !userId){
             console.log("[ webhool stripe ] Either Course ID or Subscription Gone missing.")
+            return new NextResponse('Metada is missing', {status : 405})
         }
 
         if(userId && courseId) {
@@ -37,25 +38,6 @@ export async function POST(
                 data : {
                     userId : userId,
                     courseId : courseId,
-                }
-            })
-        }else if (userId && sub && (!sub.includes('Pro_Membership_') || !sub?.includes('StudentFreeOffer_'))){
-            await db.institution.update({
-                where : {
-                    id : sub,
-                },
-                data : {
-                    isActivated : true,
-                }
-            })
-        } else {
-            await db.user.update({
-                where : {
-                    id : userId,
-                },
-                data : {
-                    subscriptionPlan : sub?.includes('Pro_Membership_') ? "Pro MemberShip" : sub?.includes('Student_Free_Membership_') ?
-                    "Student Free MemberShip" : "Ultimate Enterprise Plan"
                 }
             })
         }

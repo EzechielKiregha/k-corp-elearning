@@ -22,7 +22,7 @@ export async function POST(
                 }
             })
             let course = null; 
-            
+
             if (!institution){
                 course = await db.course.create({
                     data: {
@@ -39,6 +39,7 @@ export async function POST(
                     institutionId : institution?.id,
                 }
             })
+
 
             return NextResponse.json(course)
 

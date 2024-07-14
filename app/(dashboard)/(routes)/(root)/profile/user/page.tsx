@@ -6,13 +6,12 @@ import { UserButton, useAuth } from '@clerk/nextjs';
 import { useUser } from '@/hooks/use-User';
 import { useBusiness } from '@/hooks/use-Business';
 import { CircleArrowRight, Loader2 } from 'lucide-react';
-import InstitutionForNewUserForm from "@/app/(guest)/subscription/_forms/inst-form";
-import NewUserForm from "@/app/(guest)/subscription/_forms/user-form";
 import Banner from "@/components/banner";
 import SubscriptionButton from "../_components/subscrption-button";
 import { useNavigation } from "@/hooks/useNavigation";
 import UserIdPage from "./_components/user-id-page";
 import InstitutionProfile from "../_components/inst-form";
+import UserPaymentStatusHandler from "./_components/UserActivationStatus";
 
 
 const Profile = () => {
@@ -61,7 +60,7 @@ const Profile = () => {
 
     return (
         <div className="flex justify-center items-center flex-col mx-auto">
-            
+            <UserPaymentStatusHandler userId={userId!} institutionId={institution?.id!} />
             {error && <div>Error: {error}</div>}
             {!gotBusiness ? (
                 <>

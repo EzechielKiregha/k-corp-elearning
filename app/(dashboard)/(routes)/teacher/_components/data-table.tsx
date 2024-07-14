@@ -26,6 +26,8 @@ import { Input } from "@/components/ui/input"
 import Link from 'next/link'
 import { PlusCircle } from 'lucide-react'
 import { useNavigation } from '@/hooks/useNavigation'
+import { useUser } from '@/hooks/use-User'
+import { useAuth } from '@clerk/nextjs'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -40,8 +42,11 @@ export function DataTable<TData, TValue>({
     const [sorting, setSorting] = React.useState<SortingState>([]);
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
         []
-      );
+    );
+
+    const {userId} = useAuth()
     const nav = useNavigation()
+    const user = useUser(userId)
 
     const table = useReactTable({
         data,
@@ -71,10 +76,26 @@ export function DataTable<TData, TValue>({
             className="max-w-sm"
             />
 
-            <Button onClick={() => nav("/teacher/create")}>
+            {user?.coursesLimit === 5 && user?.subscriptionPlan !== "Student Free MemberShip" ? (
+            <Button disabled={true} onClick={() => nav("/teacher/create") }>
                 <PlusCircle className='h-4 w-4 mr-2'/>
                 New Course
             </Button>
+            ) : (
+                <>
+                {user?.createdCourses === 5 && user.subscriptionPlan === "Student Free MemberShip" ? (
+                    <Button disabled={true} onClick={() => nav("/teacher/create") }>
+                        <PlusCircle className='h-4 w-4 mr-2'/>
+                        New Course
+                    </Button>
+                ) : (
+                    <Button onClick={() => nav("/teacher/create") }>
+                        <PlusCircle className='h-4 w-4 mr-2'/>
+                        New Course
+                    </Button>
+                )}
+                </>
+            ) }
         </div>
         <div className="rounded-md border">
         <Table>

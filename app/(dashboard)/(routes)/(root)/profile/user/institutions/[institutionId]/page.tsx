@@ -9,6 +9,7 @@ import AttachmentInstitutionForm from '../../../_components/attachment-Instituti
 import InstitutionActions from '../../../_components/inst-actions'
 import InstitutionField from '../../../_components/inst-fields'
 import InstitutionTypeForm from '../../../_components/inst-type-form'
+import PaymentStatusHandler from '../_components/ActivationStatus'
 
 const InstitutionIdPage = async ({
     params
@@ -16,6 +17,7 @@ const InstitutionIdPage = async ({
     params : { institutionId: string }
 }) => {
     const {userId} = auth();
+   
 
     if (!userId) {
         return redirect("/");
@@ -57,8 +59,11 @@ const InstitutionIdPage = async ({
     const completionText = `(${completedFields}/${totalFields})`
     const isComplete = requiredFields.every(Boolean);
 
+
+
     return (
         <>
+            <PaymentStatusHandler userId={userId} institutionId={institution.id} />
             <div className="flex">
                 <InstitutionImageForm
                     initialData = {institution}
@@ -83,7 +88,7 @@ const InstitutionIdPage = async ({
                         </span>
                     </div>
                     <InstitutionActions
-                        disabled={!isComplete}
+                        disabled={!institution.isActivated}
                         institutionId={params.institutionId}
                         isActivated={institution.isActivated}
                     />

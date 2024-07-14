@@ -10,6 +10,7 @@ import axios from 'axios'
 import { useRouter } from 'next/navigation'
 import { useConfettiStore } from '@/hooks/use-confetti-store'
 import { useAuth } from '@clerk/nextjs'
+import SubscriptionButton from './subscrption-button'
 
 interface InstitutionActionsProps {
     disabled : boolean;
@@ -53,7 +54,7 @@ const InstitutionActions = ({
             await axios.delete(`/api/users/${userId}/institutions/${institutionId}`);
             toast.success("Institution Deleted");
             router.refresh();
-            // router.push(`/institutions`);
+            router.push(`/profile/user`);
         } catch{
             toast.error("Something Went Wrong")
         } finally {
@@ -63,14 +64,21 @@ const InstitutionActions = ({
 
     return (
         <div className="flex items-center gap-x-2">
-            <Button 
-                onClick={onClick}
-                disabled={disabled}
-                variant="outline"
-                size="sm"
-            >
-                {isActivated ? "Disactivated" : "Activated"}
-            </Button>
+            
+            {isActivated ? (
+                <Button 
+                    // onClick={onClick}
+                    disabled={disabled}
+                    variant="outline"
+                    size="sm"
+                >
+                    Activated
+                </Button>
+            ) : (
+                <SubscriptionButton userId={userId!} price={68.99}/>
+            )}
+            
+            
             <ConfirmModal onConfirm={onDelete}>
                 <Button className='text-sm'>
                     <Trash className='h-4 w-4'/>

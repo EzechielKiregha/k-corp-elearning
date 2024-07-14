@@ -66,9 +66,9 @@ export async function POST(
             line_items,
             mode : 'payment',
             success_url : userSub?.role === "BUSINESSOWNER" ? `${process.env.NEXT_PUBLIC_API_URL}/profile/user/institutions/${userSub!.institutionId}?success=1` : 
-            `${process.env.NEXT_PUBLIC_API_URL}/profile/user/?success=1`,
+            `${process.env.NEXT_PUBLIC_API_URL}/profile/user/?success=2`,
             cancel_url : userSub?.role === "BUSINESSOWNER" ? `${process.env.NEXT_PUBLIC_API_URL}/profile/user/institutions/${userSub!.institutionId}?canceled=1` : 
-            `${process.env.NEXT_PUBLIC_API_URL}/profile/user/?canceled=1`,
+            `${process.env.NEXT_PUBLIC_API_URL}/profile/user/?canceled=2`,
             metadata : {
                 userId : user.id,
                 subscriptionId : userSub?.subscriptionPlan === "Pro" ? `Pro_Membership_${userSub!.id}` :

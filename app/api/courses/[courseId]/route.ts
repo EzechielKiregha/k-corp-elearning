@@ -72,6 +72,18 @@ export async function PATCH(
             return new NextResponse("Unauthorized ", {status : 401})
         }
 
+        const courseNumber = await db.user.findMany({
+            where : {
+                id : userId
+            }, include : {
+                courses : {
+                    where : {
+                        isPublished : true
+                    }
+                }
+            }
+        })
+
         const course = await db.course.update({
             where : {
                 id : courseId,
@@ -79,6 +91,14 @@ export async function PATCH(
             },
             data : {
                 ...values,
+            }
+        })
+
+        await db.user.update({
+            where : {
+                id : userId,
+            }, data : {
+                createdCourses : courseNumber.length
             }
         })
 
