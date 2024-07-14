@@ -16,6 +16,9 @@ interface CoursesListProps {
 const CoursesList = ({
     items,
 } : CoursesListProps) => {
+
+    
+
     return (
         <div>
             <div className="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 

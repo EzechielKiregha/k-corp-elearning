@@ -104,44 +104,48 @@ const Pricing = () => {
                     Host your courses today. 
                 </span>
                 </h2>
-                <div className="flex flex-wrap">
-                {pricingOptions.map((option) => (
-                    <div key={option.title} className="w-full lg:w-1/3 sm:w-1/2 p-2">
-                        <div className="p-10 border border-slate-700  text-slate-100 rounded-xl bg-gradient-to-r 
-                                from-slate-950 to-sky-600 ">
-                            <p className="text-4xl mb-8">
-                                {option.title}
-                                {option.title === "Pro" && (
-                                    <span className="text-xl text-blue-300 dark:text-blue-300 text-transparent bg-clip-text ml-2 mb-4">
-                                        (Most popular)
-                                    </span>
-
+                <div className="flex flex-wrap justify-center gap-8">
+                    {pricingOptions.map((option) => (
+                        <div key={option.title} className="w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1rem)] max-w-md">
+                            <div className={`flex flex-col justify-between p-8 h-full rounded-xl ${
+                                option.title === currentPlan 
+                                    ? 'bg-gradient-to-r from-emerald-900 to-emerald-600 text-slate-100' 
+                                    : 'bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200'
+                            }`}>
+                                <div>
+                                    <p className="text-3xl mb-4">{option.title}</p>
+                                    <p className="mb-6">
+                                        <span className="text-4xl mr-2">{option.price}</span>
+                                        <span className="text-slate-400 tracking-tight">/month</span>
+                                    </p>
+                                    <ul className="space-y-3">
+                                        {option.features.map((feature, index) => (
+                                            <li key={index} className="flex items-start">
+                                                <CheckCircle2 className="flex-shrink-0 w-6 h-6 mr-2" />
+                                                <span>{feature}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                                {option.title !== currentPlan && (
+                                    <button
+                                        onClick={() => nav('/subscription')}
+                                        className="w-full mt-8 p-3 text-lg font-medium rounded-lg transition duration-200
+                                            bg-slate-800 text-slate-100 hover:bg-slate-700
+                                            dark:bg-slate-200 dark:text-slate-800 dark:hover:bg-slate-300"
+                                    >
+                                        Upgrade to {option.title}
+                                    </button>
                                 )}
-                            </p>
-                            <p className="mb-8">
-                                <span className="text-5xl mt-6 mr-2">{option.price}</span>
-                                <span className="text-slate-400 tracking-tight">/month</span>
-                            </p>
-                            
-                            <ul>
-                                {option.features.map((feature, index) => (
-                                    <li key={index} className="mt-8 flex items-center">
-                                        <CheckCircle2/>
-                                        <span className="ml-2">{feature}</span>
-                                    </li>
-                                ))}  
-                            </ul>
-                            <a
-                                href='/subscription' 
-                                className="inline-flex justify-center itens-center text-center w-full 
-                                h-12 p-2 mt-20 text-xl tracking-tight border hover:bg-slate-200 hover:text-slate-900 dark:hover:bg-white dark:hover:text-slate-900
-                                border-blue-900 rounded-lg transition duration-200 ">
-                                    Subscribe
-                            </a>
+                                {option.title === currentPlan && (
+                                    <div className="w-full mt-8 p-3 text-lg font-medium text-center rounded-lg bg-slate-200 text-slate-800">
+                                        Current Plan
+                                    </div>
+                                )}
+                            </div>
                         </div>
-                    </div>
-                ))}
-            </div>
+                    ))}
+                </div> 
             </div>
             </>
             )}

@@ -1,13 +1,15 @@
 import Image from 'next/image';
-import Link from 'next/link';
-import React from 'react'
 import IconBadge from './icon-badge';
-import { BookOpen } from 'lucide-react';
-import formatPrice  from '@/lib/format'
-import CourseProgress from './couurse-progress';
+import { BookOpen, User } from 'lucide-react';
 import TGlink from './CustomLink';
+import { db } from '@/lib/db';
+import { Institution } from '@prisma/client';
 
-
+interface CourseOwner {
+    username: string;
+    imageUrl: string | null;
+    institution: Institution | null;
+}
 interface BrowseCourseCardProps {
     key : string;
     id : string;
@@ -18,8 +20,26 @@ interface BrowseCourseCardProps {
     price : number;
 }
 
+async function getCourseOwner(courseId: string): Promise<CourseOwner | null> {
+    const course = await db.course.findUnique({
+        where: {
+            id: courseId,
+        },
+        select: {
+            courseOwner: {
+                select: {
+                    username: true,
+                    imageUrl: true,
+                    institution: true,
+                }
+            }
+        }
+    });
 
-const BrowseCourseCard = ({
+    return course?.courseOwner || null;
+}
+
+const BrowseCourseCard = async ({
     id,
     title,
     imageUrl,
@@ -27,6 +47,8 @@ const BrowseCourseCard = ({
     category,
     price,
 } : BrowseCourseCardProps) => {
+
+    const owner = await getCourseOwner(id);
 
     const formatedPrice = new Intl.NumberFormat("en-US",{
         style:"currency",
@@ -51,17 +73,39 @@ const BrowseCourseCard = ({
                     <p className="text-xs text-muted-foreground">
                         {category}
                     </p>
-                    <div className="my-3 flex items-center gap-x-2 text-sm md:text-xs">
-                        <div className="flex items-center gap-x-1 text-slate-500">
-                            <IconBadge size="sm" icon={BookOpen}/>
-                            <span>
-                                {chaptersLength} {chaptersLength === 1 ? "chapter" : "chapters"}
+                    <div className="flex items-center gap-x-1 text-slate-500">
+                        <IconBadge size="sm" icon={BookOpen}/>
+                        <span>
+                            {chaptersLength} {chaptersLength === 1 ? "chapter" : "chapters"}
+                        </span>
+                    </div>
+                    
+                        <p>
+                            {formatedPrice}
+                        </p>
+                        
+                    <div className="flex items-start mt-4">
+                        <span>Onwer :</span>
+                        {!owner?.imageUrl ? (
+                            <IconBadge icon={User}/>
+                        ) : (
+                            <Image 
+                                src={owner?.imageUrl!} 
+                                alt={owner?.username!}
+                                width={48}
+                                height={48} 
+                                className="w-12 h-12 mr-6 rounded-full border border-slate-300"
+                            />
+                        )}
+                        
+                        <div>
+                            <h5>{owner?.username}</h5>
+                            <span className="text-sm font-normal italic text-slate-400">
+                                {owner?.institution?.name! || 'Sole Dev'}
                             </span>
                         </div>
                     </div>
-                    <p>
-                        {formatedPrice}
-                    </p>
+                    
                     
                 </div>
             </div>

@@ -34,10 +34,10 @@ const UserIdPage = ({
             </div>
             <div className="p-6">
                 <div className="flex items-center justify-between">
-                <div className="flex items-center gap-x-2">
+                    <div className="flex items-center gap-x-2">
                         <IconBadge icon={LayoutDashboard}/>
                         <h2 className="text-xl">
-                            Update your personal information
+                            Personal information
                         </h2>
                     </div>
                 </div>
@@ -71,6 +71,7 @@ const UserIdPage = ({
                         
                     </div>
                     <div className="space-y-2">
+                        
                         <div>
                             <UserField
                                 initialData={user.role}

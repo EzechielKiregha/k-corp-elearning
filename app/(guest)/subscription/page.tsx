@@ -50,7 +50,7 @@ const SubscriptionPage = () => {
     return (
         <>
         <MainNavbar />
-        <div id='pricing' className='flex flex-col items-center justify-center'>
+        <div id='pricing' className='flex flex-col items-center justify-center mx-4'>
             {!isLoaded && (
             <div className="absolute h-full w-full bg-slate-500/20 dark:bg-slate-800 dark:text-slate-200 top-0 right-0 rounded-m flex items-center justify-center">
                 <Loader2 className="animate-spin h-20 w-20 text-sky-700" />
@@ -183,7 +183,7 @@ const SubscriptionPage = () => {
                 )}
             </div>
 
-            <div className="flex gap-x-16 flex-col items-center justify-between">
+            <div className="flex gap-x-16 flex-col items-center justify-between mx-2">
                 
                 {currentPlan 
                 ? (
