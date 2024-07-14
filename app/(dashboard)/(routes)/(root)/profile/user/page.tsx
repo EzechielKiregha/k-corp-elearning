@@ -33,7 +33,7 @@ const Profile = () => {
         try {
             if (user?.role === "BUSINESSOWNER") setGotbusiness(true);
 
-            if (institution?.isActivated && user?.subscriptionPlan === "Ultimate Enterprise Plan") {
+            if (institution?.isActivated) {
                 setEnterpriseIsActivated(true) ;
                 setGotbusiness(true);
             }
@@ -138,14 +138,16 @@ const Profile = () => {
                 </>
             ) : (
                 <>
-                {enterpriseisActivated ? (
+                {institution?.isActivated ? (
                     <><Banner
-                    variant="success"
-                    label="You are an Institution, University, College, ... and Manage your students, and Create up to [ 500 ] courses." />
-                    <Button onClick={() => nav(`/profile/user/institutions/${institution?.id}`)} variant="ghost">
-                        <CircleArrowRight />
-                        Visite '{institution?.name}'
+                        variant="success"
+                        label="You are an Institution, University, College, ... and Manage your students, and Create up to [ 500 ] courses." />
+                        <Button onClick={() => nav(`/profile/user/institutions/${institution?.id}`)} 
+                            variant="ghost">
+                            <CircleArrowRight />
+                            Visite ' {institution?.name} '
                     </Button>
+                    <UserIdPage userId={userId!} user={user!}/>
                     </>
                 ) : (
                     <>

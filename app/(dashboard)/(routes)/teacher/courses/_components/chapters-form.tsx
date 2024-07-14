@@ -22,6 +22,7 @@ import { cn } from '@/lib/utils'
 import { Textarea } from '@/components/ui/textarea'
 import { Chapter, Course } from '@prisma/client'
 import { ChaptersList } from './chapters-list'
+import { useNavigation } from '@/hooks/useNavigation'
 
 interface ChaptersFormProps {
     initialData : Course & { chapters : Chapter[] }
@@ -41,6 +42,7 @@ const ChaptersForm = ({
 
     const [isUpdating, setIsUpdating] = useState(false);
     const [isCreating, setIsCreating] = useState(false)
+    const nav = useNavigation();
 
 
     const router = useRouter()

@@ -1,7 +1,7 @@
 import IconBadge from '@/components/icon-badge'
 import { db } from '@/lib/db'
 import { auth } from '@clerk/nextjs/server'
-import { CircleDollarSign, File, LayoutDashboard, ListChecks } from 'lucide-react'
+import { ArrowLeft, CircleDollarSign, File, LayoutDashboard, ListChecks } from 'lucide-react'
 import { redirect } from 'next/navigation'
 import Banner from '@/components/banner'
 import InstitutionImageForm from '../../../_components/inst-image-form'
@@ -10,6 +10,7 @@ import InstitutionActions from '../../../_components/inst-actions'
 import InstitutionField from '../../../_components/inst-fields'
 import InstitutionTypeForm from '../../../_components/inst-type-form'
 import PaymentStatusHandler from '../_components/ActivationStatus'
+import TGlink from '@/components/CustomLink'
 
 const InstitutionIdPage = async ({
     params
@@ -79,6 +80,12 @@ const InstitutionIdPage = async ({
             
             <div className="p-6">
                 <div className="flex items-center justify-between">
+                    <TGlink className="flex items-center text-sm hover:opacity-75 transition mb-6"
+                        href={`/profile/user/`}
+                        >
+                            <ArrowLeft className="h-4 w-4 mr-2"/>
+                            back to user profile
+                        </TGlink>
                     <div className="gap-y-2 flex flex-col">
                         <h1 className="text-2xl font-medium">
                             institution Setup
