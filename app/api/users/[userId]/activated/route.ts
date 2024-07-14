@@ -30,7 +30,7 @@ export async function PATCH(req : NextRequest) {
                         institutionId : institutionId
                     },
                     data : {
-                        subscriptionPlan :  "Ultimate MemberShip Plan"
+                        subscriptionPlan :  "Ultimate Enterprise Plan"
                     }
                 })
             }else{
@@ -44,7 +44,8 @@ export async function PATCH(req : NextRequest) {
                         id : userId!,
                     },
                     data : {
-                        subscriptionPlan : user?.subscriptionPlan === 'Pro' ? "Pro Membership" : "Student Free MemberShip"
+                        subscriptionPlan : user.role === 'INSTRUCTOR' ? "Pro Membership" :
+                        user.role === "STUDENT" ? "Student Free MemberShip" : "Enterprise"
                     }
                 })
 

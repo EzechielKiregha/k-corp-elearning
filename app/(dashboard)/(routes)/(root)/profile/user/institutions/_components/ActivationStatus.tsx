@@ -27,8 +27,8 @@ const PaymentStatusHandler = ({ userId, institutionId }: props ) => {
             const res = await axios.patch(`/api/users/${userId}/activated`, { success: success, institutionId });
             if (res.status === 200) {
                 confetti.onOpen();
-                router.replace(`/profile/user/${institutionId}`)
-                toast.success("You've successfully Activated Your Institution.");
+                router.replace(`/profile/user/institutions/${institutionId}`)
+                // toast.success("You've successfully Activated Your Institution.");
             }
             } catch (error) {
                 console.error('Error activating institution:', error);
@@ -36,8 +36,8 @@ const PaymentStatusHandler = ({ userId, institutionId }: props ) => {
             }
         } else if (canceled === '1') {
             console.log('Payment was canceled');
-            toast.error("You've Canceled The Activation of Your Institution.");
-            router.replace(`/profile/user/${institutionId}`)
+            // toast.error("You've Canceled The Activation of Your Institution.");
+            router.replace(`/profile/user/institutions/${institutionId}`)
         }
         };
 

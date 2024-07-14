@@ -21,8 +21,8 @@ export async function POST(
             }
         })
 
-        let price = userSub?.subscriptionPlan === "Pro" ? 11.99 :
-                        userSub?.subscriptionPlan === "Enterprise" ? 68.99 : 0.00
+        let price = userSub?.role === "INSTRUCTOR" ? 11.99 :
+                        userSub?.role === "BUSINESSOWNER" ? 68.99 : 0.00
 
         const line_items : Stripe.Checkout.SessionCreateParams.LineItem[] = [
             {
@@ -31,8 +31,8 @@ export async function POST(
                     currency : "USD",
                     product_data : {
                         name : userSub?.firstName +""+ userSub?.lastName,
-                        description : userSub?.subscriptionPlan === "Pro" ? "The Pro Membership [200+ Courses creation] - " :
-                        userSub?.subscriptionPlan === "Enterprise" ? "The Ultimate Enterprise Plan [500+ Courses creation] - " :
+                        description : price === 11.99 ? "The Pro Membership [200+ Courses creation] - " :
+                        price === 68.99 ? "The Ultimate Enterprise Plan [500+ Courses creation] - " :
                         "Student Free Membership [5+ Courses creation] - ",
                     },
                     unit_amount : Math.round(price! * 100),

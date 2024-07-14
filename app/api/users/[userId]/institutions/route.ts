@@ -27,7 +27,8 @@ export async function POST(req: NextRequest) {
             where : {
                 id : userId!,
             }, data : {
-                institutionId : institution.id
+                institutionId : institution.id,
+                role : "BUSINESSOWNER"
             }
         })
 

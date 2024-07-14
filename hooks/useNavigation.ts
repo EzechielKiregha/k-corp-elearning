@@ -9,9 +9,13 @@ export const useNavigation = () => {
     const pathname = usePathname();
 
     const navigate = useCallback((href: string) => {
-        setIsLoading(true)
-        router.push(href)
-        if (pathname === href) setIsLoading(false)
+        if (pathname === href) {
+            router.refresh()
+        } else {
+            setIsLoading(true)
+            router.push(href)
+            router.refresh()
+        }
     }, [router, setIsLoading])
 
     return navigate

@@ -25,7 +25,6 @@ export async function POST(
     const session = event.data.object as Stripe.Checkout.Session;
     const userId = session?.metadata?.userId;
     const courseId = session?.metadata?.courseId
-    const sub = session?.metadata?.subscriptionId
 
     if(event.type === "checkout.session.completed"){
         if (!courseId || !userId){

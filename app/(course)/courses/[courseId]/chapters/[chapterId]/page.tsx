@@ -53,7 +53,7 @@ const ChapterIdPage = async ({
             {isLocked && (
                 <Banner
                     variant="warning"
-                    label='You need to purchase this course to watch this chapter.'
+                    label='You need to purchase the course to watch this chapter.'
                 />
             )}
             <div className="flex flex-col pb-20 max-w-4xl mx-auto">
@@ -100,12 +100,12 @@ const ChapterIdPage = async ({
                         <div className="p-4">
                             {attachments.map((attachment) => (
                                 <TGa 
-                                key={attachment.id}
-                                href={attachment.url}
-                                target='_blank'
-                                className='flex items-cente p-3 bg-sky-200 w-full
-                                rounded-md hover:underline border text-sky-700'
-                                >
+                                    key={attachment.id}
+                                    href={attachment.url}
+                                    target='_blank'
+                                    className='flex items-cente p-3 bg-sky-200 w-full
+                                    rounded-md hover:underline border text-sky-700'
+                                    >
                                     <File/>
                                     <p className="line-clamp-1">
                                         {attachment.name}

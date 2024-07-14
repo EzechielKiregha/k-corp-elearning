@@ -11,11 +11,14 @@ import NewUserForm from './_forms/user-form';
 import InstitutionForNewUserForm from './_forms/inst-form';
 import { useUser } from '@/hooks/use-User';
 import { useBusiness } from '@/hooks/use-Business';
+import { Button } from '@/components/ui/button';
+import { useNavigation } from '@/hooks/useNavigation';
 
 const SubscriptionPage = () => {
 
     const searchParams = useSearchParams()
     const plan = searchParams.get('selectedPlan')
+    const nav = useNavigation()
 
     const { isLoaded, userId } = useAuth();
     const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
@@ -30,15 +33,24 @@ const SubscriptionPage = () => {
         if (user && user.subscriptionPlan) {
             setCurrentPlan(user.subscriptionPlan)
         }
+        if(!currentPlan?.includes("Enterprise")) setShowInstitutionForm(false);
+        if(!currentPlan?.includes("Pro") && !selectedPlan) setShowUserForm(false);
     }, [ user, userId]);
+
     if (!userId) return redirect("/sign-up")
 
     if (plan && plan !== currentPlan){
         setSelectedPlan(plan)
     }
+
+    const resetPlan = () =>{
+        setSelectedPlan(null)
+        if(!currentPlan?.includes("Enterprise")) setShowInstitutionForm(false);
+        if(!currentPlan?.includes("Pro") && !selectedPlan) setShowUserForm(false);
+    }
     
     const handlePlanSelect = (plan: string) => {
-        if (plan === "Enterprise") {
+        if (plan === "Enterprise" || plan === "Ultimate Enterprise Plan") {
             setShowInstitutionForm(true);
         } else {
             setShowInstitutionForm(false);
@@ -51,13 +63,7 @@ const SubscriptionPage = () => {
         <>
         <MainNavbar />
         <div id='pricing' className='flex flex-col items-center justify-center mx-4'>
-            {!isLoaded && (
-            <div className="absolute h-full w-full bg-slate-500/20 dark:bg-slate-800 dark:text-slate-200 top-0 right-0 rounded-m flex items-center justify-center">
-                <Loader2 className="animate-spin h-20 w-20 text-sky-700" />
-            </div>
-            )}
-
-            {currentPlan && (
+            {!currentPlan?.includes(selectedPlan!) && !selectedPlan && (
                 <>
                     <div className="flex flex-col items-center justify-center mb-12">
                         <h2 className="text-3xl sm:text-4xl lg:text-5xl text-center my-8 tracking-wide">
@@ -67,8 +73,8 @@ const SubscriptionPage = () => {
                             {currentPlan}
                         </span>
                         <p className="text-xl sm:text-2xl mt-4">
-                            {currentPlan === "Pro" ? "[200+ Courses creation]" :
-                            currentPlan === "Enterprise" ? "[500+ Courses creation]" :
+                            {(currentPlan === "Pro" || currentPlan === "Pro MemberShip") ? "[200+ Courses creation]" :
+                            (currentPlan === "Enterprise" || currentPlan === "Ultimate Enterprise Plan") ? "[500+ Courses creation]" :
                             "[5+ Courses creation]"}
                         </p>
                     </div>
@@ -76,7 +82,7 @@ const SubscriptionPage = () => {
                         {pricingOptions.map((option) => (
                             <div key={option.title} className="w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1rem)] max-w-md">
                                 <div className={`flex flex-col justify-between p-8 h-full rounded-xl ${
-                                    option.title === currentPlan 
+                                    currentPlan?.includes(option.title) 
                                         ? 'bg-gradient-to-r from-emerald-900 to-emerald-600 text-slate-100' 
                                         : 'bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200'
                                 }`}>
@@ -95,9 +101,12 @@ const SubscriptionPage = () => {
                                             ))}
                                         </ul>
                                     </div>
-                                    {option.title !== currentPlan && (
+                                    {!currentPlan?.includes(option.title) && (
                                         <button
-                                            onClick={() => handlePlanSelect(option.title)}
+                                            onClick={() => (
+                                                handlePlanSelect(option.title)
+                                                // nav("/subscription")
+                                            )}
                                             className="w-full mt-8 p-3 text-lg font-medium rounded-lg transition duration-200
                                                 bg-slate-800 text-slate-100 hover:bg-slate-700
                                                 dark:bg-slate-200 dark:text-slate-800 dark:hover:bg-slate-300"
@@ -105,7 +114,7 @@ const SubscriptionPage = () => {
                                             Upgrade to {option.title}
                                         </button>
                                     )}
-                                    {option.title === currentPlan && (
+                                    {currentPlan?.includes(option.title) && (
                                         <div className="w-full mt-8 p-3 text-lg font-medium text-center rounded-lg bg-slate-200 text-slate-800">
                                             Current Plan
                                         </div>
@@ -119,16 +128,16 @@ const SubscriptionPage = () => {
             { !selectedPlan && !user && (
             <>
                 <h2 className="text-3xl sm:text-5xl lg:text-6xl text-center my-8 tracking-wide">
-                Select your subscription &<br />
-                <span className="bg-gradient-to-r from-sky-950 to-sky-600 text-slate-200">
-                    You can start teaching today.
+                Get A Free Plan Or Get A Pro & <br />
+                <span className="bg-gradient-to-r mt-1 from-sky-950 to-sky-600 text-slate-200">
+                    You Can Start Teaching Now.
                 </span>
                 </h2>
                 <div className="flex flex-wrap justify-center gap-8">
                     {pricingOptions.map((option) => (
                         <div key={option.title} className="w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1rem)] max-w-md">
                             <div className={`flex flex-col justify-between p-8 h-full rounded-xl ${
-                                option.title === currentPlan 
+                                currentPlan?.includes(option.title) 
                                     ? 'bg-gradient-to-r from-emerald-900 to-emerald-600 text-slate-100' 
                                     : 'bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200'
                             }`}>
@@ -147,9 +156,12 @@ const SubscriptionPage = () => {
                                         ))}
                                     </ul>
                                 </div>
-                                {option.title !== currentPlan && (
+                                {!currentPlan?.includes(option.title) && (
                                     <button
-                                        onClick={() => handlePlanSelect(option.title)}
+                                        onClick={() => (
+                                            handlePlanSelect(option.title)
+                                            // nav("/subscription")
+                                            )}
                                         className="w-full mt-8 p-3 text-lg font-medium rounded-lg transition duration-200
                                             bg-slate-800 text-slate-100 hover:bg-slate-700
                                             dark:bg-slate-200 dark:text-slate-800 dark:hover:bg-slate-300"
@@ -157,7 +169,7 @@ const SubscriptionPage = () => {
                                         Upgrade to {option.title}
                                     </button>
                                 )}
-                                {option.title === currentPlan && (
+                                {currentPlan?.includes(option.title) && (
                                     <div className="w-full mt-8 p-3 text-lg font-medium text-center rounded-lg bg-slate-200 text-slate-800">
                                         Current Plan
                                     </div>
@@ -170,11 +182,11 @@ const SubscriptionPage = () => {
             )}
             
         </div>
-        <div className="flex md:flex-row items-start justify-between">
-                {showUserForm && (
+            <div className="flex md:flex-row items-start justify-between">
+                {showUserForm && selectedPlan && (
                     <h2 className="text-3xl sm:text-5xl lg:text-6xl text-center my-8 tracking-wide">
-                        UnLocking {selectedPlan === "Pro" ? "The Pro Membership [200+ Courses creation] - " :
-                        selectedPlan === "Enterprise" ? "The Ultimate Enterprise Plan [500+ Courses creation] - " :
+                        UnLocking {selectedPlan?.includes("Pro") ? "The Pro Membership [200+ Courses creation] - " :
+                        selectedPlan?.includes("Enterprise") ? "The Ultimate Enterprise Plan [500+ Courses creation] - " :
                         "Student Free Membership [5+ Courses creation] - "} 
                         <span className="bg-gradient-to-r from-sky-950 to-sky-600 text-slate-200">
                             {selectedPlan}
@@ -185,20 +197,20 @@ const SubscriptionPage = () => {
 
             <div className="flex gap-x-16 flex-col items-center justify-between mx-2">
                 
-                {currentPlan 
+                {(currentPlan?.includes(selectedPlan!)) 
                 ? (
                     <>
                     <NewUserForm initialData={user!} selectedPlan={selectedPlan!} /></>
-                ) : showUserForm && (
-                    <><a
+                ) : showUserForm && selectedPlan && (
+                    <><Button
                         className="flex items-center text-sm hover:opacity-75 transition mb-6"
-                        href='/subscription'>
+                        onClick={() => (resetPlan())} variant="link">
                         <ArrowLeft className="h-4 w-4 mr-2" />
                         come back to subscription plans
-                    </a>
+                    </Button>
                     <NewUserForm initialData={user!} selectedPlan={selectedPlan!} /></>
                 )}
-                { currentPlan === "Enterprise" ? (
+                { currentPlan?.includes('Enterprise') ? (
                     <InstitutionForNewUserForm initialData={institution} userId={userId!} />
                 ): showInstitutionForm && (
                     <InstitutionForNewUserForm initialData={institution} userId={userId!} />

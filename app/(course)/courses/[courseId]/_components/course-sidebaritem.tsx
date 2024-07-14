@@ -35,27 +35,27 @@ const CourseSidebarItem = ({
             onClick={() => nav(`/courses/${courseId}/chapters/${id}`)}
             type="button"
             className={cn(
-                "flex items-center gap-x-2 text-sm text-slate-500 font-[500] pl-6 transition-all hover:text-slate-600 hover:bg-slate-300/20",
-                isActive && "hover:text-slate-700 hover:bg-slate-200/20 text-slate-700 ",
-                isCompleted && "text-emerald-700 hover:text-emerald-700",
-                isCompleted && isActive && "bg-emerald-200/20"
+                "flex items-center gap-x-2 text-sm text-slate-300 font-[500] pl-6 transition-all hover:text-slate-200 hover:bg-slate-300/20 ",
+                isActive && "dark:bg-slate-800 hover:text-slate-700 hover:bg-slate-200/20 text-slate-700 dark:hover:text-slate-200 dark:hover:bg-slate-600 dark:text-slate-200 ",
+                isCompleted && "text-emerald-700 hover:text-emerald-700 dark:text-emerald-400 dark:hover:text-emerald-300",
+                isCompleted && isActive && "bg-emerald-200/20 dark:bg-emerald-900/20"
             )}
         >
             <div className='flex items-center gap-x-2 py-4'>
                 <Icon 
                     className={cn(
-                        "text-slate-500",
-                        isActive && " text-slate-700",
-                        isCompleted && " text-emerald-700"
+                        "text-slate-500 ",
+                        isActive && " text-slate-700 dark:text-slate-200 ",
+                        isCompleted && " text-emerald-700 dark:text-emerald-500"
                     )}
                 />
                 {label}
             </div>
             <div
                 className={cn(
-                    "ml-auto opacity-0 border-2 border-slate-700 h-full transition-all",
+                    "ml-auto opacity-0 border-2 border-slate-400 h-full transition-all",
                     isActive && "opacity-100",
-                    isCompleted && " border-emerald-700"
+                    isCompleted && " border-emerald-700 dark:text-emerald-500"
                 )}
             />
         </button>

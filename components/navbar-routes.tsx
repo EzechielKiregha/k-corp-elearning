@@ -37,8 +37,7 @@ const NavbarRoutes = () => {
                 <Button 
                     className='border-b border-slate-900 dark:border-sky-300'
                     variant="ghost">
-                    | <FcApprove/>
-                    {user.subscriptionPlan} |
+                    Current Plan | {user.subscriptionPlan} |<CheckCircle/>
                 </Button>) : null
         }
             <div className="flex gap-x-2 ml-auto">
@@ -54,16 +53,26 @@ const NavbarRoutes = () => {
                         user?.subscriptionPlan === "Student Free MemberShip" ||
                         user?.subscriptionPlan === "Ultimate Enterprise Plan"
                         ) ? (
-                        <Button onClick={() => nav('/teacher/courses')} size="sm" variant="ghost">
-                            | <CheckCircle/> Teach Mode  |
+                        <Button onClick={() => nav('/teacher/courses')} 
+                        className='border-b border-slate-900 dark:border-sky-300'
+                        variant="ghost">
+                            | Teach Mode  |
                         </Button>) : (
-                            <Button onClick={() => nav('/profile/user')} size="sm" variant="link">
+                            <Button onClick={() => nav('/profile/user')}
+                            className='border-b border-slate-900 dark:border-sky-300'
+                            variant="ghost">
                                 | Activate Account |
                             </Button>
                         )
                 }
                 <ThemeToggle/>
-                <UserButton afterSignOutUrl="/"/>
+                <Button 
+                    onClick={() => nav('/profile/user')}
+                    variant="ghost"
+                    className='border-b border-slate-900 dark:border-sky-300'
+                    >
+                    <UserButton/>
+                </Button>
             </div>
         </>
     )

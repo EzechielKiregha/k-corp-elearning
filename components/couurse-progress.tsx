@@ -31,7 +31,7 @@ const CourseProgress = ({
             />
             <p className={
                 cn(
-                    "font-medium mt-2 text-sky-700",
+                    "font-medium mt-2 text-sky-700 dark:text-sky-400",
                     colorByVariant[variant || "default"],
                     sizeByVariant[size || "default"]
                 )
