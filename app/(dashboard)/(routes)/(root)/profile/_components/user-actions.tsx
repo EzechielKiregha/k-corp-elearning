@@ -51,7 +51,7 @@ const UserActions = ({
             await axios.delete(`/api/users/${userId}`);
             toast.success("Institution Deleted");
             router.refresh();
-            // router.push(`/users`);
+            // nav(`/users`);
         } catch{
             toast.error("Something Went Wrong")
         } finally {

@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { IconType } from "react-icons"
 import qs  from "query-string"
+import { useNavigation } from "@/hooks/useNavigation"
 
 interface CategoryItemProps {
     label : string,
@@ -19,6 +20,7 @@ const CategoryItem = ({
     const pathNane = usePathname()
     const router = useRouter()
     const searchParams = useSearchParams()
+    const nav = useNavigation();
 
     const currentCategoryId = searchParams.get("categoryId")
     const currentTitle = searchParams.get("title")
@@ -34,7 +36,7 @@ const CategoryItem = ({
             }
         },{skipNull:true, skipEmptyString:true});
         console.log("URL : ", url);
-        router.push(url);
+        nav(url);
     }
 
     return (

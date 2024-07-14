@@ -9,6 +9,7 @@ import toast from 'react-hot-toast'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
 import { useConfettiStore } from '@/hooks/use-confetti-store'
+import { useNavigation } from '@/hooks/useNavigation'
 
 interface ActionsProps {
     disabled : boolean;
@@ -23,6 +24,7 @@ const Actions = ({
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
     const confetti = useConfettiStore();
+    const nav = useNavigation();
 
     const onClick = async () => {
         try {
@@ -51,7 +53,7 @@ const Actions = ({
             await axios.delete(`/api/courses/${courseId}`);
             toast.success("Course Deleted");
             router.refresh();
-            router.push(`/teacher/courses`);
+            nav(`/teacher/courses`);
         } catch{
             toast.error("Something Went Wrong")
         } finally {

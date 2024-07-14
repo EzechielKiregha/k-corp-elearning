@@ -1,6 +1,7 @@
 "use client"
 
 import { useConfettiStore } from "@/hooks/use-confetti-store"
+import { useNavigation } from "@/hooks/useNavigation"
 import { cn } from "@/lib/utils"
 import MuxPlayer from "@mux/mux-player-react"
 import axios from "axios"
@@ -32,6 +33,7 @@ const VideoPlayer = ({
     const [isReady, setIsReady] = useState(false);
     const router = useRouter();
     const confetti = useConfettiStore();
+    const nav = useNavigation();
 
     const onEnded = async () =>{
         try {
@@ -47,7 +49,7 @@ const VideoPlayer = ({
                 toast.success("Progress Updated");
                 router.refresh();
                 if(nextChapterId) {
-                    router.push(`/courses/${courseId}/chapters/${nextChapterId}`)
+                    nav(`/courses/${courseId}/chapters/${nextChapterId}`)
                 }
 
                 

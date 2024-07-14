@@ -2,6 +2,7 @@
 'use client'
 
 import { useLoading } from '@/contexts/loadingContext'
+import { useNavigation } from '@/hooks/useNavigation'
 import { useRouter } from 'next/navigation'
 interface TGaProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
     href: string
@@ -10,12 +11,13 @@ interface TGaProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
 
 const TGa: React.FC<TGaProps> = ({ href, children, ...props }) => {
     const router = useRouter()
-    const { setIsLoading } = useLoading()
+    const { setIsLoading } = useLoading();
+    const nav = useNavigation();
 
     const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
         e.preventDefault()
         setIsLoading(true)
-        router.push(href)
+        nav(href)
     }
 
     return (

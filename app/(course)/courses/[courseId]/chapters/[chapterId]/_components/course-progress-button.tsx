@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { useConfettiStore } from "@/hooks/use-confetti-store";
+import { useNavigation } from "@/hooks/useNavigation";
 import axios from "axios";
 import { CheckCircle, XCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -24,6 +25,7 @@ const CourseProgressButton = ({
     const router = useRouter()
     const [isLoading, setIsLoading] = useState(false)
     const confetti = useConfettiStore();
+    const nav = useNavigation()
 
     const onClick = async () =>{
         try {
@@ -38,7 +40,7 @@ const CourseProgressButton = ({
             }
 
             if(!isCompleted && nextChapterId) {
-                router.push(`/courses/${courseId}/chapters/${nextChapterId}`)
+                nav(`/courses/${courseId}/chapters/${nextChapterId}`)
             }
 
             toast.success("Progress Updated");

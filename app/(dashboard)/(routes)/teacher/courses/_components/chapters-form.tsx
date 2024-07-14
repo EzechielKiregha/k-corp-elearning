@@ -83,7 +83,7 @@ const ChaptersForm = ({
     }
 
     const onEdit = async (id : string) => {
-        router.push(`/teacher/courses/${courseId}/chapters/${id}`);
+        nav(`/teacher/courses/${courseId}/chapters/${id}`);
     }
 
   return (

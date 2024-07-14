@@ -11,6 +11,7 @@ import { useRouter } from 'next/navigation'
 import { useConfettiStore } from '@/hooks/use-confetti-store'
 import { useAuth } from '@clerk/nextjs'
 import SubscriptionButton from './subscrption-button'
+import { useNavigation } from '@/hooks/useNavigation'
 
 interface InstitutionActionsProps {
     disabled : boolean;
@@ -25,6 +26,7 @@ const InstitutionActions = ({
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
     const confetti = useConfettiStore();
+    const nav = useNavigation();
     const { userId } = useAuth();
 
     const onClick = async () => {
@@ -54,7 +56,7 @@ const InstitutionActions = ({
             await axios.delete(`/api/users/${userId}/institutions/${institutionId}`);
             toast.success("Institution Deleted");
             router.refresh();
-            router.push(`/profile/user`);
+            nav(`/profile/user`);
         } catch{
             toast.error("Something Went Wrong")
         } finally {

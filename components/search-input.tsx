@@ -7,6 +7,7 @@ import { useDebounce } from '@/hooks/use-debounce'
 import { usePathname, useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/navigation'
 import qs from "query-string"
+import { useNavigation } from '@/hooks/useNavigation'
 
 const SearchInput = () => {
 
@@ -16,6 +17,7 @@ const SearchInput = () => {
     const pathNane = usePathname()
     const router = useRouter()
     const searchParams = useSearchParams()
+    const nav = useNavigation();
 
     const currentCategoryId = searchParams.get("categoryId")
 
@@ -28,7 +30,7 @@ const SearchInput = () => {
             }
         },{skipNull:true, skipEmptyString:true});
 
-        router.push(url);
+        nav(url);
     }, [debounceValue, currentCategoryId, router, pathNane])
 
   return (

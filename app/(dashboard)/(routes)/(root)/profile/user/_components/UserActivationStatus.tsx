@@ -15,12 +15,12 @@ interface props {
 const UserPaymentStatusHandler = ({ userId, institutionId }: props ) => {
     const searchParams = useSearchParams();
     const confetti = useConfettiStore();
+    const router = useRouter();
 
     useEffect(() => {
         const handlePaymentStatus = async () => {
         const success = searchParams.get('success');
         const canceled = searchParams.get('canceled');
-        const router = useRouter();
 
         if (success === '2') {
             try {

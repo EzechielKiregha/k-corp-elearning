@@ -9,6 +9,7 @@ import { useState } from 'react'
 import toast from 'react-hot-toast'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
+import { useNavigation } from '@/hooks/useNavigation'
 
 interface ChapterActionsProps {
     disabled : boolean;
@@ -24,6 +25,7 @@ const ChapterActions = ({
 } : ChapterActionsProps) => {
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
+    const nav = useNavigation();
 
     const onClick = async () => {
         try {
@@ -51,7 +53,7 @@ const ChapterActions = ({
             await axios.delete(`/api/courses/${courseId}/chapters/${chapterId}`);
             toast.success("Chapter Deleted");
             router.refresh();
-            router.push(`/teacher/courses/${courseId}`);
+            nav(`/teacher/courses/${courseId}`);
             router.refresh();
         } catch{
             toast.error("Something Went Wrong")
