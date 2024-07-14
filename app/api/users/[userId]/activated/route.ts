@@ -24,7 +24,6 @@ export async function PATCH(req : NextRequest) {
                         isActivated : true,
                     }
                 })
-            } else {
                 await db.user.update({
                     where : {
                         id : userId!,
@@ -34,6 +33,8 @@ export async function PATCH(req : NextRequest) {
                         subscriptionPlan :  "Ultimate MemberShip Plan"
                     }
                 })
+            }else{
+                return new NextResponse("[FAILED ACTIVATION] ", {status : 400})
             }
         } else {
             if (user && userId){
@@ -48,7 +49,7 @@ export async function PATCH(req : NextRequest) {
                 })
 
             } else {
-                
+                return new NextResponse("[FAILED ACTIVATION] ", {status : 400})
             }
         }
         return new NextResponse("[SUCCESS ACTIVATION] ", {status : 200})

@@ -3,6 +3,7 @@ import Categories from "@/app/(dashboard)/(routes)/search/_components/categories
 import { getBrowseCourses } from "@/actions/get-browseCourses";
 import BrowseCoursesList from "@/components/browse-courses-list";
 import TGa from "@/components/CustomAnchor";
+import { Button } from "@/components/ui/button";
 
 interface searchParamsProps {
     searchParams : {
@@ -38,12 +39,12 @@ const BrowseCourse = async () => {
                 />
                 <BrowseCoursesList items={courses} />
                 <div className="flex justify-center my-10">
-                    <TGa href="/browse-courses" className="bg-gradient-to-r text-slate-200 from-sky-950 to-sky-600 px-3 py-2
-                    rounded-md ">more</TGa>
+                <Button  size="sm" variant="link">
+                    <TGa href="/browse-courses">more courses</TGa>
+                </Button>
                     {/* <a href="#" className="px-3 py-2 mx-3 rounded-md ">Guide & Docs</a> */}
                 </div>
             </div>
-            
         </div>
     )
 }

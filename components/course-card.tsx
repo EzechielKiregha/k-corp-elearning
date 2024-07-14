@@ -96,7 +96,6 @@ const CourseCard = async ({
                         </p>
                         
                     )}
-                    <span>Onwer :</span>
                     <div className="flex items-start mt-2">
                         
                         {!owner?.imageUrl ? (

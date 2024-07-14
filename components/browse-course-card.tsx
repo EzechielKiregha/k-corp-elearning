@@ -83,9 +83,8 @@ const BrowseCourseCard = async ({
                         <p>
                             {formatedPrice}
                         </p>
-                        
                     <div className="flex items-start mt-4">
-                        <span>Onwer :</span>
+                        
                         {!owner?.imageUrl ? (
                             <IconBadge icon={User}/>
                         ) : (
@@ -94,7 +93,7 @@ const BrowseCourseCard = async ({
                                 alt={owner?.username!}
                                 width={48}
                                 height={48} 
-                                className="w-12 h-12 mr-6 rounded-full border border-slate-300"
+                                className="w-12 h-12 mr-3 rounded-full border border-slate-300"
                             />
                         )}
                         

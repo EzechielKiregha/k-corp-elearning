@@ -16,8 +16,6 @@ const BrowsePage = async () => {
 
     const courses = await getBrowseCourses();
 
-    // console.log("from seach, Progress :", courses[0].progress)
-
     return (
         <>
         <MainNavbar/>

@@ -13,6 +13,8 @@ import { useUser } from '@/hooks/use-User';
 import { useNavigation } from '@/hooks/useNavigation';
 import TGlink from '@/components/CustomLink';
 import TGa from '@/components/CustomAnchor';
+import { Button } from '@/components/ui/button';
+import { FcApprove } from 'react-icons/fc';
 
 
 const MainNavbar = () => {
@@ -48,26 +50,38 @@ const MainNavbar = () => {
                         </TGlink>
                     </div>
                     </div>
-                    <ul className="hidden lg:flex ml-14 space-x-6">
+                    <ul className="hidden lg:flex ml-14 space-x-2">
                         {navItems.map( (item, index) => (
                             <li key={index}>
                                 <TGlink
                                     className='hover:text-sky-600'
                                     href={item.href }
                                 >
-                                    {item.label === "Teach Mode" ? (
+                                {item.label === "Teach Mode" ? (
 
-                                        isTeacher(user!) === true ? (
-                                                <span className="bg-gradient-to-r from-sky-950 to-sky-600 text-slate-200">
-                                                    |  {item.label}  |
-                                                </span>
-                                                )
-                                        : (
-                                            "| Start Teaching |"
-                                        )
-                                        
+                                    isTeacher(user!) === true && (
+                                        user?.subscriptionPlan === "Pro MemberShip" ||
+                                        user?.subscriptionPlan === "Student Free MemberShip" ||
+                                        user?.subscriptionPlan === "Ultimate Enterprise Plan"
+                                        ) ? (
+                                        <Button 
+                                            className='border-b border-slate-900 dark:border-sky-300'
+                                            variant="ghost"> 
+                                            <FcApprove/>
+                                            | Teach Mode |
+                                        </Button>) : (
+                                            <Button
+                                                size="sm"
+                                                className=' border-b border-slate-900 dark:border-sky-300'
+                                                variant="link">
+                                                <FcApprove />
+                                                {user?.subscriptionPlan}
+                                            </Button>
+                                            )
                                     ) : (
-                                        item.label
+                                        <Button size="sm" variant="link">
+                                            {item.label}
+                                        </Button>
                                     )}
                                 </TGlink>
                             </li>
@@ -76,19 +90,27 @@ const MainNavbar = () => {
                     {!isLogin ? (
                         <div className="hidden lg:flex justify-center space-x-6 items-center ">
                             <ThemeToggle/>
-                            <TGa href="/sign-in" className='py-2 px-2 border rounded-md border-sky-700 dark:border-slate-200 dark:text-slate-200 text-sky-700 dark:hover:text-sky-500 dark:hover:border-sky-500'> Sign In </TGa>
-                            <TGa href="/sign-up" className="py-2 px-2 rounded-md bg-gradient-to-r 
-                                from-sky-950 to-sky-600 text-slate-200">Create an account</TGa>
+                            <Button onClick={() => nav('/sign-in')} variant="link" className="bg-gradient-to-r text-slate-200 from-sky-950 to-sky-600 px-3 py-2
+                            rounded-md ">Sign In</Button>
+                            <Button onClick={() => nav('/sign-up')} variant="link" className="bg-gradient-to-r text-slate-200 from-sky-950 to-sky-600 px-3 py-2
+                            rounded-md ">Create an account</Button>
                         </div>
                     ):(
                         <>
-                        <div className="hidden lg:flex lg:flex-row justify-center space-x-12 items-center">
+                        <div className="hidden lg:flex lg:flex-row md:flex md:flex-row justify-center space-x-12 items-center">
                             <ThemeToggle/>
-                            {/* <UserButton/> */}
-                            <button onClick={() => nav('/dashboard')} className="py-2 px-3 rounded-md bg-gradient-to-r 
+                            <Button 
+                                onClick={() => nav('/profile/user/')}
+                                variant="ghost"
+                                className='border-b border-slate-900 dark:border-sky-300'
+                                >
+                                <UserButton/>
+                            </Button>
+                            
+                            <Button variant="link" onClick={() => nav('/dashboard')} className="py-2 px-3 rounded-md bg-gradient-to-r 
                             from-sky-950 to-sky-600 text-slate-200">
                                 Dashboard
-                            </button>
+                            </Button>
                         </div>
                         </>
                     )}
@@ -109,21 +131,33 @@ const MainNavbar = () => {
                             <li key={index}>
                                 <TGlink
                                     className='hover:text-sky-600'
-                                    href={item.label === "Teach Mode" && item.key === 4 ? item.href : "/teacher/courses"  }
+                                    href={item.href }
                                 >
-                                    {item.label === "Teach Mode" ? (
+                                {item.label === "Teach Mode" ? (
 
-                                        isTeacher(user!) === true ? (
-                                                <span className="bg-gradient-to-r from-sky-950 to-sky-600 text-slate-200">
-                                                    |  {item.label}  |
-                                                </span>
-                                                )
-                                        : (
-                                            "| Start Teaching |"
-                                        )
-                                        
+                                    isTeacher(user!) === true && (
+                                        user?.subscriptionPlan === "Pro MemberShip" ||
+                                        user?.subscriptionPlan === "Student Free MemberShip" ||
+                                        user?.subscriptionPlan === "Ultimate Enterprise Plan"
+                                        ) ? (
+                                        <Button 
+                                            className='border-b border-slate-900 dark:border-sky-300'
+                                            variant="ghost"> 
+                                            <FcApprove/>
+                                            | Teach Mode |
+                                        </Button>) : (
+                                            <Button
+                                                size="sm"
+                                                className=' border-b border-slate-900 dark:border-sky-300'
+                                                variant="link">
+                                                <FcApprove />
+                                                {user?.subscriptionPlan}
+                                            </Button>
+                                            )
                                     ) : (
-                                        item.label
+                                        <Button size="sm" variant="link">
+                                            {item.label}
+                                        </Button>
                                     )}
                                 </TGlink>
                             </li>
@@ -131,15 +165,22 @@ const MainNavbar = () => {
                         </ul>
                         {!isLogin ? (
                             <div className="flex space-x-6 items-center ">
-                                <TGa href="/sign-in" className='py-2 px-3 border rounded-md border-sky-800 text-sky-800 '> Sign In </TGa>
-                                <TGa href="/sign-up" className="py-2 px-3 rounded-md bg-gradient-to-r 
-                                from-sky-950 to-sky-600 text-slate-200"> Create an account</TGa>
+                                <Button onClick={() => nav('/sign-in')} variant="link" className="bg-gradient-to-r text-slate-200 from-sky-950 to-sky-600 px-3 py-2
+                                rounded-md ">Sign In</Button>
+                                <Button onClick={() => nav('/sign-up')} variant="link" className="bg-gradient-to-r text-slate-200 from-sky-950 to-sky-600 px-3 py-2
+                                rounded-md ">Create an account</Button>
                             </div>
                         ):(
-                            <div className="flex space-x-6">
-                                <UserButton/>
-                                <TGlink href="/dashboard" className="py-2 px-3 rounded-md bg-gradient-to-r 
-                                    from-sky-950 to-sky-600 text-slate-200">Dashboard</TGlink>
+                            <div className="flex space-x-3">
+                                <Button 
+                                    onClick={() => nav('/profile/user/')}
+                                    variant="ghost"
+                                    className='border-b border-slate-900 dark:border-sky-300'
+                                    >
+                                    <UserButton/>
+                                </Button>
+                                <Button onClick={() => nav('/dashboard')} variant="link" className="bg-gradient-to-r text-slate-200 from-sky-950 to-sky-600 px-3 py-2
+                                rounded-md ">Dashboard</Button>
                             </div>
                         )}
                     </div>
