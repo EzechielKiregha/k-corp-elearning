@@ -24,8 +24,6 @@ const SubscriptionPage = () => {
     const [showInstitutionForm, setShowInstitutionForm] = useState(false);
     const user = useUser(userId);
     
-    if (!userId) return redirect("/sign-up");
-    
     const { institution, isLoading, error } = useBusiness(user?.institutionId, userId);
     
     useEffect(() => {
@@ -33,6 +31,7 @@ const SubscriptionPage = () => {
             setCurrentPlan(user.subscriptionPlan)
         }
     }, [ user, userId]);
+    if (!userId) return redirect("/sign-up")
 
     if (plan && plan !== currentPlan){
         setSelectedPlan(plan)

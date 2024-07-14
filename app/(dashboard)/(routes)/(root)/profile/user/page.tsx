@@ -145,7 +145,7 @@ const Profile = () => {
                         <Button onClick={() => nav(`/profile/user/institutions/${institution?.id}`)} 
                             variant="ghost">
                             <CircleArrowRight />
-                            Visite ' {institution?.name} '
+                            Visite &apos; {institution?.name} &apos;
                     </Button>
                     <UserIdPage userId={userId!} user={user!}/>
                     </>
