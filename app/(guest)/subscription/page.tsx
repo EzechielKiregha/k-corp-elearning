@@ -43,6 +43,12 @@ const SubscriptionPage = () => {
         else if(!currentPlan?.includes("Pro") && !selectedPlan) {
             setShowUserForm(false);
         }
+
+        else if (currentPlan?.includes("Free") ) {
+            setShowUserForm(true)
+            setShowInstitutionForm(true)
+        }
+
     }, [ user, userId]);
 
     if (!userId) return redirect("/sign-in")
@@ -51,6 +57,7 @@ const SubscriptionPage = () => {
         setSelectedPlan(null)
         if(!currentPlan?.includes("Enterprise") || !currentPlan?.includes("Ultimate")  ) setShowInstitutionForm(false);
         if(!currentPlan?.includes("Pro") && !selectedPlan) setShowUserForm(false);
+        if(currentPlan?.includes("Free") && !selectedPlan) setShowUserForm(true);
     }
     
     const handlePlanSelect = (plan: string) => {
@@ -218,7 +225,7 @@ const SubscriptionPage = () => {
                 )}
                 { currentPlan?.includes('Enterprise') ? (
                     <InstitutionForNewUserForm initialData={institution} userId={userId!} />
-                ): showInstitutionForm && (
+                ): showInstitutionForm && user?.role !== "STUDENT" && (
                     <InstitutionForNewUserForm initialData={institution} userId={userId!} />
                 )}
             </div>

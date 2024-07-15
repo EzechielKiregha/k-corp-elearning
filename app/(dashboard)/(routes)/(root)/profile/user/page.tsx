@@ -42,7 +42,7 @@ const Profile = () => {
 
             if (institution?.isActivated) {
                 router.refresh()
-                setEnterpriseIsActivated(true) ;
+                setEnterpriseIsActivated(true);
                 setGotbusiness(true);
                 setGotPro(false)
             }
@@ -56,12 +56,9 @@ const Profile = () => {
                 setGotbusiness(false)
             }
             
-            if (user?.subscriptionPlan === "Free") {
+            if (user?.subscriptionPlan.includes("Free") && user.role !== "STUDENT") {
                 setFreeIsActivated(true)
-            } else if (user?.subscriptionPlan === "Student Free MemberShip") {
-                setFreeIsActivated(true)
-                setGotPro(true);
-            }
+            } 
             
             router.refresh()
         } catch (error) {
@@ -69,7 +66,7 @@ const Profile = () => {
         }
     },[userId, user])
 
-    if (userId && !user?.subscriptionPlan?.includes("Free")&&
+    if (userId && !user?.subscriptionPlan?.includes("Free") &&
         !user?.subscriptionPlan?.includes("Pro") && 
         !user?.subscriptionPlan?.includes("Enterprise") &&
         !user?.subscriptionPlan?.includes("Ultimate") 
@@ -86,7 +83,7 @@ const Profile = () => {
                         size="sm"
                         className=' border-b border-slate-900 dark:border-sky-300'
                         variant="link">
-                        Start Now
+                        Get Free Here
                     </Button>
                 </ConfirmModalLogin>
                 <Button onClick={() => nav('/subscription')} variant="link">
@@ -149,7 +146,7 @@ const Profile = () => {
                             <>
                             <Banner
                                 variant="success"
-                                label="You are a Student Now With Instructor/Teacher Privileges at K-Corp eLearning. You Can Create up to [ 5+ ] courses" 
+                                label="You are using a Student Now With Instructor/Teacher Privileges at K-Corp eLearning. You Can Create up to [ 5+ ] courses" 
                                 />
                                 <Button variant="success" size="sm" className="my-2">
                                         <CircleCheck/>
@@ -169,14 +166,20 @@ const Profile = () => {
                         ) : (
                             <>
                             <Banner
-                                variant="success"
-                                label="You are a Pro Member and Instructor at K-Corp eLearning. Create up to [ 200 ] courses"
+                                variant="warning"
+                                label="Get Student Free MemberShip. Create up to [ 5+ courses]  & start teaching your collegues" 
                             />
+                            Or
+                            <SubscriptionButton userId={userId!} price={0.00} />
                             <Button onClick={() => nav('/subscription')} variant="link">
                                 <CircleArrowRight />
-                                Upgrade to Enterprise. [ 500+ ] courses.
+                                get Instructor Privileges at K-Corp eLearning. [200+ courses].
                             </Button>
-                            <SubscriptionButton userId={userId!} price={11.99} />
+                            <Button onClick={() => nav('/subscription')} variant="link">
+                                <CircleArrowRight />
+                                Register Your Business In Few Steps 
+                            </Button>
+                            
                             <UserIdPage userId={userId!} user={user!}/>
                             </>
                         )}

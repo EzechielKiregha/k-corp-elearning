@@ -40,7 +40,7 @@ const SubscriptionButton = ({
                 size="sm"
                 disabled={isLoading}
                 >
-                Activate & checkout
+                Activate {price !== 0.00 ? "checkout" : "for free"}
             </Button>
         </ConfirmModalCheckout>
     )

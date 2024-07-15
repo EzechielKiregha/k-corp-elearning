@@ -45,19 +45,27 @@ const NavbarRoutes = () => {
                     size="sm"
                     >
                     Current Plan | {user.subscriptionPlan} |
-                </Button>) : null
+                </Button>
+                ) : (
+                    <Button 
+                    className='hidden md:block border-b border-slate-900 dark:border-sky-300'
+                    variant="ghost"
+                    size="sm"
+                    >
+                    Current Plan | {user?.subscriptionPlan} |
+                </Button>
+                )
         }
             <div className="flex gap-x-2 ml-auto">
                 {
                     isTeacherPage || isCoursePage ?
                     (
-                        <Button  onClick={() => nav('/dashboard')} size="sm" variant="ghost">
+                        <Button  onClick={() => nav('/dashboard')} size="sm" variant="link">
                             <ArrowLeft className="h-4 w-4 mr-2" />
-                            exit Teach Mode
+                            exit
                         </Button>
                     ) : isTeacher(user!) === true && (
                         user?.subscriptionPlan.includes("Pro") ||
-                        user?.subscriptionPlan.includes("Free") ||
                         user?.subscriptionPlan.includes("Enterprise") ||
                         user?.subscriptionPlan.includes("Ultimate")
                         ) ? (
@@ -68,7 +76,7 @@ const NavbarRoutes = () => {
                             >
                             | Teach Mode  |
                         </Button>
-                        ) : !institution && (
+                        ) : !institution ? (
                             <ActivateAccountModal onConfirm={() => nav('/profile/user')}>
                                 <Button 
                                     className='border-b border-slate-900 dark:border-sky-300'
@@ -78,6 +86,14 @@ const NavbarRoutes = () => {
                                         | Activate Account |
                                 </Button>
                             </ActivateAccountModal>
+                        ) : user?.subscriptionPlan.includes("Free") && user?.role !== "STUDENT" && (
+                            <Button onClick={() => nav('/teacher/courses')} 
+                                className='border-b border-slate-900 dark:border-sky-300'
+                                variant="ghost"
+                                size="sm"
+                                >
+                                | My Courses |
+                            </Button>
                         )
                 }
                 <ThemeToggle/>
@@ -85,7 +101,7 @@ const NavbarRoutes = () => {
                     onClick={() => nav('/profile/user')}
                     variant="ghost"
                     size="icon"
-                    className='border-b mr-6 border-slate-900 dark:border-sky-300'
+                    className='border-b mr-2 border-slate-900 dark:border-sky-300'
                     >
                     {!user?.imageUrl ? (
                         <IconBadge size="sm" icon={User}/>
@@ -99,7 +115,6 @@ const NavbarRoutes = () => {
                         />
                     )}
                 </Button>
-                {/* <SignOutButton/> */}
             </div>
         </>
     )

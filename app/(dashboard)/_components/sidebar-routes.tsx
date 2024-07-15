@@ -88,9 +88,6 @@ const SideRoutes = () => {
             <div className="my-5">
                 <Separator/>
             </div>
-            <div className="font-[500] pl-6 transition-all ">
-                <SignOutButton/>
-            </div>
         </div>
     )
 }

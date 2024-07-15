@@ -78,7 +78,7 @@ const MainNavbar = () => {
                                             <FcApproval/>
                                             | Teach Mode |
                                         </Button>) 
-                                        : user?.subscriptionPlan && (
+                                        : user?.subscriptionPlan && user?.role !== "STUDENT" && (
                                             <Button
                                                 size="sm"
                                                 className=' border-b border-slate-900 dark:border-sky-300'
@@ -171,7 +171,7 @@ const MainNavbar = () => {
                                             <FcApproval/>
                                             | Teach Mode |
                                         </Button>) 
-                                        : user?.subscriptionPlan && (
+                                        : user?.subscriptionPlan && user?.role !== "STUDENT" && (
                                             <Button
                                                 size="sm"
                                                 className=' border-b border-slate-900 dark:border-sky-300'
