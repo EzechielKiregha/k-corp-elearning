@@ -64,9 +64,10 @@ const MainNavbar = () => {
                                 {item.label === "Teach Mode" ? (
 
                                     isTeacher(user!) === true && (
-                                        user?.subscriptionPlan === "Pro MemberShip" ||
-                                        user?.subscriptionPlan === "Student Free MemberShip" ||
-                                        user?.subscriptionPlan === "Ultimate Enterprise Plan"
+                                        user?.subscriptionPlan.includes("Pro") ||
+                                        user?.subscriptionPlan.includes("Free") ||
+                                        user?.subscriptionPlan.includes("Enterprise") ||
+                                        user?.subscriptionPlan.includes("Ultimate")
                                         ) ? (
                                         <Button 
                                             className='border-b border-slate-900 dark:border-sky-300'
@@ -74,7 +75,7 @@ const MainNavbar = () => {
                                             size="sm"
                                             onClick={() => nav('/teacher/courses')}
                                             > 
-                                            <FcApprove/>
+                                            <FcApproval/>
                                             | Teach Mode |
                                         </Button>) 
                                         : user?.subscriptionPlan && (
@@ -147,53 +148,46 @@ const MainNavbar = () => {
                     text-slate-900 dark:text-slate-200 
                     w-full p-12 items-center lg:hidden">
                         <ul>
-                            {navItems.map( (item, index) => (
-                                <li key={index}>
-                                    <TGlink
-                                        className='hover:text-sky-600'
-                                        href={item.href }
-                                    >
-                                    {item.label === "Teach Mode" ? (
+                        {navItems.map( (item, index) => (
+                            <li key={index}>
+                                <TGlink
+                                    className='hover:text-sky-600'
+                                    href={item.href }
+                                >
+                                {item.label === "Teach Mode" ? (
 
-                                        isTeacher(user!) === true && (
-                                            user?.subscriptionPlan === "Pro MemberShip" ||
-                                            user?.subscriptionPlan === "Student Free MemberShip" ||
-                                            user?.subscriptionPlan === "Ultimate Enterprise Plan"
-                                            ) ? (
-                                            <Button 
-                                                className='border-b border-slate-900 dark:border-sky-300'
-                                                variant="ghost" 
+                                    isTeacher(user!) === true && (
+                                        user?.subscriptionPlan.includes("Pro") ||
+                                        user?.subscriptionPlan.includes("Free") ||
+                                        user?.subscriptionPlan.includes("Enterprise") ||
+                                        user?.subscriptionPlan.includes("Ultimate")
+                                        ) ? (
+                                        <Button 
+                                            className='border-b border-slate-900 dark:border-sky-300'
+                                            variant="ghost"
+                                            size="sm"
+                                            onClick={() => nav('/teacher/courses')}
+                                            > 
+                                            <FcApproval/>
+                                            | Teach Mode |
+                                        </Button>) 
+                                        : user?.subscriptionPlan && (
+                                            <Button
                                                 size="sm"
-                                                > 
-                                                <FcApprove/>
-                                                | Teach Mode |
-                                            </Button>) 
-                                            : !userId ? (
-                                                <ConfirmModalLogin onConfirm={() => nav('/subscription')}>
-                                                    <Button
-                                                        size="sm"
-                                                        className=' border-b border-slate-900 dark:border-sky-300'
-                                                        variant="link">
-                                                        Start Now
-                                                    </Button>
-                                                </ConfirmModalLogin>
-                                            ) : (
-                                                <Button
-                                                    size="sm"
-                                                    className=' border-b border-slate-900 dark:border-sky-300'
-                                                    variant="link">
-                                                    <FcApproval />
-                                                    {user?.subscriptionPlan}
-                                                </Button>
-                                                )
-                                        ) : (
-                                            <Button size="sm" variant="link">
-                                                {item.label}
+                                                className=' border-b border-slate-900 dark:border-sky-300'
+                                                variant="link">
+                                                <FcApproval />
+                                                {user?.subscriptionPlan}
                                             </Button>
-                                        ) }
-                                    </TGlink>
-                                </li>
-                            ))}
+                                            )
+                                    ) : (
+                                        <Button size="sm" variant="link">
+                                            {item.label}
+                                        </Button>
+                                    ) }
+                                </TGlink>
+                            </li>
+                        ))}
                         </ul>
                         {!isLogin ? (
                             <div className="flex space-x-6 items-center ">
