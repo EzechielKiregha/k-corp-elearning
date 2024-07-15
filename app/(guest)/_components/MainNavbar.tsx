@@ -107,7 +107,7 @@ const MainNavbar = () => {
                             <Button onClick={() => nav('/sign-in')} variant="link" className="bg-gradient-to-r text-slate-200 from-sky-950 to-sky-600 px-3 py-2
                             rounded-md ">Sign In</Button>
                             <Button onClick={() => nav('/sign-up')} variant="link" className="bg-gradient-to-r text-slate-200 from-sky-950 to-sky-600 px-3 py-2
-                            rounded-md ">Create an account</Button>
+                            rounded-md ">Sign Up</Button>
                         </div>
                     ):(
                         <>
@@ -203,7 +203,7 @@ const MainNavbar = () => {
                                 <Button onClick={() => nav('/sign-in')} variant="link" className="bg-gradient-to-r text-slate-200 from-sky-950 to-sky-600 px-3 py-2
                                 rounded-md ">Sign In</Button>
                                 <Button onClick={() => nav('/sign-up')} variant="link" className="bg-gradient-to-r text-slate-200 from-sky-950 to-sky-600 px-3 py-2
-                                rounded-md ">Create an account</Button>
+                                rounded-md ">Sign Up</Button>
                             </div>
                         ):(
                             <div className="flex space-x-3">
