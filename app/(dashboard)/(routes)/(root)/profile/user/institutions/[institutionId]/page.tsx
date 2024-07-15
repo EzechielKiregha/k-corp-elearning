@@ -77,15 +77,15 @@ const InstitutionIdPage = async ({
                     label="This institution is not Active. it will not be visible to the other users."
                 />
             )}
-            
+            <TGlink className="flex items-center text-sm hover:opacity-75 transition mb-2"
+            href={`/profile/user/`}
+            >
+                <ArrowLeft className="h-4 w-4 ml-4"/>
+                back to user profile
+            </TGlink>
             <div className="p-6">
                 <div className="flex items-center justify-between">
-                    <TGlink className="flex items-center text-sm hover:opacity-75 transition mb-6"
-                        href={`/profile/user/`}
-                        >
-                            <ArrowLeft className="h-4 w-4 mr-2"/>
-                            back to user profile
-                        </TGlink>
+                    
                     <div className="gap-y-2 flex flex-col">
                         <h1 className="text-2xl font-medium">
                             institution Setup

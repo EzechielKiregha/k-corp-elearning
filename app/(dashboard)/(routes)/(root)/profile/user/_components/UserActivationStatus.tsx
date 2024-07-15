@@ -34,6 +34,7 @@ const UserPaymentStatusHandler = ({ userId, institutionId }: props ) => {
                 console.error('Error activating institution:', error);
                 // toast.error('Failed to activate institution');
                 router.replace(`/profile/user`)
+                router.refresh()
             }
         } else if (canceled === '2') {
             console.log('Payment was canceled');

@@ -28,6 +28,7 @@ const PaymentStatusHandler = ({ userId, institutionId }: props ) => {
             if (res.status === 200) {
                 confetti.onOpen();
                 router.replace(`/profile/user/institutions/${institutionId}`)
+                router.refresh()
                 // toast.success("You've successfully Activated Your Institution.");
             }
             } catch (error) {

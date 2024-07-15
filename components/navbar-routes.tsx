@@ -2,7 +2,7 @@
 import { UserButton, useAuth } from "@clerk/nextjs"; 
 import { usePathname } from "next/navigation";
 import { Button } from "./ui/button";
-import { CheckCircle, LogOut, User } from "lucide-react";
+import { ArrowLeft, CheckCircle, LogOut, User } from "lucide-react";
 import SearchInput from "./search-input";
 
 import { isTeacher  } from "@/lib/isTeacher";
@@ -13,6 +13,7 @@ import { ActivateAccountModal } from "./modals/ActivateAccountModal";
 import IconBadge from "./icon-badge";
 import Image from "next/image";
 import { SignOutButton } from "./SignOutButton";
+import { useBusiness } from "@/hooks/use-Business";
 
 const NavbarRoutes = () => {
     const { userId } = useAuth();
@@ -23,6 +24,7 @@ const NavbarRoutes = () => {
     const nav = useNavigation()
 
     const user = useUser(userId);
+    const institution = useBusiness(user?.institutionId!, user?.id)
 
     return (
         <>
@@ -32,9 +34,9 @@ const NavbarRoutes = () => {
                     <SearchInput />
                 </div>
             ) : isTeacher(user!) === true && (
-                user?.subscriptionPlan === "Pro MemberShip" ||
-                user?.subscriptionPlan === "Student Free MemberShip" ||
-                user?.subscriptionPlan === "Ultimate Enterprise Plan" ||
+                user?.subscriptionPlan.includes("Pro") ||
+                user?.subscriptionPlan.includes("Free") ||
+                user?.subscriptionPlan.includes("Enterprise") ||
                 user?.subscriptionPlan.includes("Ultimate")
                 ) ? (
                 <Button 
@@ -50,13 +52,14 @@ const NavbarRoutes = () => {
                     isTeacherPage || isCoursePage ?
                     (
                         <Button  onClick={() => nav('/dashboard')} size="sm" variant="ghost">
-                            <LogOut className="h-4 w-4 mr-2" />
-                            Exit
+                            <ArrowLeft className="h-4 w-4 mr-2" />
+                            exit Teach Mode
                         </Button>
                     ) : isTeacher(user!) === true && (
-                        user?.subscriptionPlan === "Pro MemberShip" ||
-                        user?.subscriptionPlan === "Student Free MemberShip" ||
-                        user?.subscriptionPlan === "Ultimate Enterprise Plan"
+                        user?.subscriptionPlan.includes("Pro") ||
+                        user?.subscriptionPlan.includes("Free") ||
+                        user?.subscriptionPlan.includes("Enterprise") ||
+                        user?.subscriptionPlan.includes("Ultimate")
                         ) ? (
                         <Button onClick={() => nav('/teacher/courses')} 
                             className='border-b border-slate-900 dark:border-sky-300'
@@ -65,7 +68,7 @@ const NavbarRoutes = () => {
                             >
                             | Teach Mode  |
                         </Button>
-                        ) : (
+                        ) : !institution && (
                             <ActivateAccountModal onConfirm={() => nav('/profile/user')}>
                                 <Button 
                                     className='border-b border-slate-900 dark:border-sky-300'

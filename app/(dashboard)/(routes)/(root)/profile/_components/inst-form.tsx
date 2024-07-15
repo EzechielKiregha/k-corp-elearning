@@ -123,7 +123,7 @@ const InstitutionProfile = ({
     }
 
     return (
-        <div className="mt-6 mb-4 border flex flex-col justify-start w-full max-w-[1200px] mx-auto p-4 lg:p-6 bg-slate-100 dark:bg-slate-800 dark:text-slate-200 rounded-md">
+        <div className="mt-6 mb-4 border w-full flex flex-col justify-start mx-auto p-4 lg:p-6 bg-slate-100 dark:bg-slate-800 dark:text-slate-200 rounded-md">
         <div className="flex flex-col">
             <div className="flex font-medium justify-between items-center mb-4 lg:mb-6">
                 <h2 className="text-2xl lg:text-3xl">Institution Details</h2>
@@ -148,7 +148,7 @@ const InstitutionProfile = ({
 
             {!isEditing && !institution && (
                 <div className="flex items-center justify-center p-4 lg:p-8">
-                    <h3 className="text-xl sm:text-2xl lg:text-3xl text-center mb-6 lg:mb-8 tracking-wide">
+                    <h3 className="text-xl sm:text-xl lg:text-2xl text-center mb-6 lg:mb-8 tracking-wide">
                         ADD INSTITUTION<br/><br />
                         <i>Click the <strong>Add Institution</strong>, Please Provide Some Information About Your <br /></i>
                         <span className="bg-gradient-to-r from-sky-700 to-sky-900 text-slate-200 p-3 lg:p-4 inline-block mt-4">
