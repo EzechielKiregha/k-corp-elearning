@@ -12,7 +12,7 @@ export default function Guest() {
     return (
         <>
             <MainNavbar/>
-            <div className="max-w-7xl mx-auto pt-20 px-6">
+            <div className="min-h-screen max-w-7xl mx-auto pt-20 px-6">
                 <HeroSection/>
                 <FeatureSection/>
                 <Workflow/>
@@ -20,7 +20,6 @@ export default function Guest() {
                 <Pricing/>
                 <Testimonials/>
                 <Footer/>
-                <div className='p-4 dark:bg-slate-900'></div>
             </div>
         </>
     )

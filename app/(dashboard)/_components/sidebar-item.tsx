@@ -1,12 +1,8 @@
-"use client";
-
-import { useBusiness } from "@/hooks/use-Business";
-import { useUser } from "@/hooks/use-User";
+import { SignOutButton } from "@/components/SignOutButton";
 import { useNavigation } from "@/hooks/useNavigation";
 import { cn } from "@/lib/utils";
-import { useAuth } from "@clerk/nextjs";
-import { IceCreamCone, LucideIcon } from "lucide-react";
-import { usePathname, useRouter } from "next/navigation";
+import { LucideIcon } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 interface SidebarItemProps {
     icon : LucideIcon;
@@ -27,7 +23,8 @@ const SidebarItem = ({
     ( pathname === "/" && href === "/" ) || pathname === href || pathname?.startsWith(`$(href)/`)
 
     return (
-        <button 
+        <>
+        <button
             onClick={() => nav(`${href}`)}
             type="button"
             className={ cn(
@@ -52,6 +49,7 @@ const SidebarItem = ({
             ) }
             /> 
         </button>
+        </>
     )
 }
 

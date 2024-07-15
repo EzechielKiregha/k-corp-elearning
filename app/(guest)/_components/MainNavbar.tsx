@@ -1,6 +1,6 @@
 "use client";
 
-import { Menu, X, Sun, Moon, Layout } from 'lucide-react'
+import { Menu, X, Sun, Moon, Layout, User } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import { useState, useEffect} from 'react'
 import { navItems } from '../constants'
@@ -14,7 +14,11 @@ import { useNavigation } from '@/hooks/useNavigation';
 import TGlink from '@/components/CustomLink';
 import TGa from '@/components/CustomAnchor';
 import { Button } from '@/components/ui/button';
-import { FcApprove } from 'react-icons/fc';
+import { FcApproval, FcApprove } from 'react-icons/fc';
+import { ConfirmModalLogin } from '@/components/modals/confirm-modal copy';
+import IconBadge from '@/components/icon-badge';
+import Image from 'next/image';
+import { SignOutButton } from '@/components/SignOutButton';
 
 
 const MainNavbar = () => {
@@ -69,12 +73,22 @@ const MainNavbar = () => {
                                             variant="ghost"> 
                                             <FcApprove/>
                                             | Teach Mode |
-                                        </Button>) : (
+                                        </Button>) 
+                                        : !userId ? (
+                                            <ConfirmModalLogin onConfirm={() => nav('/subscription')}>
+                                                <Button
+                                                    size="sm"
+                                                    className=' border-b border-slate-900 dark:border-sky-300'
+                                                    variant="link">
+                                                    Start Now
+                                                </Button>
+                                            </ConfirmModalLogin>
+                                        ) : (
                                             <Button
                                                 size="sm"
                                                 className=' border-b border-slate-900 dark:border-sky-300'
                                                 variant="link">
-                                                <FcApprove />
+                                                <FcApproval />
                                                 {user?.subscriptionPlan}
                                             </Button>
                                             )
@@ -82,7 +96,7 @@ const MainNavbar = () => {
                                         <Button size="sm" variant="link">
                                             {item.label}
                                         </Button>
-                                    )}
+                                    ) }
                                 </TGlink>
                             </li>
                         ))}
@@ -97,14 +111,24 @@ const MainNavbar = () => {
                         </div>
                     ):(
                         <>
-                        <div className="hidden lg:flex lg:flex-row md:flex md:flex-row justify-center space-x-12 items-center">
+                        <div className="hidden lg:flex lg:flex-row md:flex md:flex-row justify-center space-x-4 items-center">
                             <ThemeToggle/>
                             <Button 
                                 onClick={() => nav('/profile/user/')}
                                 variant="ghost"
                                 className='border-b border-slate-900 dark:border-sky-300'
                                 >
-                                <UserButton/>
+                                {!user?.imageUrl ? (
+                                    <IconBadge size="sm" icon={User}/>
+                                ) : (
+                                    <Image 
+                                        src={user?.imageUrl!} 
+                                        alt={user?.username!}
+                                        width={48}
+                                        height={48} 
+                                        className="w-10 h-10 rounded-full border border-slate-300"
+                                    />
+                                )}
                             </Button>
                             
                             <Button variant="link" onClick={() => nav('/dashboard')} className="py-2 px-3 rounded-md bg-gradient-to-r 
@@ -112,6 +136,7 @@ const MainNavbar = () => {
                                 Dashboard
                             </Button>
                         </div>
+                        <SignOutButton/>
                         </>
                     )}
                     
@@ -127,41 +152,51 @@ const MainNavbar = () => {
                     text-slate-900 dark:text-slate-200 
                     w-full p-12 items-center lg:hidden">
                         <ul>
-                        {navItems.map( (item, index) => (
-                            <li key={index}>
-                                <TGlink
-                                    className='hover:text-sky-600'
-                                    href={item.href }
-                                >
-                                {item.label === "Teach Mode" ? (
+                            {navItems.map( (item, index) => (
+                                <li key={index}>
+                                    <TGlink
+                                        className='hover:text-sky-600'
+                                        href={item.href }
+                                    >
+                                    {item.label === "Teach Mode" ? (
 
-                                    isTeacher(user!) === true && (
-                                        user?.subscriptionPlan === "Pro MemberShip" ||
-                                        user?.subscriptionPlan === "Student Free MemberShip" ||
-                                        user?.subscriptionPlan === "Ultimate Enterprise Plan"
-                                        ) ? (
-                                        <Button 
-                                            className='border-b border-slate-900 dark:border-sky-300'
-                                            variant="ghost"> 
-                                            <FcApprove/>
-                                            | Teach Mode |
-                                        </Button>) : (
-                                            <Button
-                                                size="sm"
-                                                className=' border-b border-slate-900 dark:border-sky-300'
-                                                variant="link">
-                                                <FcApprove />
-                                                {user?.subscriptionPlan}
+                                        isTeacher(user!) === true && (
+                                            user?.subscriptionPlan === "Pro MemberShip" ||
+                                            user?.subscriptionPlan === "Student Free MemberShip" ||
+                                            user?.subscriptionPlan === "Ultimate Enterprise Plan"
+                                            ) ? (
+                                            <Button 
+                                                className='border-b border-slate-900 dark:border-sky-300'
+                                                variant="ghost"> 
+                                                <FcApprove/>
+                                                | Teach Mode |
+                                            </Button>) 
+                                            : !userId ? (
+                                                <ConfirmModalLogin onConfirm={() => nav('/subscription')}>
+                                                    <Button
+                                                        size="sm"
+                                                        className=' border-b border-slate-900 dark:border-sky-300'
+                                                        variant="link">
+                                                        Start Now
+                                                    </Button>
+                                                </ConfirmModalLogin>
+                                            ) : (
+                                                <Button
+                                                    size="sm"
+                                                    className=' border-b border-slate-900 dark:border-sky-300'
+                                                    variant="link">
+                                                    <FcApproval />
+                                                    {user?.subscriptionPlan}
+                                                </Button>
+                                                )
+                                        ) : (
+                                            <Button size="sm" variant="link">
+                                                {item.label}
                                             </Button>
-                                            )
-                                    ) : (
-                                        <Button size="sm" variant="link">
-                                            {item.label}
-                                        </Button>
-                                    )}
-                                </TGlink>
-                            </li>
-                        ))}
+                                        ) }
+                                    </TGlink>
+                                </li>
+                            ))}
                         </ul>
                         {!isLogin ? (
                             <div className="flex space-x-6 items-center ">

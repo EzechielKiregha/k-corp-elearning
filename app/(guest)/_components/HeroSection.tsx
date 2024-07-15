@@ -1,11 +1,14 @@
 "use client"
 
+import { ConfirmModalLogin } from "@/components/modals/confirm-modal copy";
 import { Button } from "@/components/ui/button"
 import { useNavigation } from "@/hooks/useNavigation"
+import { useAuth } from "@clerk/nextjs";
 
 const HeroSection = () => {
 
     const nav = useNavigation();
+    const {userId} = useAuth()
 
     return (
         <div className="flex flex-col items-center mt-6 ">
@@ -20,8 +23,19 @@ const HeroSection = () => {
                 Discover high-quality education and unlock new opportunities. Join our community and start learning today!
             </p>
             <div className="flex justify-center my-10">
-                <Button onClick={() => nav('/subscription')} variant="link" className="bg-gradient-to-r text-slate-200 from-sky-950 to-sky-600 px-3 py-2
-                rounded-md ">Get Started</Button>
+                {!userId ? (
+                    <ConfirmModalLogin onConfirm={() => nav('/subscription')}>
+                        <Button
+                            className='bg-gradient-to-r text-slate-200 from-sky-950 to-sky-600 px-3 py-2rounded-md'
+                            variant="link">
+                                Start Now
+                        </Button>
+                    </ConfirmModalLogin>
+                ):(
+                    <Button onClick={() => nav('/subscription')} variant="link" className="bg-gradient-to-r text-slate-200 from-sky-950 to-sky-600 px-3 py-2
+                    rounded-md ">Get Started
+                    </Button>
+                )}
                 <Button size="sm" variant="link">
                     Documentation
                 </Button>

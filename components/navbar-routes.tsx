@@ -2,15 +2,17 @@
 import { UserButton, useAuth } from "@clerk/nextjs"; 
 import { usePathname } from "next/navigation";
 import { Button } from "./ui/button";
-import { CheckCircle, CheckCircle2, CircleAlertIcon, CircleHelp, LogOut } from "lucide-react";
-import Link from "next/link";
+import { CheckCircle, LogOut, User } from "lucide-react";
 import SearchInput from "./search-input";
 
 import { isTeacher  } from "@/lib/isTeacher";
 import { ThemeToggle } from "./theme-toggle";
 import { useUser } from "@/hooks/use-User";
-import { FcAdvance, FcApproval, FcApprove, FcBookmark } from "react-icons/fc";
 import { useNavigation } from "@/hooks/useNavigation";
+import { ActivateAccountModal } from "./modals/ActivateAccountModal";
+import IconBadge from "./icon-badge";
+import Image from "next/image";
+import { SignOutButton } from "./SignOutButton";
 
 const NavbarRoutes = () => {
     const { userId } = useAuth();
@@ -32,10 +34,11 @@ const NavbarRoutes = () => {
             ) : isTeacher(user!) === true && (
                 user?.subscriptionPlan === "Pro MemberShip" ||
                 user?.subscriptionPlan === "Student Free MemberShip" ||
-                user?.subscriptionPlan === "Ultimate Enterprise Plan"
+                user?.subscriptionPlan === "Ultimate Enterprise Plan" ||
+                user?.subscriptionPlan.includes("Ultimate")
                 ) ? (
                 <Button 
-                    className='border-b border-slate-900 dark:border-sky-300'
+                    className='hidden border-b border-slate-900 dark:border-sky-300'
                     variant="ghost">
                     Current Plan | {user.subscriptionPlan} |<CheckCircle/>
                 </Button>) : null
@@ -58,21 +61,34 @@ const NavbarRoutes = () => {
                         variant="ghost">
                             | Teach Mode  |
                         </Button>) : (
-                            <Button onClick={() => nav('/profile/user')}
-                            className='border-b border-slate-900 dark:border-sky-300'
-                            variant="ghost">
-                                | Activate Account |
-                            </Button>
+                            <ActivateAccountModal onConfirm={() => nav('/profile/user')}>
+                                <Button 
+                                    className='border-b border-slate-900 dark:border-sky-300'
+                                    variant="ghost">
+                                        | Activate Account |
+                                </Button>
+                            </ActivateAccountModal>
                         )
                 }
                 <ThemeToggle/>
                 <Button 
                     onClick={() => nav('/profile/user')}
                     variant="ghost"
-                    className='border-b border-slate-900 dark:border-sky-300'
+                    className='border-b mr-6 border-slate-900 dark:border-sky-300'
                     >
-                    <UserButton/>
+                    {!user?.imageUrl ? (
+                        <IconBadge size="sm" icon={User}/>
+                    ) : (
+                        <Image
+                            src={user?.imageUrl!} 
+                            alt={user?.username!}
+                            width={48}
+                            height={48} 
+                            className="w-10 h-10 rounded-full border border-slate-300"
+                        />
+                    )}
                 </Button>
+                {/* <SignOutButton/> */}
             </div>
         </>
     )

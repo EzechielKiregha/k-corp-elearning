@@ -5,12 +5,15 @@ import { BarChart,
     Compass,
     Layout,
     List,
+    LogOut,
     Rabbit,
     Twitter,
     User, 
 } from "lucide-react";
 import SidebarItem from "./sidebar-item";
 import { usePathname } from "next/navigation";
+import { SignOutButton } from "@/components/SignOutButton";
+import { Separator } from "@/components/ui/separator";
 
 const guestRoutes = [
     {
@@ -82,7 +85,12 @@ const SideRoutes = () => {
                     />
                 ))
             }
-            
+            <div className="my-5">
+                <Separator/>
+            </div>
+            <div className="font-[500] pl-6 transition-all ">
+                <SignOutButton/>
+            </div>
         </div>
     )
 }
