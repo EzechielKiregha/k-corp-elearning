@@ -1,5 +1,5 @@
 import IconBadge from '@/components/icon-badge'
-import { CircleDollarSign, File, LayoutDashboard, ListChecks, Loader2 } from 'lucide-react'
+import { ArrowLeft, CircleDollarSign, File, LayoutDashboard, ListChecks, Loader2 } from 'lucide-react'
 import { redirect } from 'next/navigation'
 import UserField from '../../_components/user-fields'
 import { useUser } from '@/hooks/use-User'
@@ -8,6 +8,7 @@ import UserActions from '../../_components/user-actions'
 import { useEffect, useState } from 'react'
 import { useAuth } from '@clerk/nextjs'
 import { User } from '@prisma/client'
+import TGlink from '@/components/CustomLink'
 
 interface UserIdPageProps {
     userId : string | null;
@@ -32,6 +33,12 @@ const UserIdPage = ({
                     userId = {user?.id}
                 />
             </div>
+            <TGlink className="flex items-center text-sm hover:opacity-75 transition mt-6 mb-0"
+                href={`/subscription/`}
+                >
+                    {/* <ArrowLeft className="h-4 w-4 mr-2"/> */}
+                    Check Your Current Subscription
+            </TGlink>
             <div className="p-6">
                 <div className="flex items-center justify-between">
                     <div className="flex items-center gap-x-2">

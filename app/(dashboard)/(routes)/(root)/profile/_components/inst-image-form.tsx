@@ -48,7 +48,7 @@ const InstitutionImageForm = ({
     }
 
     return (
-        <div className="border w-96 ml-[30%] bg-slate-100 dark:bg-slate-900 dark:text-slate-200 p-2 rounded-md">
+        <div className="border w-80 mx-auto bg-slate-100 dark:bg-slate-900 dark:text-slate-200 p-2 rounded-md">
             <div className="flex font-medium items-center justify-between">
                 institution image
                 <Button onClick={toggleEdit} variant="ghost">

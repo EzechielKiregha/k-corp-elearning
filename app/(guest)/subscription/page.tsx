@@ -31,16 +31,21 @@ const SubscriptionPage = () => {
     useEffect(() => {
         if (user && user.subscriptionPlan) {
             setCurrentPlan(user.subscriptionPlan)
-            if (currentPlan?.includes("Plan") ) {
-                setShowUserForm(true)
-                setShowInstitutionForm(true)
-            }
         }
-        else if(!currentPlan?.includes("Enterprise") && !currentPlan?.includes("Plan")) setShowInstitutionForm(false);
-        else if(!currentPlan?.includes("Pro") && !selectedPlan) setShowUserForm(false);
+
+        if (currentPlan?.includes("Enterprise") ) {
+            setShowUserForm(true)
+            setShowInstitutionForm(true)
+        }
+        else if(!currentPlan?.includes("Enterprise") && !currentPlan?.includes("Plan")) {
+            setShowInstitutionForm(false);
+        }
+        else if(!currentPlan?.includes("Pro") && !selectedPlan) {
+            setShowUserForm(false);
+        }
     }, [ user, userId]);
 
-    if (!userId) return redirect("/sign-up")
+    if (!userId) return redirect("/sign-in")
 
     const resetPlan = () =>{
         setSelectedPlan(null)
@@ -73,7 +78,7 @@ const SubscriptionPage = () => {
                         </span>
                         <p className="text-xl sm:text-2xl mt-4">
                             {(currentPlan.includes("Pro")) ? "[200+ Courses creation]" :
-                            currentPlan.includes("Plan") ? "[500+ Courses creation]" :
+                            currentPlan.includes("Enterprise") ? "[500+ Courses creation]" :
                             "[5+ Courses creation]"}
                         </p>
                     </div>

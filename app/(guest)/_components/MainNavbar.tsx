@@ -72,20 +72,12 @@ const MainNavbar = () => {
                                             className='border-b border-slate-900 dark:border-sky-300'
                                             variant="ghost"
                                             size="sm"
+                                            onClick={() => nav('/teacher/courses')}
                                             > 
                                             <FcApprove/>
                                             | Teach Mode |
                                         </Button>) 
-                                        : !userId ? (
-                                            <ConfirmModalLogin onConfirm={() => nav('/subscription')}>
-                                                <Button
-                                                    size="sm"
-                                                    className=' border-b border-slate-900 dark:border-sky-300'
-                                                    variant="link">
-                                                    Start Now
-                                                </Button>
-                                            </ConfirmModalLogin>
-                                        ) : (
+                                        : user?.subscriptionPlan && (
                                             <Button
                                                 size="sm"
                                                 className=' border-b border-slate-900 dark:border-sky-300'

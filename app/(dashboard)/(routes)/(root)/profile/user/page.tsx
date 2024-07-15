@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { UserButton, useAuth } from '@clerk/nextjs';
 import { useUser } from '@/hooks/use-User';
 import { useBusiness } from '@/hooks/use-Business';
-import { CircleArrowRight, CircleCheck, Loader2 } from 'lucide-react';
+import { ArrowLeft, CircleArrowRight, CircleCheck, Loader2 } from 'lucide-react';
 import Banner from "@/components/banner";
 import SubscriptionButton from "../_components/subscrption-button";
 import { useNavigation } from "@/hooks/useNavigation";
@@ -14,6 +14,7 @@ import InstitutionProfile from "../_components/inst-form";
 import UserPaymentStatusHandler from "./_components/UserActivationStatus";
 import { useRouter } from "next/navigation";
 import { ConfirmModalLogin } from "@/components/modals/confirm-modal copy";
+import TGlink from "@/components/CustomLink";
 
 
 const Profile = () => {
@@ -96,6 +97,7 @@ const Profile = () => {
                     <CircleArrowRight />
                     Register Your Business In Few Steps 
                 </Button>
+                
                 <UserIdPage userId={userId!} user={user!}/>
             </div>
             </>
@@ -122,6 +124,7 @@ const Profile = () => {
                                 <CircleArrowRight />
                                 Upgrade to Enterprise & Unlock [ 500+ ] courses. 
                             </Button>
+                            
                             <UserIdPage userId={userId!} user={user!}/>
                             </>
                         ) : (
@@ -168,7 +171,7 @@ const Profile = () => {
                 <>
                 {institution?.isActivated ? (
                     <>
-                    <Button variant="success" size="sm">
+                    <Button variant="success" size="sm" className="my-2">
                             <CircleCheck/>
                             Your Account is Activated
                     </Button>

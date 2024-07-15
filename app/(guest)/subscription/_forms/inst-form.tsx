@@ -151,7 +151,7 @@ const InstitutionForNewUserForm = ({
                             <ImageIcon className="text-slate-800 w-20 h-20 lg:w-24 lg:h-24" />
                         </div>
                     ) : (
-                        <div className="aspect-video w-full">
+                        <div className="aspect-video w-52">
                             <Image
                                 alt="Upload"
                                 layout="responsive"
