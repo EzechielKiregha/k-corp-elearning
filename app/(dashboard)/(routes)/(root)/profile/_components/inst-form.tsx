@@ -123,11 +123,11 @@ const InstitutionProfile = ({
     }
 
     return (
-        <div className="mt-6 border flex flex-col justify-start w-full max-w-[1200px] mx-auto p-4 lg:p-6 bg-slate-100 dark:bg-slate-800 dark:text-slate-200 rounded-md">
+        <div className="mt-6 mb-4 border flex flex-col justify-start w-full max-w-[1200px] mx-auto p-4 lg:p-6 bg-slate-100 dark:bg-slate-800 dark:text-slate-200 rounded-md">
         <div className="flex flex-col">
             <div className="flex font-medium justify-between items-center mb-4 lg:mb-6">
                 <h2 className="text-2xl lg:text-3xl">Institution Details</h2>
-                <Button onClick={() => nav(`/profile/user/institutions/${institution?.id}`)} variant="ghost" className="flex items-center text-lg lg:text-xl">
+                <Button onClick={toggleEditing} variant="ghost" className="flex items-center text-lg lg:text-xl">
                     {isEditing ? "Cancel" : (
                         <>
                             {!institution ? (

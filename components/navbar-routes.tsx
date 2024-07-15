@@ -38,16 +38,18 @@ const NavbarRoutes = () => {
                 user?.subscriptionPlan.includes("Ultimate")
                 ) ? (
                 <Button 
-                    className='hidden border-b border-slate-900 dark:border-sky-300'
-                    variant="ghost">
-                    Current Plan | {user.subscriptionPlan} |<CheckCircle/>
+                    className='hidden md:block border-b border-slate-900 dark:border-sky-300'
+                    variant="ghost"
+                    size="sm"
+                    >
+                    Current Plan | {user.subscriptionPlan} |
                 </Button>) : null
         }
             <div className="flex gap-x-2 ml-auto">
                 {
                     isTeacherPage || isCoursePage ?
                     (
-                        <Button onClick={() => nav('/dashboard')} size="sm" variant="ghost">
+                        <Button  onClick={() => nav('/dashboard')} size="sm" variant="ghost">
                             <LogOut className="h-4 w-4 mr-2" />
                             Exit
                         </Button>
@@ -57,14 +59,19 @@ const NavbarRoutes = () => {
                         user?.subscriptionPlan === "Ultimate Enterprise Plan"
                         ) ? (
                         <Button onClick={() => nav('/teacher/courses')} 
-                        className='border-b border-slate-900 dark:border-sky-300'
-                        variant="ghost">
+                            className='border-b border-slate-900 dark:border-sky-300'
+                            variant="ghost"
+                            size="sm"
+                            >
                             | Teach Mode  |
-                        </Button>) : (
+                        </Button>
+                        ) : (
                             <ActivateAccountModal onConfirm={() => nav('/profile/user')}>
                                 <Button 
                                     className='border-b border-slate-900 dark:border-sky-300'
-                                    variant="ghost">
+                                    variant="ghost" 
+                                    size="sm"
+                                    >
                                         | Activate Account |
                                 </Button>
                             </ActivateAccountModal>
@@ -74,6 +81,7 @@ const NavbarRoutes = () => {
                 <Button 
                     onClick={() => nav('/profile/user')}
                     variant="ghost"
+                    size="icon"
                     className='border-b mr-6 border-slate-900 dark:border-sky-300'
                     >
                     {!user?.imageUrl ? (
@@ -82,9 +90,9 @@ const NavbarRoutes = () => {
                         <Image
                             src={user?.imageUrl!} 
                             alt={user?.username!}
-                            width={48}
-                            height={48} 
-                            className="w-10 h-10 rounded-full border border-slate-300"
+                            width={32}
+                            height={32} 
+                            className="w-8 h-8 rounded-full border border-slate-300"
                         />
                     )}
                 </Button>

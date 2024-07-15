@@ -70,7 +70,9 @@ const MainNavbar = () => {
                                         ) ? (
                                         <Button 
                                             className='border-b border-slate-900 dark:border-sky-300'
-                                            variant="ghost"> 
+                                            variant="ghost"
+                                            size="sm"
+                                            > 
                                             <FcApprove/>
                                             | Teach Mode |
                                         </Button>) 
@@ -104,9 +106,9 @@ const MainNavbar = () => {
                     {!isLogin ? (
                         <div className="hidden lg:flex justify-center space-x-6 items-center ">
                             <ThemeToggle/>
-                            <Button onClick={() => nav('/sign-in')} variant="link" className="bg-gradient-to-r text-slate-200 from-sky-950 to-sky-600 px-3 py-2
+                            <Button size="sm" onClick={() => nav('/sign-in')} variant="link" className="bg-gradient-to-r text-slate-200 from-sky-950 to-sky-600 px-3 py-2
                             rounded-md ">Sign In</Button>
-                            <Button onClick={() => nav('/sign-up')} variant="link" className="bg-gradient-to-r text-slate-200 from-sky-950 to-sky-600 px-3 py-2
+                            <Button size="sm" onClick={() => nav('/sign-up')} variant="link" className="bg-gradient-to-r text-slate-200 from-sky-950 to-sky-600 px-3 py-2
                             rounded-md ">Sign Up</Button>
                         </div>
                     ):(
@@ -116,6 +118,7 @@ const MainNavbar = () => {
                             <Button 
                                 onClick={() => nav('/profile/user/')}
                                 variant="ghost"
+                                size="icon"
                                 className='border-b border-slate-900 dark:border-sky-300'
                                 >
                                 {!user?.imageUrl ? (
@@ -124,19 +127,19 @@ const MainNavbar = () => {
                                     <Image 
                                         src={user?.imageUrl!} 
                                         alt={user?.username!}
-                                        width={48}
-                                        height={48} 
-                                        className="w-10 h-10 rounded-full border border-slate-300"
+                                        width={32}
+                                        height={32} 
+                                        className="w-8 h-8 rounded-full border border-slate-300"
                                     />
                                 )}
                             </Button>
                             
-                            <Button variant="link" onClick={() => nav('/dashboard')} className="py-2 px-3 rounded-md bg-gradient-to-r 
+                            <Button size="sm" variant="link" onClick={() => nav('/dashboard')} className="py-2 px-3 rounded-md bg-gradient-to-r 
                             from-sky-950 to-sky-600 text-slate-200">
                                 Dashboard
                             </Button>
                         </div>
-                        <SignOutButton/>
+                        
                         </>
                     )}
                     
@@ -167,7 +170,9 @@ const MainNavbar = () => {
                                             ) ? (
                                             <Button 
                                                 className='border-b border-slate-900 dark:border-sky-300'
-                                                variant="ghost"> 
+                                                variant="ghost" 
+                                                size="sm"
+                                                > 
                                                 <FcApprove/>
                                                 | Teach Mode |
                                             </Button>) 
@@ -200,23 +205,35 @@ const MainNavbar = () => {
                         </ul>
                         {!isLogin ? (
                             <div className="flex space-x-6 items-center ">
-                                <Button onClick={() => nav('/sign-in')} variant="link" className="bg-gradient-to-r text-slate-200 from-sky-950 to-sky-600 px-3 py-2
+                                <Button size="sm" onClick={() => nav('/sign-in')} variant="link" className="bg-gradient-to-r text-slate-200 from-sky-950 to-sky-600 px-3 py-2
                                 rounded-md ">Sign In</Button>
-                                <Button onClick={() => nav('/sign-up')} variant="link" className="bg-gradient-to-r text-slate-200 from-sky-950 to-sky-600 px-3 py-2
+                                <Button size="sm" onClick={() => nav('/sign-up')} variant="link" className="bg-gradient-to-r text-slate-200 from-sky-950 to-sky-600 px-3 py-2
                                 rounded-md ">Sign Up</Button>
                             </div>
                         ):(
-                            <div className="flex space-x-3">
+                            <div className="flex space-x-12">
                                 <Button 
                                     onClick={() => nav('/profile/user/')}
                                     variant="ghost"
+                                    size="icon"
                                     className='border-b border-slate-900 dark:border-sky-300'
                                     >
-                                    <UserButton/>
+                                    {!user?.imageUrl ? (
+                                        <IconBadge size="sm" icon={User}/>
+                                    ) : (
+                                        <Image 
+                                            src={user?.imageUrl!} 
+                                            alt={user?.username!}
+                                            width={32}
+                                            height={32} 
+                                            className="w-8 h-8 rounded-full border border-slate-300"
+                                        />
+                                    )}
                                 </Button>
-                                <Button onClick={() => nav('/dashboard')} variant="link" className="bg-gradient-to-r text-slate-200 from-sky-950 to-sky-600 px-3 py-2
+                                <Button size="sm" onClick={() => nav('/dashboard')} variant="link" className="bg-gradient-to-r text-slate-200 from-sky-950 to-sky-600 px-3 py-2
                                 rounded-md ">Dashboard</Button>
                             </div>
+                            
                         )}
                     </div>
                 )}

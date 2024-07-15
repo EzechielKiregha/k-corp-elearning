@@ -187,7 +187,7 @@ model User {
   lastLogin      DateTime      @updatedAt
   isActive       Boolean       @default(true)
   institutionId  String?
-  institution    Institution?  @relation(fields: [institutionId], references: [id], onDelete: Cascade)
+  institution    Institution?  @relation(fields: [institutionId], references: [id])
   subscriptionPlan String
   coursesLimit Int
   createdCourses Int           @default(0)

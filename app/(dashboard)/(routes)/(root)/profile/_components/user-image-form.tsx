@@ -78,9 +78,9 @@ const UserImageForm = ({
                         <Image
                             alt = "Upload"
                             layout="responsive"
-                                width={16}
-                                height={9}
-                            className="object-cover rounded-full"
+                                width={32}
+                                height={32}
+                            className=" w-16 h-9 object-cover rounded-full"
                             src={initialData.imageUrl}
                         />
                     </div>

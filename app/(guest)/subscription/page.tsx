@@ -17,7 +17,6 @@ import { useNavigation } from '@/hooks/useNavigation';
 const SubscriptionPage = () => {
 
     const searchParams = useSearchParams()
-    const plan = searchParams.get('selectedPlan')
     const nav = useNavigation()
 
     const { isLoaded, userId } = useAuth();
@@ -32,25 +31,25 @@ const SubscriptionPage = () => {
     useEffect(() => {
         if (user && user.subscriptionPlan) {
             setCurrentPlan(user.subscriptionPlan)
+            if (currentPlan?.includes("Plan") ) {
+                setShowUserForm(true)
+                setShowInstitutionForm(true)
+            }
         }
-        if(!currentPlan?.includes("Enterprise")) setShowInstitutionForm(false);
-        if(!currentPlan?.includes("Pro") && !selectedPlan) setShowUserForm(false);
+        else if(!currentPlan?.includes("Enterprise") && !currentPlan?.includes("Plan")) setShowInstitutionForm(false);
+        else if(!currentPlan?.includes("Pro") && !selectedPlan) setShowUserForm(false);
     }, [ user, userId]);
 
     if (!userId) return redirect("/sign-up")
 
-    if (plan && plan !== currentPlan){
-        setSelectedPlan(plan)
-    }
-
     const resetPlan = () =>{
         setSelectedPlan(null)
-        if(!currentPlan?.includes("Enterprise")) setShowInstitutionForm(false);
+        if(!currentPlan?.includes("Enterprise") || !currentPlan?.includes("Ultimate")  ) setShowInstitutionForm(false);
         if(!currentPlan?.includes("Pro") && !selectedPlan) setShowUserForm(false);
     }
     
     const handlePlanSelect = (plan: string) => {
-        if (plan === "Enterprise" || plan === "Ultimate Enterprise Plan") {
+        if (plan === "Enterprise" || plan.includes("Ultimate")) {
             setShowInstitutionForm(true);
         } else {
             setShowInstitutionForm(false);
@@ -63,7 +62,7 @@ const SubscriptionPage = () => {
         <>
         <MainNavbar />
         <div id='pricing' className='flex flex-col items-center justify-center mx-4'>
-            {!currentPlan?.includes(selectedPlan!) && !selectedPlan && (
+            {!currentPlan?.includes(selectedPlan!) && !selectedPlan && currentPlan &&(
                 <>
                     <div className="flex flex-col items-center justify-center mb-12">
                         <h2 className="text-3xl sm:text-4xl lg:text-5xl text-center my-8 tracking-wide">
@@ -73,8 +72,8 @@ const SubscriptionPage = () => {
                             {currentPlan}
                         </span>
                         <p className="text-xl sm:text-2xl mt-4">
-                            {(currentPlan === "Pro" || currentPlan === "Pro MemberShip") ? "[200+ Courses creation]" :
-                            (currentPlan === "Enterprise" || currentPlan === "Ultimate Enterprise Plan") ? "[500+ Courses creation]" :
+                            {(currentPlan.includes("Pro")) ? "[200+ Courses creation]" :
+                            currentPlan.includes("Plan") ? "[500+ Courses creation]" :
                             "[5+ Courses creation]"}
                         </p>
                     </div>
@@ -82,7 +81,7 @@ const SubscriptionPage = () => {
                         {pricingOptions.map((option) => (
                             <div key={option.title} className="w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1rem)] max-w-md">
                                 <div className={`flex flex-col justify-between p-8 h-full rounded-xl ${
-                                    currentPlan?.includes(option.title) 
+                                    currentPlan?.includes(option.title)
                                         ? 'bg-gradient-to-r from-emerald-900 to-emerald-600 text-slate-100' 
                                         : 'bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200'
                                 }`}>
@@ -125,7 +124,7 @@ const SubscriptionPage = () => {
                     </div>   
                 </>
             )}
-            { !selectedPlan && !user && (
+            { !selectedPlan && (!user && !currentPlan) && (
             <>
                 <h2 className="text-3xl sm:text-5xl lg:text-6xl text-center my-8 tracking-wide">
                 Get A Free Plan Or Get A Pro & <br />
@@ -197,11 +196,11 @@ const SubscriptionPage = () => {
 
             <div className="flex gap-x-16 flex-col items-center justify-between mx-2">
                 
-                {(currentPlan?.includes(selectedPlan!)) 
+                {(currentPlan?.includes(selectedPlan!) && showUserForm) 
                 ? (
                     <>
                     <NewUserForm initialData={user!} selectedPlan={selectedPlan!} /></>
-                ) : showUserForm && selectedPlan && (
+                ) : showUserForm && selectedPlan ? (
                     <><Button
                         className="flex items-center text-sm hover:opacity-75 transition mb-6"
                         onClick={() => (resetPlan())} variant="link">
@@ -209,12 +208,14 @@ const SubscriptionPage = () => {
                         come back to subscription plans
                     </Button>
                     <NewUserForm initialData={user!} selectedPlan={selectedPlan!} /></>
+                ) : showUserForm && (
+                    <NewUserForm initialData={user!} selectedPlan={selectedPlan!} />
                 )}
                 { currentPlan?.includes('Enterprise') ? (
                     <InstitutionForNewUserForm initialData={institution} userId={userId!} />
                 ): showInstitutionForm && (
                     <InstitutionForNewUserForm initialData={institution} userId={userId!} />
-                    )}
+                )}
             </div>
         <Footer />
         </>

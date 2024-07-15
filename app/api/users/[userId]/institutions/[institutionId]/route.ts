@@ -30,12 +30,13 @@ export async function DELETE(
                 }
             })
             
-            return NextResponse.json(institution)
+            return new NextResponse("Institution Deleted Successfully", {status : 200})
         } catch (error) {
             console.log("[INSTITUION_ID] ", error);
             return new NextResponse("Internal error", {status : 500})
         }
 }
+
 export async function GET(
     req:Request,
     { params } : { params : { institutionId : string } }

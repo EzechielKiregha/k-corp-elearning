@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { UserButton, useAuth } from '@clerk/nextjs';
 import { useUser } from '@/hooks/use-User';
 import { useBusiness } from '@/hooks/use-Business';
-import { CircleArrowRight, Loader2 } from 'lucide-react';
+import { CircleArrowRight, CircleCheck, Loader2 } from 'lucide-react';
 import Banner from "@/components/banner";
 import SubscriptionButton from "../_components/subscrption-button";
 import { useNavigation } from "@/hooks/useNavigation";
@@ -101,9 +101,10 @@ const Profile = () => {
             </>
         )
     }
+    if(!userId) nav('/');
 
     return (
-        <div className="flex justify-center items-center flex-col">
+        <div className="flex justify-center items-center flex-col mx-4">
             <UserPaymentStatusHandler userId={userId!} institutionId={institution?.id!} />
             {error && <div>Error: {error}</div>}
             {!gotBusiness ? (
@@ -158,8 +159,6 @@ const Profile = () => {
                             <UserIdPage userId={userId!} user={user!}/>
                             </>
                         ) }
-                        
-                        
                         </>
                     )}
                 </div>
@@ -168,11 +167,13 @@ const Profile = () => {
             ) : (
                 <>
                 {institution?.isActivated ? (
-                    <><Banner
-                        variant="success"
-                        label="You are an Institution, University, College, ... and Manage your students, and Create up to [ 500 ] courses." />
-                        <Button onClick={() => nav(`/profile/user/institutions/${institution?.id}`)} 
-                            variant="ghost">
+                    <>
+                    <Button variant="success" size="sm">
+                            <CircleCheck/>
+                            Your Account is Activated
+                    </Button>
+                    <Button onClick={() => nav(`/profile/user/institutions/${institution?.id}`)} 
+                            variant="ghost" size="sm">
                             <CircleArrowRight />
                             Visite &apos; {institution?.name} &apos;
                     </Button>
@@ -180,11 +181,15 @@ const Profile = () => {
                     </>
                 ) : (
                     <>
-                    <Banner
-                        variant="success"
-                        label="As Institution, University, College, ... know that by Activate Your Institution Status you unlock - Advanced Analytics & Full Management of Courses and students - you can Create up to [ 500+ ] courses."
-                    /> <br />
-                    <SubscriptionButton userId={userId!} price={68.99} />
+                    {!institution?.isActivated && (
+                        <><Banner
+                            variant="success"
+                            label="As ... know that by Activate Your Institution Status you unlock - Advanced Analytics & Full Management of Courses and students - you can Create up to [ 500+ ] courses." 
+                            /><br />
+                            <SubscriptionButton userId={userId!} price={68.99} />
+                            </>
+                    )}
+                    
                     <UserIdPage userId={userId!} user={user!}/>
                     <InstitutionProfile initialData={institution} userId={userId!}/>
                     </>

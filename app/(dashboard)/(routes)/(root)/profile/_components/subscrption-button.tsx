@@ -1,5 +1,6 @@
 "use client"
 
+import { ConfirmModalCheckout } from '@/components/modals/confirm-modal-checkout';
 import { Button } from '@/components/ui/button';
 import formatPrice from '@/lib/format';
 import axios from 'axios';
@@ -33,14 +34,15 @@ const SubscriptionButton = ({
     }
 
     return (
-        <Button
-            className='w-full md:w-auto'
-            size="sm"
-            onClick={onClick}
-            disabled={isLoading}
-            >
-            Activate & checkout for {formatPrice(price)}
-        </Button>
+        <ConfirmModalCheckout onConfirm={onClick} price={price}>
+            <Button
+                className='w-full md:w-auto'
+                size="sm"
+                disabled={isLoading}
+                >
+                Activate & checkout
+            </Button>
+        </ConfirmModalCheckout>
     )
 }
 
