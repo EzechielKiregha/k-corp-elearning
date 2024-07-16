@@ -36,7 +36,7 @@ const SubscriptionButton = ({
     return (
         <ConfirmModalCheckout onConfirm={onClick} price={price}>
             <Button
-                className='w-full md:w-auto'
+                className='md:w-auto'
                 size="sm"
                 disabled={isLoading}
                 >

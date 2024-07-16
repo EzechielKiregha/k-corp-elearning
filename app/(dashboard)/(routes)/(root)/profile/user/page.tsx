@@ -88,7 +88,7 @@ const Profile = () => {
                 </ConfirmModalLogin>
                 <Button onClick={() => nav('/subscription')} variant="link">
                     <CircleArrowRight />
-                    become a Pro Member and Instructor at K-Corp eLearning.
+                    become a Pro Member and Instructor at<br />K-Corp eLearning.
                 </Button>
                 <Button onClick={() => nav('/subscription')} variant="link">
                     <CircleArrowRight />
@@ -119,7 +119,7 @@ const Profile = () => {
                             />
                             <Button onClick={() => nav('/subscription')} variant="link">
                                 <CircleArrowRight />
-                                Upgrade to Enterprise & Unlock [ 500+ ] courses. 
+                                Upgrade to Enterprise & Unlock <br />[ 500+ ] courses. 
                             </Button>
                             
                             <UserIdPage userId={userId!} user={user!}/>
@@ -133,7 +133,7 @@ const Profile = () => {
                             />
                             <Button onClick={() => nav('/subscription')} variant="link">
                                 <CircleArrowRight />
-                                Upgrade to Enterprise. [ 500+ ] courses.
+                                Upgrade to Enterprise.<br /> [ 500+ courses ].
                             </Button>
                             {/* <SubscriptionButton userId={userId!} price={11.99} /> */}
                             <UserIdPage userId={userId!} user={user!}/>
@@ -154,7 +154,7 @@ const Profile = () => {
                                 </Button>
                             <Button onClick={() => nav('/subscription')} variant="link">
                                 <CircleArrowRight />
-                                Pro Member and Instructor at K-Corp eLearning. [ 200+ ] courses.
+                                Pro Member and Instructor at K-Corp eLearning.<br /> [ 200+ ] courses.
                             </Button>
                             <Button onClick={() => nav('/subscription')} variant="link">
                                 <CircleArrowRight />
@@ -173,7 +173,7 @@ const Profile = () => {
                             <SubscriptionButton userId={userId!} price={0.00} />
                             <Button onClick={() => nav('/subscription')} variant="link">
                                 <CircleArrowRight />
-                                get Instructor Privileges at K-Corp eLearning. [200+ courses].
+                                get Instructor Privileges at K-Corp eLearning. <br /> [200+ courses].
                             </Button>
                             <Button onClick={() => nav('/subscription')} variant="link">
                                 <CircleArrowRight />

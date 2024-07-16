@@ -40,11 +40,8 @@ const SubscriptionPage = () => {
         else if(!currentPlan?.includes("Enterprise") && !currentPlan?.includes("Plan")) {
             setShowInstitutionForm(false);
         }
-        else if(!currentPlan?.includes("Pro") && !selectedPlan) {
-            setShowUserForm(false);
-        }
 
-        else if (currentPlan?.includes("Free") ) {
+        else if (currentPlan?.includes("Free") && user?.role !== "STUDENT") {
             setShowUserForm(true)
             setShowInstitutionForm(true)
         }

@@ -45,7 +45,8 @@ export async function PATCH(req : NextRequest) {
                     },
                     data : {
                         subscriptionPlan : user.role === 'INSTRUCTOR' ? "Pro Membership" :
-                        user.role === "STUDENT" ? "Student Free MemberShip" : "Enterprise"
+                        user.role === "STUDENT" ? "Student Free MemberShip" : "Enterprise",
+                        role : "INSTRUCTOR"
                     }
                 })
 
