@@ -146,14 +146,14 @@ const Profile = () => {
                             <>
                             <Banner
                                 variant="success"
-                                label="You are using a Student Now With Instructor/Teacher Privileges at K-Corp eLearning. You Can Create up to [ 5+ ] courses" 
+                                label="You are using a Student Free Plan With Instructor/Teacher Privileges at K-Corp eLearning. You Can Create up to [ 5+ ] courses" 
                                 />
                                 <Button variant="success" size="sm" className="my-2">
                                         <CircleCheck/>
                                         Your Account is Activated
                                 </Button>
                             <Button onClick={() => nav('/subscription')} variant="link">
-                                <CircleArrowRight />
+                                {/* <CircleArrowRight /> */}
                                 Pro Member and Instructor at K-Corp eLearning.<br /> [ 200+ ] courses.
                             </Button>
                             <Button onClick={() => nav('/subscription')} variant="link">
@@ -172,7 +172,7 @@ const Profile = () => {
                             Or
                             <SubscriptionButton userId={userId!} price={0.00} />
                             <Button onClick={() => nav('/subscription')} variant="link">
-                                <CircleArrowRight />
+                                {/* <CircleArrowRight /> */}
                                 get Instructor Privileges at K-Corp eLearning. <br /> [200+ courses].
                             </Button>
                             <Button onClick={() => nav('/subscription')} variant="link">
