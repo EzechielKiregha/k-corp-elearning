@@ -17,10 +17,10 @@ const Pricing = () => {
     
     useEffect(() => {
         if (user && user.subscriptionPlan) {
-            const plan = user.subscriptionPlan?.includes("Free") ? "Free" 
-            : user.subscriptionPlan?.includes("Pro") ? "Pro" 
-            : user.subscriptionPlan?.includes("Enterprise") ? "Enterprise" 
-            : user.subscriptionPlan?.includes("Ultimate") ? "Enterprise" 
+            const plan = user.subscriptionPlan?.includes("Free") ? user.subscriptionPlan
+            : user.subscriptionPlan?.includes("Pro") ? user.subscriptionPlan 
+            : user.subscriptionPlan?.includes("Enterprise") ? user.subscriptionPlan 
+            : user.subscriptionPlan?.includes("Ultimate") ? user.subscriptionPlan
             : null;
             setCurrentPlan(plan)
         } else {
