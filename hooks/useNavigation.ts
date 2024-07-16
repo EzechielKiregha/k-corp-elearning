@@ -12,6 +12,7 @@ export const useNavigation = () => {
     const navigate = useCallback((href: string) => {
         
         if (pathname === href) {
+            router.push(href)
             router.refresh()
         } else {
             setIsLoading(true)
