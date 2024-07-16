@@ -1,6 +1,5 @@
 # K-Corp E-Learning Platform
 
-## Screenshot
 ![eLearning home](https://github.com/user-attachments/assets/36f7c2c3-1f46-499e-8b31-4b3668050f5d)
 
 ## Introduction
