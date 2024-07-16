@@ -1,36 +1,63 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# K-Corp E-Learning Platform
 
-## Getting Started
+## Introduction
+Welcome to the K-Corp E-Learning Platform, a project dedicated to empowering African youth through accessible and quality education. This platform also aims to provide businesses, institutions, and educational start-ups with the opportunity to reach and connect with young people by offering various courses free of charge.
 
-First, run the development server:
+## Features
+- Responsive design for all devices
+- Subscription management with Stripe
+- Institution and course management capabilities
+- Free courses for young learners
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Technology Stack
+- Frontend: Next.js, React, TypeScript, Tailwind CSS
+- Backend: Prisma, Node.js
+- Authentication: Clerk
+- Payment Integration: Stripe, MoMo
+- Hosting: Vercel
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+visit [k-corp-elearning ](https://k-corp-elearning.vercel.app/)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Installation
+To set up the project locally, follow these steps:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+1. Clone the repository:
+    ```bash
+    [git clone https://github.com/EzechielKiregha/k-corp-elearning.git](https://github.com/EzechielKiregha/k-corp-elearning.git)
+    ```
 
-## Learn More
+2. Navigate to the project directory:
+    ```bash
+    cd k-corp-elearning
+    ```
 
-To learn more about Next.js, take a look at the following resources:
+3. Install the dependencies:
+    ```bash
+    npm install
+    ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+4. Set up the environment variables. Create a `.env` file in the root directory and add the necessary configuration:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+    ```plaintext
+    DATABASE_URL=your-database-url ***
+    NEXT_PUBLIC_STRIPE_KEY=your-stripe-key ****
+    CLERK_API_KEY=your-clerk-api-key ****
+    ```
+    you will need Mux API Keys, Clerk API Keys, Stripe API , UploadThing Api Keys 
 
-## Deploy on Vercel
+5. Run the development server:
+    ```bash
+    npm run dev
+    ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+6. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Usage
+Once the development server is running, you can start exploring the platform. Create an account, browse courses, and [start learning.](https://k-corp-elearning.vercel.app/)
+
+## Authors
+- [Kambale Kiregha Ezechiel](https://www.linkedin.com/in/kambale-kiregha-125a60264/)
+
+## Screenshot
+![eLearning home](https://github.com/user-attachments/assets/36f7c2c3-1f46-499e-8b31-4b3668050f5d)
+
