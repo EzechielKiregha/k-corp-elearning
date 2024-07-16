@@ -72,7 +72,7 @@ const UserField = ({
                 <Button onClick={toggleEdit} variant="ghost">
                     {isEditing ? (
                         <>Cancel</>
-                    ) : (
+                    ) : !(field.includes("Limit") || field.includes("role") || field.includes("created") || field.includes("subscriptionPlan")) && (
                         <>
                             <Pencil className="h-4 w-4 mr-2"/>
                             Edit {label.toLowerCase()}
@@ -112,7 +112,7 @@ const UserField = ({
                         />
                         <div className="flex items-center gap-x-2">
                             <Button 
-                            disabled = {!isValid || isSubmitting}
+                            disabled = {!isValid || isSubmitting || (field.includes("Limit") || field.includes("role") || field.includes("created") ||field.includes("subscriptionPlan"))}
                             type="submit"
                             >
                                 Save

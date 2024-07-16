@@ -87,7 +87,7 @@ const Profile = () => {
                     </Button>
                 </ConfirmModalLogin>
                 <Button onClick={() => nav('/subscription')} variant="link">
-                    <CircleArrowRight />
+                    {/* <CircleArrowRight /> */}
                     become a Pro Member and Instructor at<br />K-Corp eLearning.
                 </Button>
                 <Button onClick={() => nav('/subscription')} variant="link">
@@ -118,7 +118,7 @@ const Profile = () => {
                                 label="You are a Pro Member and Instructor at K-Corp eLearning. Create up to [ 200 ] courses"
                             />
                             <Button onClick={() => nav('/subscription')} variant="link">
-                                <CircleArrowRight />
+                                {/* <CircleArrowRight /> */}
                                 Upgrade to Enterprise & Unlock <br />[ 500+ ] courses. 
                             </Button>
                             
@@ -132,7 +132,7 @@ const Profile = () => {
                                 label="You are a Pro Member and Instructor at K-Corp eLearning. Create up to [ 200 ] courses"
                             />
                             <Button onClick={() => nav('/subscription')} variant="link">
-                                <CircleArrowRight />
+                                {/* <CircleArrowRight /> */}
                                 Upgrade to Enterprise.<br /> [ 500+ courses ].
                             </Button>
                             {/* <SubscriptionButton userId={userId!} price={11.99} /> */}
@@ -157,7 +157,7 @@ const Profile = () => {
                                 Pro Member and Instructor at K-Corp eLearning.<br /> [ 200+ ] courses.
                             </Button>
                             <Button onClick={() => nav('/subscription')} variant="link">
-                                <CircleArrowRight />
+                                {/* <CircleArrowRight /> */}
                                 Register Your Business In Few Steps 
                             </Button>
 
@@ -176,7 +176,7 @@ const Profile = () => {
                                 get Instructor Privileges at K-Corp eLearning. <br /> [200+ courses].
                             </Button>
                             <Button onClick={() => nav('/subscription')} variant="link">
-                                <CircleArrowRight />
+                                {/* <CircleArrowRight /> */}
                                 Register Your Business In Few Steps 
                             </Button>
                             
