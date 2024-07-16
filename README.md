@@ -3,6 +3,16 @@
 ## Introduction
 Welcome to the K-Corp E-Learning Platform, a project dedicated to empowering African youth through accessible and quality education. This platform also aims to provide businesses, institutions, and educational start-ups with the opportunity to reach and connect with young people by offering various courses free of charge.
 
+## Authors
+- [Kambale Kiregha Ezechiel](https://www.linkedin.com/in/kambale-kiregha-125a60264/)
+
+visit :
+- [k-corp-elearning ](https://k-corp-elearning.vercel.app/)
+- [blog post](https://www.linkedin.com/pulse/k-corp-e-learning-platform-alx-foundation-portfolio-project-kiregha-31sqf/?trackingId=Raeroc7NSZy4oSrjReJiEQ%3D%3D)
+
+## Screenshot
+![eLearning home](https://github.com/user-attachments/assets/36f7c2c3-1f46-499e-8b31-4b3668050f5d)
+
 ## Features
 - Responsive design for all devices
 - Subscription management with Stripe
@@ -16,7 +26,6 @@ Welcome to the K-Corp E-Learning Platform, a project dedicated to empowering Afr
 - Payment Integration: Stripe, MoMo
 - Hosting: Vercel
 
-visit [k-corp-elearning ](https://k-corp-elearning.vercel.app/)
 
 ## Installation
 To set up the project locally, follow these steps:
@@ -54,10 +63,4 @@ To set up the project locally, follow these steps:
 
 ## Usage
 Once the development server is running, you can start exploring the platform. Create an account, browse courses, and [start learning.](https://k-corp-elearning.vercel.app/)
-
-## Authors
-- [Kambale Kiregha Ezechiel](https://www.linkedin.com/in/kambale-kiregha-125a60264/)
-
-## Screenshot
-![eLearning home](https://github.com/user-attachments/assets/36f7c2c3-1f46-499e-8b31-4b3668050f5d)
 
