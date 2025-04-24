@@ -37,14 +37,14 @@ const ContactPage = () => {
                 </form>
                 <div className="mt-10">
                 <h2 className="text-2xl font-semibold">Contact Information</h2>
-                <p className="mt-2">Email: contact@k-corpelearning.com</p>
-                <p>Phone: +123 456 7890</p>
+                <p className="mt-2">Email: kireghacorp@gmail.com</p>
+                <p>Phone: +250790802201</p>
                 <p>Address: 1234 Learning St, Kigali, Rwanda</p>
                 </div>
                 <div className="mt-6 flex space-x-4 justify-center">
-                <TGa href="#" className="text-blue-500">Facebook</TGa>
-                <TGa href="#" className="text-blue-500">Twitter</TGa>
-                <TGa href="#" className="text-blue-500">LinkedIn</TGa>
+                <TGa href="https://web.facebook.com/KireghaCorp.aiMirror" className="text-blue-500">Facebook</TGa>
+                <TGa href="https://x.com/KireghaEzechiel" className="text-blue-500">X (Twitter)</TGa>
+                <TGa href="https://www.linkedin.com/in/kambale-kiregha-125a60264/" className="text-blue-500">LinkedIn</TGa>
                 </div>
             </div>
             </div>
